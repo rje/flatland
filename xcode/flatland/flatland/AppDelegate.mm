@@ -24,8 +24,8 @@
 {
     JSInterpreter* jsi = new JSInterpreter();
     jsi->InitializeVM();
-    std::string line = "window.setSize(1024, 768);";
-    jsi->RunString(line);
+    string filePath = "/Users/ryan/src/mmg/flatland/tests/test_1.js";
+    jsi->LoadFile(filePath);
 }
 
 @end

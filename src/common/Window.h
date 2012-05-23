@@ -9,8 +9,11 @@
 #ifndef flatland_Window_h
 #define flatland_Window_h
 
+#ifdef TARGET_OS_MAC
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/gl.h>
+#endif
+
 #include <v8.h>
 
 @class NSWindow;
@@ -25,8 +28,10 @@ public:
 private:
     Window();
     virtual ~Window();
+#ifdef TARGET_OS_MAC
     NSWindow* m_window;
     FLGLView* m_glview;
+#endif
 };
 
 

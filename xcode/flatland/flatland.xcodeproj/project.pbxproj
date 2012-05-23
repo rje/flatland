@@ -20,6 +20,10 @@
 		94676A7D156B0FB500B68B44 /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94676A7B156B0FB500B68B44 /* libv8_snapshot.a */; };
 		94A3ADA0156BFACE005D9ED7 /* FLGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A3AD9F156BFACE005D9ED7 /* FLGLView.m */; };
 		94A3ADA2156BFCFF005D9ED7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A3ADA1156BFCFF005D9ED7 /* OpenGL.framework */; };
+		94F5B6FD156D53E800D5C650 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F5B6FC156D53E800D5C650 /* Entity.cpp */; };
+		94F5B700156D570A00D5C650 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F5B6FF156D570A00D5C650 /* Mesh.cpp */; };
+		94F5B703156D6A4E00D5C650 /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F5B702156D6A4E00D5C650 /* EntityBindings.cpp */; };
+		94F5B706156D796A00D5C650 /* MeshBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94F5B705156D796A00D5C650 /* MeshBindings.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,16 @@
 		94A3AD9E156BFACE005D9ED7 /* FLGLView.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = FLGLView.h; sourceTree = "<group>"; };
 		94A3AD9F156BFACE005D9ED7 /* FLGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLGLView.m; sourceTree = "<group>"; };
 		94A3ADA1156BFCFF005D9ED7 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		94F5B6F8156D47FA00D5C650 /* Renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		94F5B6FA156D4EDD00D5C650 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		94F5B6FB156D4FAD00D5C650 /* Component.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Component.h; sourceTree = "<group>"; };
+		94F5B6FC156D53E800D5C650 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		94F5B6FE156D570200D5C650 /* Mesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		94F5B6FF156D570A00D5C650 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		94F5B701156D5E9B00D5C650 /* EntityBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EntityBindings.h; sourceTree = "<group>"; };
+		94F5B702156D6A4E00D5C650 /* EntityBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBindings.cpp; sourceTree = "<group>"; };
+		94F5B704156D793C00D5C650 /* MeshBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshBindings.h; sourceTree = "<group>"; };
+		94F5B705156D796A00D5C650 /* MeshBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshBindings.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +85,10 @@
 				94660DFE156C3A35000EE946 /* JSInterpreter.h */,
 				94660E00156C5AD8000EE946 /* WindowBindings.cpp */,
 				94660E02156C5B15000EE946 /* WindowBindings.h */,
+				94F5B701156D5E9B00D5C650 /* EntityBindings.h */,
+				94F5B702156D6A4E00D5C650 /* EntityBindings.cpp */,
+				94F5B704156D793C00D5C650 /* MeshBindings.h */,
+				94F5B705156D796A00D5C650 /* MeshBindings.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -142,6 +160,8 @@
 		94A3AD98156BFA03005D9ED7 /* common */ = {
 			isa = PBXGroup;
 			children = (
+				94F5B6F9156D4ED000D5C650 /* components */,
+				94F5B6F6156D47D600D5C650 /* renderer */,
 				94660DFC156C3A35000EE946 /* binding */,
 				94660DF9156C2E3B000EE946 /* Window.h */,
 			);
@@ -158,6 +178,26 @@
 			);
 			name = osx;
 			path = ../../src/osx;
+			sourceTree = "<group>";
+		};
+		94F5B6F6156D47D600D5C650 /* renderer */ = {
+			isa = PBXGroup;
+			children = (
+				94F5B6F8156D47FA00D5C650 /* Renderer.h */,
+			);
+			path = renderer;
+			sourceTree = "<group>";
+		};
+		94F5B6F9156D4ED000D5C650 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				94F5B6FB156D4FAD00D5C650 /* Component.h */,
+				94F5B6FA156D4EDD00D5C650 /* Entity.h */,
+				94F5B6FC156D53E800D5C650 /* Entity.cpp */,
+				94F5B6FE156D570200D5C650 /* Mesh.h */,
+				94F5B6FF156D570A00D5C650 /* Mesh.cpp */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +287,10 @@
 				94660DFB156C2F6E000EE946 /* Window_mac.mm in Sources */,
 				94660DFF156C3A35000EE946 /* JSInterpreter.cpp in Sources */,
 				94660E01156C5AD8000EE946 /* WindowBindings.cpp in Sources */,
+				94F5B6FD156D53E800D5C650 /* Entity.cpp in Sources */,
+				94F5B700156D570A00D5C650 /* Mesh.cpp in Sources */,
+				94F5B703156D6A4E00D5C650 /* EntityBindings.cpp in Sources */,
+				94F5B706156D796A00D5C650 /* MeshBindings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

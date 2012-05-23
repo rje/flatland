@@ -4,6 +4,8 @@
 #include <fstream>
 
 #include "WindowBindings.h"
+#include "EntityBindings.h"
+#include "MeshBindings.h"
 
 using namespace v8;
 
@@ -21,6 +23,8 @@ void JSInterpreter::InitializeVM() {
     m_globalObjDef = Persistent<ObjectTemplate>::New(global);
     // BINDINGS BLOCK
     WindowBindings_BindToGlobal(m_globalObjDef);
+    EntityBindings_BindToGlobal(m_globalObjDef);
+    MeshBindings_BindToGlobal(m_globalObjDef);
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
     
