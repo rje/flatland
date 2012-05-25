@@ -1,2 +1,4 @@
 out
 deps/v8/out
+xcode/flatland/flatland.xcodeproj/project.xcworkspace/
+xcode/flatland/flatland.xcodeproj/xcuserdata/

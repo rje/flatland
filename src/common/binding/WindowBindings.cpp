@@ -12,6 +12,7 @@
 using namespace v8;
 
 Handle<Value> fl_wb_SetSize(const Arguments& args) {
+    Locker locker;
     HandleScope handle_scope;
     Handle<Value> widthVal = args[0];
     Handle<Value> heightVal = args[1];
@@ -22,6 +23,7 @@ Handle<Value> fl_wb_SetSize(const Arguments& args) {
 }
 
 Handle<Value> fl_wb_SetClearColor(const Arguments& args) {
+    Locker locker;
     HandleScope handle_scope;
     GLfloat r = (GLfloat)args[0]->ToNumber()->NumberValue();
     GLfloat g = (GLfloat)args[1]->ToNumber()->NumberValue();
@@ -33,6 +35,7 @@ Handle<Value> fl_wb_SetClearColor(const Arguments& args) {
 
 
 void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
+    Locker locker;
     HandleScope handle_scope;
     Handle<ObjectTemplate> window = ObjectTemplate::New();
     window->Set(String::New("setSize"), FunctionTemplate::New(fl_wb_SetSize));

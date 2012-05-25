@@ -30,9 +30,11 @@ v8:
 v8-clean:
 	make -C deps/v8 clean
 
-sdl:
+sdl: sdl-build
+	test -f out/lib/libSDL2.a || make -C deps/SDL install
+
+sdl-build:
 	make -C deps/SDL
-	make -C deps/SDL install
 
 $(TARGET)-clean:
 	rm -rf $(OUTDIR)/obj

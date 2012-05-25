@@ -1,0 +1,7 @@
+SDL/Makefile
+SDL/Makefile.rules
+SDL/build/
+SDL/config.log
+SDL/config.status
+SDL/libtool
+SDL/sdl2-config

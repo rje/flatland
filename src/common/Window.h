@@ -13,6 +13,13 @@
 #include <SDL2/SDL_opengl.h>
 
 #include <v8.h>
+
+enum WindowDirtyMask {
+    WINDOW_NONE = 0,
+    WINDOW_SIZE,
+    WINDOW_CLEAR_COLOR
+};
+
 class Window {
 public:
     static Window* GetWindow();
@@ -20,12 +27,16 @@ public:
     virtual void Flush();
     virtual void SetClearColor(GLclampf r, GLclampf g, GLclampf b, GLclampf a);
     virtual void Test();
+    virtual void HandleUpdates();
 private:
     Window();
     virtual ~Window();
     
-    SDL_Window* m_windowSurface;
+    SDL_Window* m_window;
     SDL_GLContext m_glContext;
+    GLfloat m_width, m_height;
+    GLuint m_isDirty;
+    GLclampf m_clearR, m_clearG, m_clearB, m_clearA;
 };
 
 

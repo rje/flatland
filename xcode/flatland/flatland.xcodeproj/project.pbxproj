@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940E0E6215702C2E00E80636 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E6115702C2E00E80636 /* Window.cpp */; };
 		9494207D156FFE3700C36ECD /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942060156FFE3700C36ECD /* EntityBindings.cpp */; };
 		9494207E156FFE3700C36ECD /* JSInterpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942062156FFE3700C36ECD /* JSInterpreter.cpp */; };
 		9494207F156FFE3700C36ECD /* MeshBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942064156FFE3700C36ECD /* MeshBindings.cpp */; };
@@ -16,7 +17,6 @@
 		94942083156FFE3700C36ECD /* EntityRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9494206E156FFE3700C36ECD /* EntityRegistry.cpp */; };
 		94942084156FFE3700C36ECD /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942070156FFE3700C36ECD /* Mesh.cpp */; };
 		94942085156FFE3700C36ECD /* MeshRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942072156FFE3700C36ECD /* MeshRenderer.cpp */; };
-		94942088156FFE3700C36ECD /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9494207C156FFE3700C36ECD /* Window.cpp */; };
 		9494208D1570014100C36ECD /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9494208B1570014100C36ECD /* libv8_base.a */; };
 		9494208E1570014100C36ECD /* libv8_snapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9494208C1570014100C36ECD /* libv8_snapshot.a */; };
 		949420971570019500C36ECD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9494208F1570019500C36ECD /* AudioToolbox.framework */; };
@@ -47,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		940E0E6115702C2E00E80636 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		94942050156FFE1000C36ECD /* flatland */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = flatland; sourceTree = BUILT_PRODUCTS_DIR; };
 		94942060156FFE3700C36ECD /* EntityBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBindings.cpp; sourceTree = "<group>"; };
 		94942061156FFE3700C36ECD /* EntityBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityBindings.h; sourceTree = "<group>"; };
@@ -70,7 +71,6 @@
 		94942075156FFE3700C36ECD /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		94942076156FFE3700C36ECD /* Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
 		94942077156FFE3700C36ECD /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
-		9494207C156FFE3700C36ECD /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		949420891570013400C36ECD /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../out/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		9494208B1570014100C36ECD /* libv8_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_base.a; path = ../../out/lib/libv8_base.a; sourceTree = "<group>"; };
 		9494208C1570014100C36ECD /* libv8_snapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_snapshot.a; path = ../../out/lib/libv8_snapshot.a; sourceTree = "<group>"; };
@@ -166,10 +166,11 @@
 		9494205E156FFE3700C36ECD /* common */ = {
 			isa = PBXGroup;
 			children = (
+				94942077156FFE3700C36ECD /* Window.h */,
+				940E0E6115702C2E00E80636 /* Window.cpp */,
 				9494205F156FFE3700C36ECD /* binding */,
 				9494206A156FFE3700C36ECD /* components */,
 				94942074156FFE3700C36ECD /* renderer */,
-				94942077156FFE3700C36ECD /* Window.h */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -220,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				94E31EA9157020A1005AE36B /* main.cpp */,
-				9494207C156FFE3700C36ECD /* Window.cpp */,
 			);
 			path = osx;
 			sourceTree = "<group>";
@@ -285,8 +285,8 @@
 				94942083156FFE3700C36ECD /* EntityRegistry.cpp in Sources */,
 				94942084156FFE3700C36ECD /* Mesh.cpp in Sources */,
 				94942085156FFE3700C36ECD /* MeshRenderer.cpp in Sources */,
-				94942088156FFE3700C36ECD /* Window.cpp in Sources */,
 				94E31EAA157020A1005AE36B /* main.cpp in Sources */,
+				940E0E6215702C2E00E80636 /* Window.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

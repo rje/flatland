@@ -10,6 +10,16 @@
 
 using namespace v8;
 
+JSInterpreter* JSInterpreter::Instance() {
+    static JSInterpreter* sm_instance = NULL;
+    if(sm_instance == NULL) {
+        sm_instance = new JSInterpreter();
+        sm_instance->InitializeVM();
+    }
+    
+    return sm_instance;
+}
+
 JSInterpreter::JSInterpreter() {
     
 }
@@ -33,6 +43,7 @@ void JSInterpreter::RegisterConsole() {
 }
 
 void JSInterpreter::InitializeVM() {
+    Locker locker;
     HandleScope handle_scope;
     Handle<ObjectTemplate> global = ObjectTemplate::New();
     m_globalObjDef = Persistent<ObjectTemplate>::New(global);
@@ -54,6 +65,7 @@ void JSInterpreter::LoadFile(string& path, const string& name) {
 }
 
 void JSInterpreter::RunString(string& contents, const string& name) {
+    Locker locker;
     HandleScope current_scope;
     Context::Scope context_scope(m_context);
     TryCatch trycatch;
