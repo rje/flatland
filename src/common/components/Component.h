@@ -15,6 +15,7 @@
 #include <vector>
 using namespace std;
 
+class Entity;
 class Component;
 typedef vector<Component*> ComponentVector;
 typedef ComponentVector::iterator CVIter;
@@ -25,6 +26,12 @@ public:
     virtual ~Component() {}
     
     virtual void Update(GLfloat delta) {};
+    virtual void SetOwner(Entity* owner) { m_owner = owner; }
+    virtual void Register() {}
+    virtual void Unregister() {}
+    
+protected:
+    Entity* m_owner;
 };
 
 #endif

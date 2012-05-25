@@ -23,6 +23,18 @@ public:
     string* GetName();
     
     virtual void AddComponent(Component* toAdd);
+    virtual void RemoveComponent(Component* toRemove);
+    
+    template <class T> T* GetComponent() {
+        for(ComponentVector::iterator i = m_components.begin(); i != m_components.end(); ++i) {
+            Component* toCheck = *i;
+            T* val = static_cast<T*>(toCheck);
+            if(val) {
+                return val;
+            }
+        }
+        return NULL;
+    };
 
 protected:
     ComponentVector m_components;

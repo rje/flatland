@@ -21,10 +21,21 @@ Handle<Value> fl_wb_SetSize(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_wb_SetClearColor(const Arguments& args) {
+    HandleScope handle_scope;
+    GLfloat r = (GLfloat)args[0]->ToNumber()->NumberValue();
+    GLfloat g = (GLfloat)args[1]->ToNumber()->NumberValue();
+    GLfloat b = (GLfloat)args[2]->ToNumber()->NumberValue();
+    GLfloat a = (GLfloat)args[3]->ToNumber()->NumberValue();
+    Window::GetWindow()->SetClearColor(r, g, b, a);
+    return Undefined();
+}
+
 
 void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     HandleScope handle_scope;
     Handle<ObjectTemplate> window = ObjectTemplate::New();
     window->Set(String::New("setSize"), FunctionTemplate::New(fl_wb_SetSize));
+    window->Set(String::New("setClearColor"), FunctionTemplate::New(fl_wb_SetClearColor));
     global->Set("window", window);
 }

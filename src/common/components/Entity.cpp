@@ -9,13 +9,17 @@
 #include "Entity.h"
 #define LOG printf
 
+#include "EntityRegistry.h"
+
 
 Entity::Entity() : m_name(NULL) {
     LOG("Entity::Entity()\n");
+    EntityRegistry::instance()->RegisterEntity(this);
 }
 
 Entity::~Entity() {
     LOG("Entity::~Entity()\n");
+    EntityRegistry::instance()->UnregisterEntity(this);
     if(m_name) {
         delete m_name;
     }
@@ -31,4 +35,16 @@ string* Entity::GetName() {
 
 void Entity::AddComponent(Component* toAdd) {
     m_components.push_back(toAdd);
+    toAdd->SetOwner(this);
+    toAdd->Register();
+}
+
+void Entity::RemoveComponent(Component* toRemove) {
+    for(ComponentVector::iterator i = m_components.begin(); i != m_components.end(); ++i){
+        Component* toCheck = *i;
+        if(toCheck == toRemove) {
+            m_components.erase(i);
+            return;
+        }
+    }
 }

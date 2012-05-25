@@ -19,6 +19,7 @@ public:
 private:
     v8::Persistent<v8::ObjectTemplate> m_globalObjDef;
     v8::Persistent<v8::Context> m_context;
+    void RegisterConsole();
 };
 
 #endif

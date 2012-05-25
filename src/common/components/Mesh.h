@@ -10,15 +10,19 @@
 #define flatland_Mesh_h
 
 #include "Component.h"
+#include "Vectors.h"
 
 class Mesh : public Component {
 public:
     Mesh();
     virtual ~Mesh();
     
-    virtual void Update(GLfloat delta);
-    
     static Mesh* CreateRect(GLfloat w, GLfloat h);
+    
+protected:
+    Vector3* m_verts;
+    Vector2* m_uvs;
+    GLshort* m_indices;
 };
 
 

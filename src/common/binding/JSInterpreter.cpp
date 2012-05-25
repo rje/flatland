@@ -6,6 +6,7 @@
 #include "WindowBindings.h"
 #include "EntityBindings.h"
 #include "MeshBindings.h"
+#include "MeshRendererBindings.h"
 
 using namespace v8;
 
@@ -17,14 +18,30 @@ JSInterpreter::~JSInterpreter() {
     
 }
 
+Handle<Value> _fl_jsi_console_log(const Arguments& args) {
+    HandleScope handle_scope;
+    String::Utf8Value toPrint(args[0]->ToString());
+    printf("%s\n", *toPrint);
+    return Undefined();
+}
+
+void JSInterpreter::RegisterConsole() {
+    HandleScope handle_scope;
+    Handle<ObjectTemplate> consoleObj = ObjectTemplate::New();
+    consoleObj->Set("log", FunctionTemplate::New(_fl_jsi_console_log));
+    this->m_globalObjDef->Set("console", consoleObj);
+}
+
 void JSInterpreter::InitializeVM() {
     HandleScope handle_scope;
     Handle<ObjectTemplate> global = ObjectTemplate::New();
     m_globalObjDef = Persistent<ObjectTemplate>::New(global);
     // BINDINGS BLOCK
+    this->RegisterConsole();
     WindowBindings_BindToGlobal(m_globalObjDef);
     EntityBindings_BindToGlobal(m_globalObjDef);
     MeshBindings_BindToGlobal(m_globalObjDef);
+    MeshRendererBindings_BindToGlobal(m_globalObjDef);
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
     
