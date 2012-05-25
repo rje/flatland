@@ -19,10 +19,13 @@ public:
     
     static Mesh* CreateRect(GLfloat w, GLfloat h);
     
+    Vector3* GetVertexArray();
+    GLushort* GetIndexArray();
+    
 protected:
     Vector3* m_verts;
     Vector2* m_uvs;
-    GLshort* m_indices;
+    GLushort* m_indices;
 };
 
 

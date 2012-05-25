@@ -12,7 +12,7 @@ TARGET=flatland
 
 all: create-out $(TARGET)
 
-clean: v8-clean $(TARGET)-clean
+clean: sdl-clean v8-clean $(TARGET)-clean
 
 create-out:
 	mkdir -p $(OUTDIR)
@@ -36,12 +36,15 @@ sdl: sdl-build
 sdl-build:
 	make -C deps/SDL
 
+sdl-clean:
+	make -C deps/SDL clean
+
 $(TARGET)-clean:
 	rm -rf $(OUTDIR)/obj
 	rm -rf $(OUTDIR)/$(TARGET)
 
-$(TARGET): $(OBJECTS)
+$(TARGET): | v8 sdl $(OBJECTS)
 	$(CC) $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) $(OBJ_DIR)/* -o $(OUTDIR)/$@
 
-$(OBJECTS): out/%.o : src/%.cpp v8 sdl
+$(OBJECTS): out/%.o : src/%.cpp 
 	$(CC) $(CFLAGS) $(shell out/bin/sdl2-config --cflags) $< -o $(OBJ_DIR)/$(notdir $@)

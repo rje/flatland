@@ -1,8 +1,11 @@
 
 function createSprite() {
   var e = new Entity("spritename");
-  e.addComponent(Mesh.createRect(64, 64));
-  e.addComponent(new MeshRenderer());
+  var m = new Mesh.createRect(0.5, 0.5);
+  var mr = new MeshRenderer();
+  mr.setColor(1, 1, 1, 1);
+  e.addComponent(m);
+  e.addComponent(mr);
   return e;
 }
 

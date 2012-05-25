@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		940E0E6215702C2E00E80636 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E6115702C2E00E80636 /* Window.cpp */; };
+		940E0E64157042C300E80636 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E63157042C300E80636 /* Renderer.cpp */; };
 		9494207D156FFE3700C36ECD /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942060156FFE3700C36ECD /* EntityBindings.cpp */; };
 		9494207E156FFE3700C36ECD /* JSInterpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942062156FFE3700C36ECD /* JSInterpreter.cpp */; };
 		9494207F156FFE3700C36ECD /* MeshBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942064156FFE3700C36ECD /* MeshBindings.cpp */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		940E0E6115702C2E00E80636 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		940E0E63157042C300E80636 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		94942050156FFE1000C36ECD /* flatland */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = flatland; sourceTree = BUILT_PRODUCTS_DIR; };
 		94942060156FFE3700C36ECD /* EntityBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBindings.cpp; sourceTree = "<group>"; };
 		94942061156FFE3700C36ECD /* EntityBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityBindings.h; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			children = (
 				94942075156FFE3700C36ECD /* Renderer.h */,
 				94942076156FFE3700C36ECD /* Vectors.h */,
+				940E0E63157042C300E80636 /* Renderer.cpp */,
 			);
 			path = renderer;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				94942085156FFE3700C36ECD /* MeshRenderer.cpp in Sources */,
 				94E31EAA157020A1005AE36B /* main.cpp in Sources */,
 				940E0E6215702C2E00E80636 /* Window.cpp in Sources */,
+				940E0E64157042C300E80636 /* Renderer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

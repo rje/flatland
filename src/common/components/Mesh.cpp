@@ -7,10 +7,10 @@
 //
 
 #include "Mesh.h"
-
+#include "Entity.h"
 
 Mesh::Mesh() {
-    
+    m_ident = new string("Mesh");
 }
 
 Mesh::~Mesh() {
@@ -21,7 +21,7 @@ Mesh* Mesh::CreateRect(GLfloat w, GLfloat h) {
     Mesh* toReturn = new Mesh();
     toReturn->m_verts = new Vector3[4];
     toReturn->m_uvs = new Vector2[4];
-    toReturn->m_indices = new GLshort[6];
+    toReturn->m_indices = new GLushort[6];
     for(int i = 0; i < 4; i++) {
         toReturn->m_verts[i].x = (i % 2 == 0) ? 0 : w;
         toReturn->m_verts[i].y = (i / 2 == 0) ? 0 : h;
@@ -37,4 +37,12 @@ Mesh* Mesh::CreateRect(GLfloat w, GLfloat h) {
     toReturn->m_indices[5] = 3;
     
     return toReturn;
+}
+
+Vector3* Mesh::GetVertexArray() {
+    return m_verts;
+}
+
+GLushort* Mesh::GetIndexArray() {
+    return m_indices;
 }

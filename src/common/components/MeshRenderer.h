@@ -19,6 +19,8 @@ public:
     virtual void Register();
     virtual void Unregister();
     virtual void SetColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
+    
+    virtual void Render();
 
 protected:
     GLfloat m_r, m_g, m_b, m_a;

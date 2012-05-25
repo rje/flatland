@@ -7,23 +7,10 @@
 //
 
 #include "Window.h"
+#include "Renderer.h"
 #include <stdio.h>
 #include <v8.h>
 #include <SDL/SDL.h>
-
-void Window::Test() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0f, 0.85f, 0.35f);
-    glBegin(GL_TRIANGLES);
-    {
-        glVertex3f(  0.0,  0.6, 0.0);
-        glVertex3f( -0.2, -0.3, 0.0);
-        glVertex3f(  0.2, -0.3 ,0.0);
-    }
-    glEnd();
-    this->Flush();
-}
-
 
 Window::Window() : m_window(NULL) {
     printf("Creating window\n");
@@ -38,10 +25,9 @@ Window::Window() : m_window(NULL) {
     m_glContext = SDL_GL_CreateContext(m_window);
     SDL_GL_MakeCurrent(m_window, m_glContext);
     glClearColor(0, 0, 0, 0);
-    glClear(GL_COLOR_BUFFER_BIT);
-    this->Test();
     SDL_ShowWindow(m_window);
     m_isDirty = WINDOW_NONE;
+    m_renderer = new Renderer(this);
 }
 
 Window::~Window() {
@@ -85,4 +71,8 @@ void Window::HandleUpdates() {
         glClearColor(m_clearR, m_clearG, m_clearB, m_clearA);
         m_isDirty &= !WINDOW_CLEAR_COLOR;
     }
+}
+
+Renderer* Window::GetRenderer() {
+    return m_renderer;
 }

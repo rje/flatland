@@ -9,8 +9,7 @@
 #ifndef flatland_Component_h
 #define flatland_Component_h
 
-#include <OpenGL/OpenGL.h>
-#include <OpenGL/gl.h>
+#include <SDL2/SDL_opengl.h>
 
 #include <vector>
 using namespace std;
@@ -32,6 +31,7 @@ public:
     
 protected:
     Entity* m_owner;
+    string* m_ident;
 };
 
 #endif

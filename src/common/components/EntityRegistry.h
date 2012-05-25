@@ -21,6 +21,8 @@ public:
     void RegisterEntity(Entity* toAdd);
     void UnregisterEntity(Entity* toRemove);
     
+    const vector<Entity*> GetEntities();
+    
 private:
     EntityRegistry();
     void Init();

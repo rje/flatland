@@ -44,3 +44,8 @@ void EntityRegistry::Init() {
 EntityRegistry::~EntityRegistry() {
     
 }
+
+
+const vector<Entity*> EntityRegistry::GetEntities() {
+    return m_entities;
+}

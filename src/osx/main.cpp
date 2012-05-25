@@ -2,6 +2,7 @@
 #include "JSInterpreter.h"
 #include <SDL2/SDL.h>
 #include "Window.h"
+#include "Renderer.h"
 
 int main(int argc, char** argv) {
     bool running = true;
@@ -12,7 +13,7 @@ int main(int argc, char** argv) {
         SDL_Event evt;
         if(SDL_PollEvent(&evt)) {
             if(evt.type == SDL_QUIT || 
-               (evt.type == SDL_KEYDOWN && evt.key.keysym.scancode == SDL_SCANCODE_Q)) {
+               (evt.type == SDL_KEYDOWN && evt.key.keysym.scancode == SDL_SCANCODE_Q && evt.key.keysym.mod && KMOD_GUI)) {
                 running = false;
             }
             else if(evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_RESIZED) {
@@ -22,6 +23,9 @@ int main(int argc, char** argv) {
             }
         }
         Window::GetWindow()->HandleUpdates();
-        Window::GetWindow()->Test();
+        Renderer* r = Window::GetWindow()->GetRenderer();
+        r->Prepare();
+        r->Draw();
+        r->Flush();
     }
 }
