@@ -14,9 +14,7 @@
 
 Entity::Entity() : m_name(NULL) {
     LOG("Entity::Entity()\n");
-    Transform* t = new Transform();
-    t->SetPosition(10, 10);
-    this->AddComponent(t);
+    this->AddComponent(new Transform());
     EntityRegistry::instance()->RegisterEntity(this);
 }
 
