@@ -17,6 +17,8 @@ typedef struct Vector2 {
 } Vector2;
 
 typedef struct Vector3 {
+    Vector3(GLfloat nx, GLfloat ny, GLfloat nz) : x(nx), y(ny), z(nz) {}    
+    Vector3() : x(0.0f), y(0.0f), z(0.0f) {}
     GLfloat x, y, z;
 } Vector3;
 

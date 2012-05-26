@@ -21,7 +21,7 @@ Handle<FunctionTemplate> fl_mb_GetTemplate() {
     return handle_scope.Close(templ);
 }
 
-Handle<Value> fl_mb_WrapMesh(Mesh* toWrap) {
+Handle<Value> MeshBindings_WrapMesh(Mesh* toWrap) {
     static Persistent<FunctionTemplate> s_templ = Persistent<FunctionTemplate>::New(fl_mb_GetTemplate());
     HandleScope handle_scope;
     Local<Object> mesh_inst = s_templ->InstanceTemplate()->NewInstance();
@@ -35,7 +35,7 @@ Handle<Value> fl_mb_ConstructorCall(const Arguments& args) {
     }
     HandleScope handle_scope;
     Mesh* mesh = new Mesh();
-    return fl_mb_WrapMesh(mesh);
+    return MeshBindings_WrapMesh(mesh);
 }
 
 Handle<Value> fl_mb_CreateRect(const Arguments& args) {
@@ -43,7 +43,7 @@ Handle<Value> fl_mb_CreateRect(const Arguments& args) {
     GLfloat width = (GLfloat)args[0]->NumberValue();
     GLfloat height = (GLfloat)args[1]->NumberValue();
     Mesh* mesh = Mesh::CreateRect(width, height);
-    return fl_mb_WrapMesh(mesh);
+    return MeshBindings_WrapMesh(mesh);
 }
 
 void MeshBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {

@@ -10,7 +10,11 @@
 #define flatland_MeshRendererBindings_h
 
 #include <v8.h>
+using namespace v8;
+
+class MeshRenderer;
 
 void MeshRendererBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global);
+Handle<Value> MeshRendererBindings_WrapMeshRenderer(MeshRenderer* toWrap);
 
 #endif

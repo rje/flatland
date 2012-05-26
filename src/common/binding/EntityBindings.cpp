@@ -24,19 +24,32 @@ Handle<Value> fl_eb_AddComponent(const Arguments& args) {
     Local<External> extVal = Local<External>::Cast(intVal);
     Component* comp = static_cast<Component*>(extVal->Value());
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    Local<Array> compArray = args.This()->Get(String::New("_components")).As<Array>();
-    compArray->Set(compArray->Length(), obj);
     Entity* entity = static_cast<Entity*>(entVal->Value());
     entity->AddComponent(comp);
     return Undefined();
+}
+
+Handle<Value> fl_eb_GetComponent(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Entity* entity = static_cast<Entity*>(entVal->Value());
+    String::Utf8Value type(args[0]->ToString());
+    string typeName = *type;
+    Component* toReturn = entity->GetComponentByTypeName(typeName);
+    if(toReturn == NULL) {
+        return Undefined();
+    }
+    else {
+        return toReturn->GetWrappedObject();
+    }
 }
 
 Handle<FunctionTemplate> fl_eb_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
-    instance_templ->Set("_components", Array::New(0));
     instance_templ->Set("addComponent", FunctionTemplate::New(fl_eb_AddComponent));
+    instance_templ->Set("getComponent", FunctionTemplate::New(fl_eb_GetComponent));
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }

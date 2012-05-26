@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		940E0E6215702C2E00E80636 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E6115702C2E00E80636 /* Window.cpp */; };
 		940E0E64157042C300E80636 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E63157042C300E80636 /* Renderer.cpp */; };
+		940E0E671570583A00E80636 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E661570583900E80636 /* Transform.cpp */; };
+		940E0E6A15707D5100E80636 /* TransformBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E6915707D5100E80636 /* TransformBindings.cpp */; };
 		9494207D156FFE3700C36ECD /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942060156FFE3700C36ECD /* EntityBindings.cpp */; };
 		9494207E156FFE3700C36ECD /* JSInterpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942062156FFE3700C36ECD /* JSInterpreter.cpp */; };
 		9494207F156FFE3700C36ECD /* MeshBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942064156FFE3700C36ECD /* MeshBindings.cpp */; };
@@ -50,6 +52,10 @@
 /* Begin PBXFileReference section */
 		940E0E6115702C2E00E80636 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
 		940E0E63157042C300E80636 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		940E0E65157057BB00E80636 /* Transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transform.h; sourceTree = "<group>"; };
+		940E0E661570583900E80636 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
+		940E0E6815707D0300E80636 /* TransformBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformBindings.h; sourceTree = "<group>"; };
+		940E0E6915707D5100E80636 /* TransformBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformBindings.cpp; sourceTree = "<group>"; };
 		94942050156FFE1000C36ECD /* flatland */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = flatland; sourceTree = BUILT_PRODUCTS_DIR; };
 		94942060156FFE3700C36ECD /* EntityBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBindings.cpp; sourceTree = "<group>"; };
 		94942061156FFE3700C36ECD /* EntityBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityBindings.h; sourceTree = "<group>"; };
@@ -190,6 +196,8 @@
 				94942067156FFE3700C36ECD /* MeshRendererBindings.h */,
 				94942068156FFE3700C36ECD /* WindowBindings.cpp */,
 				94942069156FFE3700C36ECD /* WindowBindings.h */,
+				940E0E6815707D0300E80636 /* TransformBindings.h */,
+				940E0E6915707D5100E80636 /* TransformBindings.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -206,6 +214,8 @@
 				94942071156FFE3700C36ECD /* Mesh.h */,
 				94942072156FFE3700C36ECD /* MeshRenderer.cpp */,
 				94942073156FFE3700C36ECD /* MeshRenderer.h */,
+				940E0E65157057BB00E80636 /* Transform.h */,
+				940E0E661570583900E80636 /* Transform.cpp */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -291,6 +301,8 @@
 				94E31EAA157020A1005AE36B /* main.cpp in Sources */,
 				940E0E6215702C2E00E80636 /* Window.cpp in Sources */,
 				940E0E64157042C300E80636 /* Renderer.cpp in Sources */,
+				940E0E671570583A00E80636 /* Transform.cpp in Sources */,
+				940E0E6A15707D5100E80636 /* TransformBindings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

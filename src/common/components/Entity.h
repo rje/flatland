@@ -35,6 +35,8 @@ public:
         }
         return NULL;
     };
+    
+    virtual Component* GetComponentByTypeName(string& type);
 
 protected:
     ComponentVector m_components;

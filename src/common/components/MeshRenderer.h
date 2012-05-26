@@ -15,6 +15,8 @@ class MeshRenderer : public Component {
 public:
     MeshRenderer();
     virtual ~MeshRenderer();
+    virtual Persistent<Object> GetWrappedObject();
+
     
     virtual void Register();
     virtual void Unregister();

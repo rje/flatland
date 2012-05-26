@@ -16,6 +16,7 @@ class Mesh : public Component {
 public:
     Mesh();
     virtual ~Mesh();
+    virtual Persistent<Object> GetWrappedObject();
     
     static Mesh* CreateRect(GLfloat w, GLfloat h);
     

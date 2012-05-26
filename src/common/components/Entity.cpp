@@ -10,10 +10,13 @@
 #define LOG printf
 
 #include "EntityRegistry.h"
-
+#include "Transform.h"
 
 Entity::Entity() : m_name(NULL) {
     LOG("Entity::Entity()\n");
+    Transform* t = new Transform();
+    t->SetPosition(10, 10);
+    this->AddComponent(t);
     EntityRegistry::instance()->RegisterEntity(this);
 }
 
@@ -47,4 +50,14 @@ void Entity::RemoveComponent(Component* toRemove) {
             return;
         }
     }
+}
+
+Component* Entity::GetComponentByTypeName(string& type) {
+    for(ComponentVector::iterator i = m_components.begin(); i != m_components.end(); ++i){
+        Component* toCheck = *i;
+        if(toCheck->GetIdent() == type) {
+            return toCheck;
+        }
+    }
+    return NULL;
 }

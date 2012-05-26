@@ -8,9 +8,18 @@
 
 #include "Mesh.h"
 #include "Entity.h"
+#include "MeshBindings.h"
 
 Mesh::Mesh() {
     m_ident = new string("Mesh");
+}
+
+Persistent<Object> Mesh::GetWrappedObject() {
+    HandleScope handle_scope;
+    if(m_wrappedJSVersion.IsEmpty()) {
+        m_wrappedJSVersion = Persistent<Object>::New(MeshBindings_WrapMesh(this)->ToObject());
+    }
+    return m_wrappedJSVersion;
 }
 
 Mesh::~Mesh() {

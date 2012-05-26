@@ -32,7 +32,7 @@ Handle<FunctionTemplate> fl_mrb_GetTemplate() {
     return handle_scope.Close(templ);
 }
 
-Handle<Value> fl_mrb_WrapMeshRenderer(MeshRenderer* toWrap) {
+Handle<Value> MeshRendererBindings_WrapMeshRenderer(MeshRenderer* toWrap) {
     static Persistent<FunctionTemplate> s_templ = Persistent<FunctionTemplate>::New(fl_mrb_GetTemplate());
     HandleScope handle_scope;
     Local<Object> meshRenderer_inst = s_templ->InstanceTemplate()->NewInstance();
@@ -47,7 +47,7 @@ Handle<Value> fl_mrb_ConstructorCall(const Arguments& args) {
     HandleScope handle_scope;
     String::Utf8Value name(args[0]->ToString());
     MeshRenderer* meshRenderer = new MeshRenderer();
-    return fl_mrb_WrapMeshRenderer(meshRenderer);
+    return MeshRendererBindings_WrapMeshRenderer(meshRenderer);
 }
 
 void MeshRendererBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {

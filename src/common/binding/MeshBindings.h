@@ -11,7 +11,9 @@
 
 #include <v8.h>
 
-void MeshBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global);
+class Mesh;
 
+void MeshBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global);
+v8::Handle<v8::Value> MeshBindings_WrapMesh(Mesh* toWrap);
 
 #endif

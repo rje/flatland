@@ -65,6 +65,10 @@ void Window::HandleUpdates() {
     if(m_isDirty && WINDOW_SIZE) {
         SDL_SetWindowSize(m_window, m_width, m_height);
         glViewport(0, 0, m_width, m_height);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0, m_width, 0, m_height, -1, 1);
+        glMatrixMode(GL_MODELVIEW);
         m_isDirty &= !WINDOW_SIZE;
     }
     if(m_isDirty && WINDOW_CLEAR_COLOR) {

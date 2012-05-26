@@ -14,6 +14,9 @@
 #include <vector>
 using namespace std;
 
+#include <v8.h>
+using namespace v8;
+
 class Entity;
 class Component;
 typedef vector<Component*> ComponentVector;
@@ -29,9 +32,12 @@ public:
     virtual void Register() {}
     virtual void Unregister() {}
     
+    virtual Persistent<Object> GetWrappedObject() = 0;
+    virtual string& GetIdent() { return *m_ident; }
 protected:
     Entity* m_owner;
     string* m_ident;
+    Persistent<Object> m_wrappedJSVersion;
 };
 
 #endif
