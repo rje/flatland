@@ -8,15 +8,15 @@ OBJECTS:=$(patsubst src/%.cpp,out/%.o,$(SOURCES))
 BASE_DIR=${PWD}
 TARGET=flatland
 UNAME = $(shell uname -s)
+LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot
 
 ifeq ($(UNAME),Darwin)
 CC=clang++
 V8BUILDDIR=deps/v8/out/native
-LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot
 else
 CC=g++
 V8BUILDDIR=deps/v8/out/native/obj.target/tools/gyp
-LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot -lGL
+LDFLAGS+=-lGL
 endif
 
 
