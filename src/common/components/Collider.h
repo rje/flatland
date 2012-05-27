@@ -10,7 +10,7 @@
 #define flatland_Collider_h
 
 #include "Component.h"
-#include <Box2D/box2d.h>
+#include <Box2D/Box2D.h>
 #include <vector>
 
 using namespace std;

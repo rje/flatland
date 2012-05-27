@@ -9,7 +9,7 @@
 #ifndef flatland_PhysicsSystem_h
 #define flatland_PhysicsSystem_h
 
-#include <Box2D/box2d.h>
+#include <Box2D/Box2D.h>
 #include "Collider.h"
 
 using namespace std;
