@@ -46,7 +46,7 @@
 #define SIZEOF_VOIDP 8
 #define HAVE_GCC_ATOMICS 1
 /* #undef HAVE_GCC_SYNC_LOCK_TEST_AND_SET */
-#define HAVE_PTHREAD_SPINLOCK 1
+/* #undef HAVE_PTHREAD_SPINLOCK */
 
 /* Comment this if you want to build without any C library requirements */
 #define HAVE_LIBC 1
@@ -59,7 +59,7 @@
 #define STDC_HEADERS 1
 #define HAVE_STDLIB_H 1
 #define HAVE_STDARG_H 1
-#define HAVE_MALLOC_H 1
+/* #undef HAVE_MALLOC_H */
 #define HAVE_MEMORY_H 1
 #define HAVE_STRING_H 1
 #define HAVE_STRINGS_H 1
@@ -92,8 +92,8 @@
 #define HAVE_MEMMOVE 1
 #define HAVE_MEMCMP 1
 #define HAVE_STRLEN 1
-/* #undef HAVE_STRLCPY */
-/* #undef HAVE_STRLCAT */
+#define HAVE_STRLCPY 1
+#define HAVE_STRLCAT 1
 #define HAVE_STRDUP 1
 /* #undef HAVE__STRREV */
 /* #undef HAVE__STRUPR */
@@ -145,14 +145,14 @@
 #define HAVE_SETJMP 1
 #define HAVE_NANOSLEEP 1
 #define HAVE_SYSCONF 1
-/* #undef HAVE_SYSCTLBYNAME */
+#define HAVE_SYSCTLBYNAME 1
 /* #undef HAVE_CLOCK_GETTIME */
 /* #undef HAVE_GETPAGESIZE */
 #define HAVE_MPROTECT 1
 #define HAVE_ICONV 1
 #define HAVE_PTHREAD_SETNAME_NP 1
 /* #undef HAVE_PTHREAD_SET_NAME_NP */
-#define HAVE_SEM_TIMEDWAIT 1
+/* #undef HAVE_SEM_TIMEDWAIT */
 
 #else
 /* We may need some replacement for stdarg.h here */
@@ -186,7 +186,7 @@
 /* #undef SDL_AUDIO_DRIVER_PULSEAUDIO_DYNAMIC */
 /* #undef SDL_AUDIO_DRIVER_BEOSAUDIO */
 /* #undef SDL_AUDIO_DRIVER_BSD */
-/* #undef SDL_AUDIO_DRIVER_COREAUDIO */
+#define SDL_AUDIO_DRIVER_COREAUDIO 1
 #define SDL_AUDIO_DRIVER_DISK 1
 #define SDL_AUDIO_DRIVER_DUMMY 1
 /* #undef SDL_AUDIO_DRIVER_XAUDIO2 */
@@ -196,7 +196,7 @@
 /* #undef SDL_AUDIO_DRIVER_NAS */
 /* #undef SDL_AUDIO_DRIVER_NAS_DYNAMIC */
 /* #undef SDL_AUDIO_DRIVER_NDS */
-#define SDL_AUDIO_DRIVER_OSS 1
+/* #undef SDL_AUDIO_DRIVER_OSS */
 /* #undef SDL_AUDIO_DRIVER_OSS_SOUNDCARD_H */
 /* #undef SDL_AUDIO_DRIVER_PAUDIO */
 /* #undef SDL_AUDIO_DRIVER_QSA */
@@ -206,20 +206,20 @@
 /* #undef SDL_AUDIO_DRIVER_FUSIONSOUND_DYNAMIC */
 
 /* Enable various input drivers */
-#define SDL_INPUT_LINUXEV 1
+/* #undef SDL_INPUT_LINUXEV */
 /* #undef SDL_INPUT_TSLIB */
 /* #undef SDL_JOYSTICK_BEOS */
 /* #undef SDL_JOYSTICK_DINPUT */
 /* #undef SDL_JOYSTICK_DUMMY */
-/* #undef SDL_JOYSTICK_IOKIT */
-#define SDL_JOYSTICK_LINUX 1
+#define SDL_JOYSTICK_IOKIT 1
+/* #undef SDL_JOYSTICK_LINUX */
 /* #undef SDL_JOYSTICK_NDS */
 /* #undef SDL_JOYSTICK_WINMM */
 /* #undef SDL_JOYSTICK_USBHID */
 /* #undef SDL_JOYSTICK_USBHID_MACHINE_JOYSTICK_H */
 /* #undef SDL_HAPTIC_DUMMY */
-#define SDL_HAPTIC_LINUX 1
-/* #undef SDL_HAPTIC_IOKIT */
+/* #undef SDL_HAPTIC_LINUX */
+#define SDL_HAPTIC_IOKIT 1
 /* #undef SDL_HAPTIC_DINPUT */
 
 /* Enable various shared object loading systems */
@@ -247,28 +247,28 @@
 
 /* Enable various video drivers */
 /* #undef SDL_VIDEO_DRIVER_BWINDOW */
-/* #undef SDL_VIDEO_DRIVER_COCOA */
+#define SDL_VIDEO_DRIVER_COCOA 1
 /* #undef SDL_VIDEO_DRIVER_DIRECTFB */
 /* #undef SDL_VIDEO_DRIVER_DIRECTFB_DYNAMIC */
 #define SDL_VIDEO_DRIVER_DUMMY 1
 /* #undef SDL_VIDEO_DRIVER_NDS */
 /* #undef SDL_VIDEO_DRIVER_WINDOWS */
 #define SDL_VIDEO_DRIVER_X11 1
-#define SDL_VIDEO_DRIVER_X11_DYNAMIC "libX11.so.6"
-#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XEXT "libXext.so.6"
-/* #undef SDL_VIDEO_DRIVER_X11_DYNAMIC_XCURSOR */
-/* #undef SDL_VIDEO_DRIVER_X11_DYNAMIC_XINERAMA */
-/* #undef SDL_VIDEO_DRIVER_X11_DYNAMIC_XINPUT */
-/* #undef SDL_VIDEO_DRIVER_X11_DYNAMIC_XRANDR */
-/* #undef SDL_VIDEO_DRIVER_X11_DYNAMIC_XSS */
-/* #undef SDL_VIDEO_DRIVER_X11_DYNAMIC_XVIDMODE */
-/* #undef SDL_VIDEO_DRIVER_X11_XCURSOR */
-/* #undef SDL_VIDEO_DRIVER_X11_XINERAMA */
-/* #undef SDL_VIDEO_DRIVER_X11_XINPUT */
-/* #undef SDL_VIDEO_DRIVER_X11_XRANDR */
-/* #undef SDL_VIDEO_DRIVER_X11_XSCRNSAVER */
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC "/usr/X11R6/lib/libX11.6.dylib"
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XEXT "/usr/X11R6/lib/libXext.6.dylib"
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XCURSOR "/usr/X11R6/lib/libXcursor.1.dylib"
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XINERAMA "/usr/X11R6/lib/libXinerama.1.dylib"
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XINPUT "/usr/X11R6/lib/libXi.6.dylib"
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XRANDR "/usr/X11R6/lib/libXrandr.2.dylib"
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XSS "/usr/X11R6/lib/libXss.1.dylib"
+#define SDL_VIDEO_DRIVER_X11_DYNAMIC_XVIDMODE "/usr/X11R6/lib/libXxf86vm.1.dylib"
+#define SDL_VIDEO_DRIVER_X11_XCURSOR 1
+#define SDL_VIDEO_DRIVER_X11_XINERAMA 1
+#define SDL_VIDEO_DRIVER_X11_XINPUT 1
+#define SDL_VIDEO_DRIVER_X11_XRANDR 1
+#define SDL_VIDEO_DRIVER_X11_XSCRNSAVER 1
 #define SDL_VIDEO_DRIVER_X11_XSHAPE 1
-/* #undef SDL_VIDEO_DRIVER_X11_XVIDMODE */
+#define SDL_VIDEO_DRIVER_X11_XVIDMODE 1
 
 /* #undef SDL_VIDEO_RENDER_D3D */
 #define SDL_VIDEO_RENDER_OGL 1
@@ -280,16 +280,16 @@
 #define SDL_VIDEO_OPENGL 1
 /* #undef SDL_VIDEO_OPENGL_ES */
 /* #undef SDL_VIDEO_OPENGL_BGL */
-/* #undef SDL_VIDEO_OPENGL_CGL */
+#define SDL_VIDEO_OPENGL_CGL 1
 #define SDL_VIDEO_OPENGL_GLX 1
 /* #undef SDL_VIDEO_OPENGL_WGL */
 /* #undef SDL_VIDEO_OPENGL_OSMESA */
 /* #undef SDL_VIDEO_OPENGL_OSMESA_DYNAMIC */
 
 /* Enable system power support */
-#define SDL_POWER_LINUX 1
+/* #undef SDL_POWER_LINUX */
 /* #undef SDL_POWER_WINDOWS */
-/* #undef SDL_POWER_MACOSX */
+#define SDL_POWER_MACOSX 1
 /* #undef SDL_POWER_BEOS */
 /* #undef SDL_POWER_NINTENDODS */
 /* #undef SDL_POWER_HARDWIRED */
