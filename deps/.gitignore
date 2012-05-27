@@ -5,5 +5,5 @@ SDL/config.log
 SDL/config.status
 SDL/libtool
 SDL/sdl2-config
-SDL/include/SDL_config.h
 SDL/sdl2.pc
+

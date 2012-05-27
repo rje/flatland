@@ -31,7 +31,7 @@ create-out:
 
 dependencies:
 	$(MAKE) -C deps/v8 dependencies
-	$(shell cd deps/SDL && ./configure --prefix=${BASE_DIR}/out)
+	$(shell mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out)
 
 v8:
 	make -C deps/v8 native
@@ -41,13 +41,13 @@ v8-clean:
 	make -C deps/v8 clean
 
 sdl: sdl-build
-	test -f out/lib/libSDL2.a || make -C deps/SDL install
+	test -f out/lib/libSDL2.a || make -C out/deps/SDL install
 
 sdl-build:
-	make -C deps/SDL
+	make -C out/deps/SDL
 
 sdl-clean:
-	make -C deps/SDL clean
+	make -C out/deps/SDL clean
 
 $(TARGET)-clean:
 	rm -rf $(OUTDIR)/obj
