@@ -1,5 +1,5 @@
 //
-//  Window_mac.mm
+//  Window.cpp
 //  flatland
 //
 //  Created by Ryan Evans on 5/22/12.
@@ -10,7 +10,7 @@
 #include "Renderer.h"
 #include <stdio.h>
 #include <v8.h>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 Window::Window() : m_window(NULL) {
     printf("Creating window\n");

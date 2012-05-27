@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "JSInterpreter.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "Window.h"
 #include "Renderer.h"
 
@@ -31,4 +31,5 @@ int main(int argc, char** argv) {
         r->Draw();
         r->Flush();
     }
+    return 0;
 }

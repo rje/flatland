@@ -11,6 +11,7 @@
 		940E0E64157042C300E80636 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E63157042C300E80636 /* Renderer.cpp */; };
 		940E0E671570583A00E80636 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E661570583900E80636 /* Transform.cpp */; };
 		940E0E6A15707D5100E80636 /* TransformBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E6915707D5100E80636 /* TransformBindings.cpp */; };
+		9491039A1572F57800BFDF65 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 949103991572F57800BFDF65 /* main.cpp */; };
 		9494207D156FFE3700C36ECD /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942060156FFE3700C36ECD /* EntityBindings.cpp */; };
 		9494207E156FFE3700C36ECD /* JSInterpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942062156FFE3700C36ECD /* JSInterpreter.cpp */; };
 		9494207F156FFE3700C36ECD /* MeshBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942064156FFE3700C36ECD /* MeshBindings.cpp */; };
@@ -34,7 +35,6 @@
 		949420A2157001D700C36ECD /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A1157001D700C36ECD /* libm.dylib */; };
 		949420A71570021200C36ECD /* libSDL2main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A61570021200C36ECD /* libSDL2main.a */; };
 		949420A815700B1400C36ECD /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A3157001F300C36ECD /* libSDL2.a */; };
-		94E31EAA157020A1005AE36B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E31EA9157020A1005AE36B /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +56,7 @@
 		940E0E661570583900E80636 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
 		940E0E6815707D0300E80636 /* TransformBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformBindings.h; sourceTree = "<group>"; };
 		940E0E6915707D5100E80636 /* TransformBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformBindings.cpp; sourceTree = "<group>"; };
+		949103991572F57800BFDF65 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		94942050156FFE1000C36ECD /* flatland */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = flatland; sourceTree = BUILT_PRODUCTS_DIR; };
 		94942060156FFE3700C36ECD /* EntityBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBindings.cpp; sourceTree = "<group>"; };
 		94942061156FFE3700C36ECD /* EntityBindings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityBindings.h; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		949420A1157001D700C36ECD /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
 		949420A3157001F300C36ECD /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../out/lib/libSDL2.a; sourceTree = "<group>"; };
 		949420A61570021200C36ECD /* libSDL2main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2main.a; path = ../../out/lib/libSDL2main.a; sourceTree = "<group>"; };
-		94E31EA9157020A1005AE36B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,8 +172,8 @@
 		9494205D156FFE3700C36ECD /* src */ = {
 			isa = PBXGroup;
 			children = (
+				949103991572F57800BFDF65 /* main.cpp */,
 				9494205E156FFE3700C36ECD /* common */,
-				94942079156FFE3700C36ECD /* osx */,
 			);
 			name = src;
 			path = ../../src;
@@ -238,14 +238,6 @@
 			path = renderer;
 			sourceTree = "<group>";
 		};
-		94942079156FFE3700C36ECD /* osx */ = {
-			isa = PBXGroup;
-			children = (
-				94E31EA9157020A1005AE36B /* main.cpp */,
-			);
-			path = osx;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -306,11 +298,11 @@
 				94942083156FFE3700C36ECD /* EntityRegistry.cpp in Sources */,
 				94942084156FFE3700C36ECD /* Mesh.cpp in Sources */,
 				94942085156FFE3700C36ECD /* MeshRenderer.cpp in Sources */,
-				94E31EAA157020A1005AE36B /* main.cpp in Sources */,
 				940E0E6215702C2E00E80636 /* Window.cpp in Sources */,
 				940E0E64157042C300E80636 /* Renderer.cpp in Sources */,
 				940E0E671570583A00E80636 /* Transform.cpp in Sources */,
 				940E0E6A15707D5100E80636 /* TransformBindings.cpp in Sources */,
+				9491039A1572F57800BFDF65 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +358,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-					../../out/include,
+					../../out/include/SDL2,
 					../../deps/v8/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
@@ -381,7 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-					../../out/include,
+					../../out/include/SDL2,
 					../../deps/v8/include,
 				);
 				LIBRARY_SEARCH_PATHS = (

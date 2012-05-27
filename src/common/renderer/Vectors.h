@@ -9,7 +9,7 @@
 #ifndef flatland_Vectors_h
 #define flatland_Vectors_h
 
-#include <SDL2/SDL_opengl.h>
+#include <SDL_opengl.h>
 
 typedef struct Vector2 {
     GLfloat x, y;

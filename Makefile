@@ -1,5 +1,5 @@
 
-IFLAGS=-Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer -Iout/include
+IFLAGS=-Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer
 CFLAGS=-c -Wall $(IFLAGS)
 OUTDIR=out
 OBJ_DIR=$(OUTDIR)/objs
