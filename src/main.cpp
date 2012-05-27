@@ -7,7 +7,10 @@
 int main(int argc, char** argv) {
     bool running = true;
     Window::GetWindow();
-    string test = "/Users/ryan/src/mmg/flatland/tests/test_1.js";
+    string test = "tests/test_1.js";
+		if(argc == 2) {
+			test = argv[1];
+		}
     JSInterpreter::Instance()->LoadFile(test);
     while(running) {
         SDL_Event evt;

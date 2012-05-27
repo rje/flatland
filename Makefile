@@ -1,14 +1,24 @@
 
-CC=clang++
-IFLAGS=-Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer -Isrc/osx -Iout/include
+IFLAGS=-Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer -Iout/include
 CFLAGS=-c -Wall $(IFLAGS)
 OUTDIR=out
 OBJ_DIR=$(OUTDIR)/objs
-LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot
 SOURCES:=$(shell find src -name \*.cpp)
 OBJECTS:=$(patsubst src/%.cpp,out/%.o,$(SOURCES))
 BASE_DIR=${PWD}
 TARGET=flatland
+UNAME = $(shell uname -s)
+
+ifeq ($(UNAME),Darwin)
+CC=clang++
+V8BUILDDIR=deps/v8/out/native
+LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot
+else
+CC=g++
+V8BUILDDIR=deps/v8/out/native/obj.target/tools/gyp
+LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot -lGL
+endif
+
 
 all: create-out $(TARGET)
 
@@ -25,7 +35,7 @@ dependencies:
 
 v8:
 	make -C deps/v8 native
-	cp deps/v8/out/native/*.a $(OUTDIR)/lib
+	cp $(V8BUILDDIR)/*.a $(OUTDIR)/lib
 
 v8-clean:
 	make -C deps/v8 clean
@@ -44,7 +54,7 @@ $(TARGET)-clean:
 	rm -rf $(OUTDIR)/$(TARGET)
 
 $(TARGET): | v8 sdl $(OBJECTS)
-	$(CC) $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) $(OBJ_DIR)/* -o $(OUTDIR)/$@
+	$(CC) $(OBJ_DIR)/* $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) -o $(OUTDIR)/$@
 
 $(OBJECTS): out/%.o : src/%.cpp 
 	$(CC) $(CFLAGS) $(shell out/bin/sdl2-config --cflags) $< -o $(OBJ_DIR)/$(notdir $@)

@@ -12,6 +12,7 @@
 #include <SDL2/SDL_opengl.h>
 
 #include <vector>
+#include <string>
 using namespace std;
 
 #include <v8.h>
