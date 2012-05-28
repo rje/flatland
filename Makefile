@@ -53,8 +53,8 @@ $(TARGET)-clean:
 	rm -rf $(OUTDIR)/obj
 	rm -rf $(OUTDIR)/$(TARGET)
 
-$(TARGET): | v8 sdl $(OBJECTS)
+$(TARGET): | $(OBJECTS)
 	$(CC) $(OBJ_DIR)/* $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) -o $(OUTDIR)/$@
 
-$(OBJECTS): out/%.o : src/%.cpp 
+$(OBJECTS): out/%.o : src/%.cpp v8 sdl
 	$(CC) $(CFLAGS) $(shell out/bin/sdl2-config --cflags) $< -o $(OBJ_DIR)/$(notdir $@)
