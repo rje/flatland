@@ -6,4 +6,6 @@ SDL/config.status
 SDL/libtool
 SDL/sdl2-config
 SDL/sdl2.pc
-
+SDL/VisualC/SDL/Win32
+SDL/VisualC/SDLmain/Win32
+SDL/VisualC/tests

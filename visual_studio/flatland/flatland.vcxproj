@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\common\binding\EntityBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\JSInterpreter.cpp" />
+    <ClCompile Include="..\..\src\common\binding\MeshBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\MeshRendererBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\TransformBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\WindowBindings.cpp" />
+    <ClCompile Include="..\..\src\common\components\Entity.cpp" />
+    <ClCompile Include="..\..\src\common\components\EntityRegistry.cpp" />
+    <ClCompile Include="..\..\src\common\components\Mesh.cpp" />
+    <ClCompile Include="..\..\src\common\components\MeshRenderer.cpp" />
+    <ClCompile Include="..\..\src\common\components\Transform.cpp" />
+    <ClCompile Include="..\..\src\common\renderer\Renderer.cpp" />
+    <ClCompile Include="..\..\src\common\Window.cpp" />
+    <ClCompile Include="..\..\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\common\binding\EntityBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\JSInterpreter.h" />
+    <ClInclude Include="..\..\src\common\binding\MeshBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\MeshRendererBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\TransformBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\WindowBindings.h" />
+    <ClInclude Include="..\..\src\common\components\Component.h" />
+    <ClInclude Include="..\..\src\common\components\Entity.h" />
+    <ClInclude Include="..\..\src\common\components\EntityRegistry.h" />
+    <ClInclude Include="..\..\src\common\components\Mesh.h" />
+    <ClInclude Include="..\..\src\common\components\MeshRenderer.h" />
+    <ClInclude Include="..\..\src\common\components\Transform.h" />
+    <ClInclude Include="..\..\src\common\renderer\Renderer.h" />
+    <ClInclude Include="..\..\src\common\renderer\Vectors.h" />
+    <ClInclude Include="..\..\src\common\Window.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B17219A9-3315-4943-9229-CA1F80FD7FAF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>flatland</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\SDL\VisualC\SDLmain\Win32\Release;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\SDL\VisualC\SDL\Win32\Release;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\v8\build\Release\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common\renderer;C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common\components;C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common\binding;C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\SDL\include;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\v8\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\SDL\VisualC\SDLmain\Win32\Release;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\SDL\VisualC\SDL\Win32\Release;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\v8\build\Release\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common\renderer;C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common\components;C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common\binding;C:\Users\Ryan Evans\Documents\GitHub\flatland\src\common;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\SDL\include;C:\Users\Ryan Evans\Documents\GitHub\flatland\deps\v8\include;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)\..\..\out\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)\..\..\src\common;$(ProjectDir)\..\..\src\common\renderer;$(ProjectDir)\..\..\src\common\components;$(ProjectDir)\..\..\src\common\binding;$(ProjectDir)\..\..\deps\SDL\include;$(ProjectDir)\..\..\deps\v8\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;SDL.lib;SDLmain.lib;opengl32.lib;winmm.lib;ws2_32.lib;glu32.lib;imm32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PreBuildEvent>
+      <Command>call "$(ProjectDir)build_prep.bat"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Creating 'out' and copying SDL</Message>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
