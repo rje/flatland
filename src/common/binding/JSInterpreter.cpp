@@ -7,6 +7,8 @@
 #include "EntityBindings.h"
 #include "MeshBindings.h"
 #include "MeshRendererBindings.h"
+#include "TransformBindings.h"
+#include "ScriptableBindings.h"
 
 using namespace v8;
 
@@ -53,6 +55,8 @@ void JSInterpreter::InitializeVM() {
     EntityBindings_BindToGlobal(m_globalObjDef);
     MeshBindings_BindToGlobal(m_globalObjDef);
     MeshRendererBindings_BindToGlobal(m_globalObjDef);
+    TransformBindings_BindToGlobal(m_globalObjDef);
+    ScriptableBindings_BindToGlobal(m_globalObjDef);
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
     

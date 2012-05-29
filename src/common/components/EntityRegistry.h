@@ -21,6 +21,8 @@ public:
     void RegisterEntity(Entity* toAdd);
     void UnregisterEntity(Entity* toRemove);
     
+    void CallUpdates(GLfloat delta);
+    
     const vector<Entity*> GetEntities();
     
 private:

@@ -47,6 +47,14 @@ void Window::SetSize(GLfloat x, GLfloat y) {
     m_isDirty |= WINDOW_SIZE;
 }
 
+GLfloat Window::GetWidth() {
+    return m_width;
+}
+
+GLfloat Window::GetHeight() {
+    return m_height;
+}
+
 void Window::Flush() {
     glFlush();
     SDL_GL_SwapWindow(this->m_window);

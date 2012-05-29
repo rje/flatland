@@ -30,6 +30,9 @@ public:
     virtual void SetClearColor(GLclampf r, GLclampf g, GLclampf b, GLclampf a);
     virtual void HandleUpdates();
     
+    virtual GLfloat GetWidth();
+    virtual GLfloat GetHeight();
+    
     virtual Renderer* GetRenderer();
 private:
     Window();

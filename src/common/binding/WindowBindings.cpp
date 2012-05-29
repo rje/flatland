@@ -33,12 +33,22 @@ Handle<Value> fl_wb_SetClearColor(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_wb_GetSize(const Arguments& args) {
+    Locker locker;
+    HandleScope handle_scope;
+    Handle<Object> toReturn = Object::New();
+    toReturn->Set(String::New("width"), Number::New(Window::GetWindow()->GetWidth()));
+    toReturn->Set(String::New("height"), Number::New(Window::GetWindow()->GetHeight()));
+    
+    return handle_scope.Close(toReturn);
+}
 
 void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     Locker locker;
     HandleScope handle_scope;
     Handle<ObjectTemplate> window = ObjectTemplate::New();
     window->Set(String::New("setSize"), FunctionTemplate::New(fl_wb_SetSize));
+    window->Set(String::New("getSize"), FunctionTemplate::New(fl_wb_GetSize));
     window->Set(String::New("setClearColor"), FunctionTemplate::New(fl_wb_SetClearColor));
     global->Set("window", window);
 }

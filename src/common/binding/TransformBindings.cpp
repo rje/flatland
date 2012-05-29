@@ -34,11 +34,25 @@ Handle<Value> fl_tf_SetPosition(const Arguments& args) {
     return handle_scope.Close(args.This());
 }
 
+Handle<Value> fl_tf_GetPosition(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Transform* transform = static_cast<Transform*>(entVal->Value());
+    Vector3 vec = transform->GetPosition();
+    Handle<Object> toReturn = Object::New();
+    toReturn->Set(String::New("x"), Number::New(vec.x));
+    toReturn->Set(String::New("y"), Number::New(vec.y));
+    toReturn->Set(String::New("z"), Number::New(vec.z));
+    
+    return handle_scope.Close(toReturn);
+}
+
 Handle<FunctionTemplate> fl_tf_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setPosition", FunctionTemplate::New(fl_tf_SetPosition));
+    instance_templ->Set("getPosition", FunctionTemplate::New(fl_tf_GetPosition));
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }
@@ -48,6 +62,8 @@ Handle<Value> TransformBindings_WrapTransform(Transform* toWrap) {
     HandleScope handle_scope;
     Local<Object> transform_inst = s_templ->InstanceTemplate()->NewInstance();
     transform_inst->SetInternalField(0, External::New(toWrap));
+    Persistent<Object> ref = Persistent<Object>::New(transform_inst->ToObject());
+    toWrap->SetWrappedObject(ref);
     return handle_scope.Close(transform_inst);
 }
 

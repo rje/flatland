@@ -14,12 +14,12 @@ public:
     void LoadFile(string& path, const string& name = "");
     void RunString(string& contents, const string& name = "");
     
+    v8::Persistent<v8::Context> m_context;
 private:
     JSInterpreter();
     virtual ~JSInterpreter();
     void InitializeVM();
     v8::Persistent<v8::ObjectTemplate> m_globalObjDef;
-    v8::Persistent<v8::Context> m_context;
     void RegisterConsole();
 };
 

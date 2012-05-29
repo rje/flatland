@@ -10,7 +10,10 @@
 #define flatland_EntityBindings_h
 
 #include <v8.h>
+using namespace v8;
+class Entity;
 
+Handle<Value> EntityBindings_WrapEntity(Entity* toWrap);
 void EntityBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global);
 
 #endif

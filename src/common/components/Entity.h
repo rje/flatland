@@ -22,6 +22,8 @@ public:
     void SetName(string* name);
     string* GetName();
     
+    virtual void Update(GLfloat delta);
+    
     virtual void AddComponent(Component* toAdd);
     virtual void RemoveComponent(Component* toRemove);
     
@@ -37,10 +39,13 @@ public:
     };
     
     virtual Component* GetComponentByTypeName(string& type);
+    virtual void SetWrappedObject(Persistent<Object>& handle);
+    virtual Persistent<Object> GetWrappedObject();
 
 protected:
     ComponentVector m_components;
     string* m_name;
+    Persistent<Object> m_wrappedObj;
 };
 
 #endif

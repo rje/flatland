@@ -33,6 +33,13 @@ void EntityRegistry::UnregisterEntity(Entity* toRemove) {
     }
 }
 
+void EntityRegistry::CallUpdates(GLfloat delta) {
+    for(vector<Entity*>::iterator i = m_entities.begin(); i != m_entities.end(); ++i) {
+        Entity* toCall = *i;
+        toCall->Update(delta);
+    } 
+}
+
 EntityRegistry::EntityRegistry() {
     
 }

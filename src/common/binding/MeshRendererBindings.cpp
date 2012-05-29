@@ -37,6 +37,8 @@ Handle<Value> MeshRendererBindings_WrapMeshRenderer(MeshRenderer* toWrap) {
     HandleScope handle_scope;
     Local<Object> meshRenderer_inst = s_templ->InstanceTemplate()->NewInstance();
     meshRenderer_inst->SetInternalField(0, External::New(toWrap));
+    Persistent<Object> ref = Persistent<Object>::New(meshRenderer_inst->ToObject());
+    toWrap->SetWrappedObject(ref);
     return handle_scope.Close(meshRenderer_inst);
 }
 

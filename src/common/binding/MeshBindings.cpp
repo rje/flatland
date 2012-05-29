@@ -26,6 +26,8 @@ Handle<Value> MeshBindings_WrapMesh(Mesh* toWrap) {
     HandleScope handle_scope;
     Local<Object> mesh_inst = s_templ->InstanceTemplate()->NewInstance();
     mesh_inst->SetInternalField(0, External::New(toWrap));
+    Persistent<Object> ref = Persistent<Object>::New(mesh_inst->ToObject());
+    toWrap->SetWrappedObject(ref);
     return handle_scope.Close(mesh_inst);
 }
 

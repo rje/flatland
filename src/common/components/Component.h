@@ -33,6 +33,7 @@ public:
     virtual void Register() {}
     virtual void Unregister() {}
     
+    virtual void SetWrappedObject(Persistent<Object>& handle) { m_wrappedJSVersion = handle; }
     virtual Persistent<Object> GetWrappedObject() = 0;
     virtual string& GetIdent() { return *m_ident; }
 protected:

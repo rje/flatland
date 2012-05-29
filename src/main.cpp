@@ -3,15 +3,17 @@
 #include <SDL.h>
 #include "Window.h"
 #include "Renderer.h"
+#include "EntityRegistry.h"
 
 int main(int argc, char** argv) {
     bool running = true;
     Window::GetWindow();
-    string test = "tests/test_1.js";
+    string test = "tests/test_2.js";
 		if(argc == 2) {
 			test = argv[1];
 		}
     JSInterpreter::Instance()->LoadFile(test);
+    uint32_t oldTicks = SDL_GetTicks();
     while(running) {
         SDL_Event evt;
         if(SDL_PollEvent(&evt)) {
@@ -25,8 +27,12 @@ int main(int argc, char** argv) {
                 Window::GetWindow()->SetSize(w, h);
             }
         }
+        uint32_t newTicks = SDL_GetTicks();
+        GLfloat delta = (newTicks - oldTicks) / 1000.0f;
         Window::GetWindow()->HandleUpdates();
         Renderer* r = Window::GetWindow()->GetRenderer();
+        EntityRegistry::instance()->CallUpdates(delta);
+        oldTicks = newTicks;
         r->Prepare();
         r->Draw();
         r->Flush();

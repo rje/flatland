@@ -54,11 +54,13 @@ Handle<FunctionTemplate> fl_eb_GetTemplate() {
     return handle_scope.Close(templ);
 }
 
-Handle<Value> fl_eb_WrapEntity(Entity* toWrap) {
+Handle<Value> EntityBindings_WrapEntity(Entity* toWrap) {
     static Persistent<FunctionTemplate> s_templ = Persistent<FunctionTemplate>::New(fl_eb_GetTemplate());
     HandleScope handle_scope;
     Local<Object> entity_inst = s_templ->InstanceTemplate()->NewInstance();
     entity_inst->SetInternalField(0, External::New(toWrap));
+    Persistent<Object> ref = Persistent<Object>::New(entity_inst->ToObject());
+    toWrap->SetWrappedObject(ref);
     return handle_scope.Close(entity_inst);
 }
 
@@ -70,7 +72,7 @@ Handle<Value> fl_eb_ConstructorCall(const Arguments& args) {
     String::Utf8Value name(args[0]->ToString());
     Entity* entity = new Entity();
     entity->SetName(new string(*name));
-    return fl_eb_WrapEntity(entity);
+    return EntityBindings_WrapEntity(entity);
 }
 
 void EntityBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {
