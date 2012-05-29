@@ -75,6 +75,12 @@ void JSInterpreter::RunString(string& contents, const string& name) {
     TryCatch trycatch;
     Handle<String> source = String::New(contents.c_str());
     Handle<Script> script = Script::Compile(source, String::New(name.c_str()));
+    if(script.IsEmpty()) {
+        Handle<Value> stack = trycatch.StackTrace();
+        String::Utf8Value result(stack);
+        printf("Stack trace:\n%s\n", *result);
+        return;
+    }
     Handle<Value> val = script->Run();
     if(val.IsEmpty()) {
         Handle<Value> stack = trycatch.StackTrace();

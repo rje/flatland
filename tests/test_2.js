@@ -6,7 +6,7 @@ function createSprite(x, y) {
   e.addComponent(Mesh.createRect(64, 64));
   e.addComponent(mr);
   e.getComponent("Transform").setPosition(x, y);
-  var s = new Scriptable();
+  var s = new Scriptable("moving");
   s.onUpdate = function (delta) {
     if(this.transform == undefined) {
        this.transform = e.getComponent("Transform");

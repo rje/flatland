@@ -7,20 +7,17 @@
 //
 
 #include "Entity.h"
-#define LOG printf
 
 #include "EntityBindings.h"
 #include "EntityRegistry.h"
 #include "Transform.h"
 
 Entity::Entity() : m_name(NULL) {
-    LOG("Entity::Entity()\n");
     this->AddComponent(new Transform());
     EntityRegistry::instance()->RegisterEntity(this);
 }
 
 Entity::~Entity() {
-    LOG("Entity::~Entity()\n");
     EntityRegistry::instance()->UnregisterEntity(this);
     if(m_name) {
         delete m_name;

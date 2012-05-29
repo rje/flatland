@@ -33,6 +33,8 @@ public:
     virtual GLfloat GetWidth();
     virtual GLfloat GetHeight();
     
+    virtual void SetResizeable(GLboolean canResize);
+    
     virtual Renderer* GetRenderer();
 private:
     Window();
@@ -43,6 +45,7 @@ private:
     GLfloat m_width, m_height;
     GLuint m_isDirty;
     GLclampf m_clearR, m_clearG, m_clearB, m_clearA;
+    GLboolean m_canResize;
     Renderer* m_renderer;
 };
 

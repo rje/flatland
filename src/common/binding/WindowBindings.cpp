@@ -43,6 +43,14 @@ Handle<Value> fl_wb_GetSize(const Arguments& args) {
     return handle_scope.Close(toReturn);
 }
 
+Handle<Value> fl_wb_SetResizable(const Arguments& args) {
+    Locker locker;
+    HandleScope handle_scope;
+    GLboolean val = args[0]->ToBoolean()->Value();
+    Window::GetWindow()->SetResizeable(val);
+    return Undefined();
+}
+
 void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     Locker locker;
     HandleScope handle_scope;
@@ -50,5 +58,6 @@ void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     window->Set(String::New("setSize"), FunctionTemplate::New(fl_wb_SetSize));
     window->Set(String::New("getSize"), FunctionTemplate::New(fl_wb_GetSize));
     window->Set(String::New("setClearColor"), FunctionTemplate::New(fl_wb_SetClearColor));
+    window->Set(String::New("setResizable"), FunctionTemplate::New(fl_wb_SetResizable));
     global->Set("window", window);
 }

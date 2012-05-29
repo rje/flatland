@@ -72,7 +72,6 @@ Handle<Value> fl_tf_ConstructorCall(const Arguments& args) {
         return ThrowException(String::New("Cannot call constructor like a function"));
     }
     HandleScope handle_scope;
-    String::Utf8Value name(args[0]->ToString());
     Transform* transform = new Transform();
     return TransformBindings_WrapTransform(transform);
 }

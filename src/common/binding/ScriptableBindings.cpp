@@ -8,13 +8,27 @@
 
 #include "ScriptableBindings.h"
 #include "Scriptable.h"
+#include "Entity.h"
 
 using namespace v8;
+
+Handle<Value> fl_scr_GetParent(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Scriptable* scriptable = static_cast<Scriptable*>(entVal->Value());
+    if(scriptable->GetOwner() == NULL) {
+        return Undefined();
+    }
+    else {
+        return handle_scope.Close(scriptable->GetOwner()->GetWrappedObject());
+    }
+}
 
 Handle<FunctionTemplate> fl_scr_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
+    instance_templ->Set("getParent", FunctionTemplate::New(fl_scr_GetParent));
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }
@@ -30,13 +44,16 @@ Handle<Value> ScriptableBindings_WrapScriptable(Scriptable* toWrap) {
 }
 
 Handle<Value> fl_scr_ConstructorCall(const Arguments& args) {
+    HandleScope handle_scope;
     if(!args.IsConstructCall()) {
         return ThrowException(String::New("Cannot call constructor like a function"));
     }
-    HandleScope handle_scope;
-    String::Utf8Value name(args[0]->ToString());
-    Scriptable* scriptable = new Scriptable();
-    return ScriptableBindings_WrapScriptable(scriptable);
+    else {
+        String::Utf8Value result(args[0]);
+        string name = *result;
+        Scriptable* scriptable = new Scriptable(name);
+        return ScriptableBindings_WrapScriptable(scriptable);
+    }
 }
 
 void ScriptableBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {

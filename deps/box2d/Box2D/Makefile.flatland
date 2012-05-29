@@ -1,0 +1,35 @@
+
+CFLAGS=-I.
+OUTDIR=out
+OBJ_DIR=$(OUTDIR)/objs
+SOURCES:=$(shell find Box2D -name \*.cpp)
+OBJECTS=$(patsubst Box2D/%.cpp,out/%.o,$(SOURCES))
+LIBNAME=libBox2D.a
+LIB=$(OUTDIR)/$(LIBNAME)
+
+ifeq ($(UNAME),Darwin)
+	CC=clang++
+else
+	CC=g++
+endif
+
+all: create-out build
+
+clean:
+	rm -rf out
+
+create-out:
+	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OUTDIR)/lib
+
+build: $(LIB)
+
+$(LIB): $(OBJECTS)
+	ar rcs $(LIB) $(shell find out -name *\.o)
+
+$(OBJECTS): out/%.o : Box2D/%.cpp
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+install:
+	cp $(OUTDIR)/$(LIBNAME) ../../../out/lib/$(LIBNAME)

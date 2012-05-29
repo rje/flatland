@@ -13,6 +13,7 @@
 		940E0E6A15707D5100E80636 /* TransformBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E6915707D5100E80636 /* TransformBindings.cpp */; };
 		942E29BF15751C180060A53F /* Scriptable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942E29BE15751C180060A53F /* Scriptable.cpp */; };
 		942E29C2157521A50060A53F /* ScriptableBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942E29C1157521A50060A53F /* ScriptableBindings.cpp */; };
+		942E29C4157586C30060A53F /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 942E29C3157586C30060A53F /* libBox2D.a */; };
 		9491039A1572F57800BFDF65 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 949103991572F57800BFDF65 /* main.cpp */; };
 		9494207D156FFE3700C36ECD /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942060156FFE3700C36ECD /* EntityBindings.cpp */; };
 		9494207E156FFE3700C36ECD /* JSInterpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942062156FFE3700C36ECD /* JSInterpreter.cpp */; };
@@ -62,6 +63,7 @@
 		942E29BE15751C180060A53F /* Scriptable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scriptable.cpp; sourceTree = "<group>"; };
 		942E29C01575216A0060A53F /* ScriptableBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptableBindings.h; sourceTree = "<group>"; };
 		942E29C1157521A50060A53F /* ScriptableBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptableBindings.cpp; sourceTree = "<group>"; };
+		942E29C3157586C30060A53F /* libBox2D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBox2D.a; path = ../../out/lib/libBox2D.a; sourceTree = "<group>"; };
 		949103991572F57800BFDF65 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		94942050156FFE1000C36ECD /* flatland */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = flatland; sourceTree = BUILT_PRODUCTS_DIR; };
 		94942060156FFE3700C36ECD /* EntityBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBindings.cpp; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942E29C4157586C30060A53F /* libBox2D.a in Frameworks */,
 				949420A815700B1400C36ECD /* libSDL2.a in Frameworks */,
 				949420A71570021200C36ECD /* libSDL2main.a in Frameworks */,
 				949420A2157001D700C36ECD /* libm.dylib in Frameworks */,
@@ -153,6 +156,7 @@
 		94942045156FFE1000C36ECD = {
 			isa = PBXGroup;
 			children = (
+				942E29C3157586C30060A53F /* libBox2D.a */,
 				9494205D156FFE3700C36ECD /* src */,
 				94942053156FFE1000C36ECD /* flatland */,
 				940E0E6B1570825800E80636 /* frameworks */,
@@ -372,6 +376,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../out/include/SDL2,
 					../../deps/v8/include,
+					../../deps/box2d/Box2D,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					../../out/lib,
@@ -387,6 +392,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../out/include/SDL2,
 					../../deps/v8/include,
+					../../deps/box2d/Box2D,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					../../out/lib,

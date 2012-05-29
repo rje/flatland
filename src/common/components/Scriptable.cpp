@@ -10,8 +10,8 @@
 #include "ScriptableBindings.h"
 #include "JSInterpreter.h"
 
-Scriptable::Scriptable() {
-    
+Scriptable::Scriptable(string& name) : m_name(name) {
+    m_ident = new string("Scriptable");
 }
 
 Scriptable::~Scriptable() {

@@ -1,5 +1,5 @@
 
-IFLAGS=-Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer
+IFLAGS=-Ideps/box2d/Box2D -Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer
 CFLAGS=-c -Wall $(IFLAGS)
 OUTDIR=out
 OBJ_DIR=$(OUTDIR)/objs
@@ -8,7 +8,7 @@ OBJECTS:=$(patsubst src/%.cpp,out/%.o,$(SOURCES))
 BASE_DIR=${PWD}
 TARGET=flatland
 UNAME = $(shell uname -s)
-LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot
+LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot -lBox2D
 
 ifeq ($(UNAME),Darwin)
 CC=clang++
@@ -22,7 +22,7 @@ endif
 
 all: create-out $(TARGET)
 
-clean: sdl-clean v8-clean $(TARGET)-clean
+clean: sdl-clean v8-clean box2d-clean $(TARGET)-clean
 
 create-out:
 	mkdir -p $(OUTDIR)
@@ -33,8 +33,17 @@ dependencies:
 	$(MAKE) -C deps/v8 dependencies
 	$(shell mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out)
 
+box2d: box2d-build
+	test -f out/lib/libBox2D.a || make -C deps/box2d/Box2D -f Makefile.flatland install
+
+box2d-build:
+	make -C deps/box2d/Box2D -f Makefile.flatland
+
+box2d-clean:
+	make -C deps/box2d/Box2D -f Makefile.flatland clean
+
 v8:
-	make -C deps/v8 native
+	make -C deps/v8 native -j8
 	cp $(V8BUILDDIR)/*.a $(OUTDIR)/lib
 
 v8-clean:
@@ -53,8 +62,9 @@ $(TARGET)-clean:
 	rm -rf $(OUTDIR)/obj
 	rm -rf $(OUTDIR)/$(TARGET)
 
-$(TARGET): | $(OBJECTS)
-	$(CC) $(OBJ_DIR)/* $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) -o $(OUTDIR)/$@
+$(TARGET): $(OBJECTS)
+	$(CC) $(OBJECTS) $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) -o $(OUTDIR)/$@
 
-$(OBJECTS): out/%.o : src/%.cpp v8 sdl
-	$(CC) $(CFLAGS) $(shell out/bin/sdl2-config --cflags) $< -o $(OBJ_DIR)/$(notdir $@)
+$(OBJECTS): out/%.o : src/%.cpp v8 sdl box2d
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(shell out/bin/sdl2-config --cflags) -c $< -o $@

@@ -13,11 +13,13 @@
 
 class Scriptable : public Component {
 public:    
-    Scriptable();
+    Scriptable(string& m_name);
     virtual ~Scriptable();
     
     virtual Persistent<Object> GetWrappedObject();
     virtual void Update(GLfloat delta);
+protected:
+    string m_name;
 };
 
 #endif

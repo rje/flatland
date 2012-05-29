@@ -47,7 +47,6 @@ Handle<Value> fl_mrb_ConstructorCall(const Arguments& args) {
         return ThrowException(String::New("Cannot call constructor like a function"));
     }
     HandleScope handle_scope;
-    String::Utf8Value name(args[0]->ToString());
     MeshRenderer* meshRenderer = new MeshRenderer();
     return MeshRendererBindings_WrapMeshRenderer(meshRenderer);
 }

@@ -29,6 +29,7 @@ public:
     virtual ~Component() {}
     
     virtual void Update(GLfloat delta) {};
+    virtual Entity* GetOwner() { return m_owner; }
     virtual void SetOwner(Entity* owner) { m_owner = owner; }
     virtual void Register() {}
     virtual void Unregister() {}

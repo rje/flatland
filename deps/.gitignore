@@ -9,3 +9,5 @@ SDL/sdl2.pc
 SDL/VisualC/SDL/Win32
 SDL/VisualC/SDLmain/Win32
 SDL/VisualC/tests
+box2d/Box2D/out
+box2d/Contributions

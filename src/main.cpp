@@ -8,7 +8,7 @@
 int main(int argc, char** argv) {
     bool running = true;
     Window::GetWindow();
-    string test = "tests/test_2.js";
+    string test = "tests/games/breakout/app.js";
 		if(argc == 2) {
 			test = argv[1];
 		}
