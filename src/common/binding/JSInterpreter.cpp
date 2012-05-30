@@ -9,6 +9,7 @@
 #include "MeshRendererBindings.h"
 #include "TransformBindings.h"
 #include "ScriptableBindings.h"
+#include "KeyboardBindings.h"
 
 using namespace v8;
 
@@ -57,6 +58,7 @@ void JSInterpreter::InitializeVM() {
     MeshRendererBindings_BindToGlobal(m_globalObjDef);
     TransformBindings_BindToGlobal(m_globalObjDef);
     ScriptableBindings_BindToGlobal(m_globalObjDef);
+    KeyboardBindings_BindToGlobal(m_globalObjDef);
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
     

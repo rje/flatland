@@ -12,8 +12,6 @@
 #include <v8.h>
 #include <SDL.h>
 
-#include <Box2D/Common/b2Math.h>
-
 Window::Window() : m_window(NULL) {
     printf("Creating window\n");
     SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
@@ -76,18 +74,18 @@ void Window::SetClearColor(GLclampf r, GLclampf g, GLclampf b, GLclampf a) {
 }
 
 void Window::HandleUpdates() {
-    if(m_isDirty && WINDOW_SIZE) {
+    if(m_isDirty & WINDOW_SIZE) {
         SDL_SetWindowSize(m_window, m_width, m_height);
         glViewport(0, 0, m_width, m_height);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         glOrtho(0, m_width, 0, m_height, -1, 1);
         glMatrixMode(GL_MODELVIEW);
-        m_isDirty &= !WINDOW_SIZE;
+        m_isDirty &= ~WINDOW_SIZE;
     }
-    if(m_isDirty && WINDOW_CLEAR_COLOR) {
+    if(m_isDirty & WINDOW_CLEAR_COLOR) {
         glClearColor(m_clearR, m_clearG, m_clearB, m_clearA);
-        m_isDirty &= !WINDOW_CLEAR_COLOR;
+        m_isDirty &= ~WINDOW_CLEAR_COLOR;
     }
 }
 

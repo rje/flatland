@@ -14,6 +14,7 @@
 		942E29BF15751C180060A53F /* Scriptable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942E29BE15751C180060A53F /* Scriptable.cpp */; };
 		942E29C2157521A50060A53F /* ScriptableBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942E29C1157521A50060A53F /* ScriptableBindings.cpp */; };
 		942E29C4157586C30060A53F /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 942E29C3157586C30060A53F /* libBox2D.a */; };
+		944236261576939200A6C5BD /* KeyboardBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944236251576939200A6C5BD /* KeyboardBindings.cpp */; };
 		9491039A1572F57800BFDF65 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 949103991572F57800BFDF65 /* main.cpp */; };
 		9494207D156FFE3700C36ECD /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942060156FFE3700C36ECD /* EntityBindings.cpp */; };
 		9494207E156FFE3700C36ECD /* JSInterpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942062156FFE3700C36ECD /* JSInterpreter.cpp */; };
@@ -64,6 +65,8 @@
 		942E29C01575216A0060A53F /* ScriptableBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptableBindings.h; sourceTree = "<group>"; };
 		942E29C1157521A50060A53F /* ScriptableBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptableBindings.cpp; sourceTree = "<group>"; };
 		942E29C3157586C30060A53F /* libBox2D.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libBox2D.a; path = ../../out/lib/libBox2D.a; sourceTree = "<group>"; };
+		944236251576939200A6C5BD /* KeyboardBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardBindings.cpp; sourceTree = "<group>"; };
+		944236281576B0E500A6C5BD /* KeyboardBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardBindings.h; sourceTree = "<group>"; };
 		949103991572F57800BFDF65 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		94942050156FFE1000C36ECD /* flatland */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = flatland; sourceTree = BUILT_PRODUCTS_DIR; };
 		94942060156FFE3700C36ECD /* EntityBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EntityBindings.cpp; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 				940E0E6915707D5100E80636 /* TransformBindings.cpp */,
 				942E29C01575216A0060A53F /* ScriptableBindings.h */,
 				942E29C1157521A50060A53F /* ScriptableBindings.cpp */,
+				944236281576B0E500A6C5BD /* KeyboardBindings.h */,
+				944236251576939200A6C5BD /* KeyboardBindings.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -319,6 +324,7 @@
 				9491039A1572F57800BFDF65 /* main.cpp in Sources */,
 				942E29BF15751C180060A53F /* Scriptable.cpp in Sources */,
 				942E29C2157521A50060A53F /* ScriptableBindings.cpp in Sources */,
+				944236261576939200A6C5BD /* KeyboardBindings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
