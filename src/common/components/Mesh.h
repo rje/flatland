@@ -19,14 +19,19 @@ public:
     virtual Persistent<Object> GetWrappedObject();
     
     static Mesh* CreateRect(GLfloat w, GLfloat h);
+    static Mesh* CreateCircle(GLfloat radius, GLint numPoints);
     
     Vector3* GetVertexArray();
     GLushort* GetIndexArray();
+    GLint GetIndexCount();
+    GLenum GetMeshType();
     
 protected:
     Vector3* m_verts;
     Vector2* m_uvs;
     GLushort* m_indices;
+    GLint m_indexCount;
+    GLenum m_meshType;
 };
 
 

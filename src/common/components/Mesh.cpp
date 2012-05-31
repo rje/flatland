@@ -9,6 +9,7 @@
 #include "Mesh.h"
 #include "Entity.h"
 #include "MeshBindings.h"
+#include <math.h>
 
 Mesh::Mesh() {
     m_ident = new string("Mesh");
@@ -46,6 +47,28 @@ Mesh* Mesh::CreateRect(GLfloat w, GLfloat h) {
     toReturn->m_indices[3] = 1;
     toReturn->m_indices[4] = 2;
     toReturn->m_indices[5] = 3;
+    toReturn->m_indexCount = 6;
+    toReturn->m_meshType = GL_TRIANGLES;
+    return toReturn;
+}
+
+Mesh* Mesh::CreateCircle(GLfloat radius, GLint numPoints) {
+    Mesh* toReturn = new Mesh();
+    toReturn->m_verts = new Vector3[numPoints];
+    toReturn->m_uvs = new Vector2[numPoints];
+    toReturn->m_indices = new GLushort[numPoints];
+    for(int i = 0; i < numPoints; i++) {
+        GLfloat cx = cos(2 * M_PI * i / (GLfloat)numPoints);
+        GLfloat sy = sin(2 * M_PI * i / (GLfloat)numPoints);
+        toReturn->m_verts[i].x = radius * cx;
+        toReturn->m_verts[i].y = radius * sy;
+        toReturn->m_verts[i].z = 0;
+        toReturn->m_uvs[i].x = 0.5 + cx;
+        toReturn->m_uvs[i].y = 0.5 + sy;
+        toReturn->m_indices[i] = i;
+    }
+    toReturn->m_indexCount = numPoints;
+    toReturn->m_meshType = GL_TRIANGLE_FAN;
     
     return toReturn;
 }
@@ -56,4 +79,12 @@ Vector3* Mesh::GetVertexArray() {
 
 GLushort* Mesh::GetIndexArray() {
     return m_indices;
+}
+
+GLint Mesh::GetIndexCount() {
+    return m_indexCount;
+}
+
+GLenum Mesh::GetMeshType() {
+    return m_meshType;
 }

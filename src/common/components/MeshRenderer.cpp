@@ -51,7 +51,7 @@ void MeshRenderer::Render() {
         glColor4f(m_r, m_g, m_b, m_a);
         glEnableClientState(GL_VERTEX_ARRAY);
         glVertexPointer(3, GL_FLOAT, 0, m->GetVertexArray());
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, m->GetIndexArray());
+        glDrawElements(m->GetMeshType(), m->GetIndexCount(), GL_UNSIGNED_SHORT, m->GetIndexArray());
     }
     glPopMatrix();
 }

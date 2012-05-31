@@ -1,4 +1,3 @@
-
 function createBox(w, h, name, r, g, b) {
     var e = new Entity(name);
     e.addComponent(Mesh.createRect(w, h));
@@ -52,7 +51,9 @@ function createPaddle() {
 }
 
 function createBall() {
-    var ball = createBox(1, 1, "ball", 0.8, 0.8, 0.8);
+    var ball = new Entity("ball");
+    ball.addComponent(Mesh.createCircle(0.5, 32));
+    ball.addComponent(new MeshRenderer()).setColor(0.8, 0.8, 0.8, 1);
     ball.getComponent("Transform").setPosition(16, 8);
     var cc = ball.addComponent(new CircleCollider(0.5));
     cc.setPhysicsProperties({type: Collider.dynamic, restitution: 1, friction: 0, density: 1});
@@ -63,17 +64,17 @@ function createWalls() {
     var e = new Entity();
     e.getComponent("Transform").setPosition(0, 12);
     var bc = e.addComponent(new BoxCollider(0.1, 20));
-    bc.setPhysicsProperties({type: Collider.static, restitution: 0, friction: 0});
+    bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
 
     e = new Entity();
     e.getComponent("Transform").setPosition(32, 12);
     bc = e.addComponent(new BoxCollider(0.1, 20));
-    bc.setPhysicsProperties({type: Collider.static, restitution: 0, friction: 0});
+    bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
 
     e = new Entity();
     e.getComponent("Transform").setPosition(16, 24);
     bc = e.addComponent(new BoxCollider(25, 0.1));
-    bc.setPhysicsProperties({type: Collider.static, restitution: 0, friction: 0});
+    bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
     bc.onCollision = function(contact, otherCollider) {
         var ball = otherCollider.getParent();
         if(!ball.hasDoubled) {

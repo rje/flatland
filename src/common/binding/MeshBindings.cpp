@@ -50,9 +50,18 @@ Handle<Value> fl_mb_CreateRect(const Arguments& args) {
     return MeshBindings_WrapMesh(mesh);
 }
 
+Handle<Value> fl_mb_CreateCircle(const Arguments& args) {
+    HandleScope handle_scope;
+    GLfloat radius = args[0]->NumberValue();
+    GLint points = args[1]->Int32Value();
+    Mesh* mesh = Mesh::CreateCircle(radius, points);
+    return MeshBindings_WrapMesh(mesh);
+}
+
 void MeshBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {
     HandleScope handle_scope;
     Handle<FunctionTemplate> meshObj = FunctionTemplate::New(fl_mb_ConstructorCall);
     meshObj->Set("createRect", FunctionTemplate::New(fl_mb_CreateRect));
+    meshObj->Set("createCircle", FunctionTemplate::New(fl_mb_CreateCircle));
     global->Set("Mesh", meshObj);
 }
