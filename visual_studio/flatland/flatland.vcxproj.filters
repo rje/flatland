@@ -15,6 +15,17 @@
     <ClCompile Include="..\..\src\common\renderer\Renderer.cpp" />
     <ClCompile Include="..\..\src\common\Window.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\common\binding\BoxColliderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\CircleColliderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\ColliderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\ComponentBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\KeyboardBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\ScriptableBindings.cpp" />
+    <ClCompile Include="..\..\src\common\components\BoxCollider.cpp" />
+    <ClCompile Include="..\..\src\common\components\CircleCollider.cpp" />
+    <ClCompile Include="..\..\src\common\components\Collider.cpp" />
+    <ClCompile Include="..\..\src\common\components\Scriptable.cpp" />
+    <ClCompile Include="..\..\src\common\components\PhysicsSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\common\binding\EntityBindings.h" />
@@ -32,5 +43,16 @@
     <ClInclude Include="..\..\src\common\renderer\Renderer.h" />
     <ClInclude Include="..\..\src\common\renderer\Vectors.h" />
     <ClInclude Include="..\..\src\common\Window.h" />
+    <ClInclude Include="..\..\src\common\binding\ComponentBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\BoxColliderBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\CircleColliderBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\ColliderBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\KeyboardBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\ScriptableBindings.h" />
+    <ClInclude Include="..\..\src\common\components\Collider.h" />
+    <ClInclude Include="..\..\src\common\components\BoxCollider.h" />
+    <ClInclude Include="..\..\src\common\components\CircleCollider.h" />
+    <ClInclude Include="..\..\src\common\components\Scriptable.h" />
+    <ClInclude Include="..\..\src\common\components\PhysicsSystem.h" />
   </ItemGroup>
 </Project>

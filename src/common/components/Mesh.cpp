@@ -9,6 +9,7 @@
 #include "Mesh.h"
 #include "Entity.h"
 #include "MeshBindings.h"
+#define _USE_MATH_DEFINES // needed for the windows build, yay windows
 #include <math.h>
 
 Mesh::Mesh() {

@@ -7,6 +7,7 @@
 //
 
 #include "PhysicsSystem.h"
+#define _USE_MATH_DEFINES // needed for the windows build, yay windows
 #include <math.h>
 
 class PSDebugDraw : public b2Draw {
