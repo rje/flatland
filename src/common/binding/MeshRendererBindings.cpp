@@ -17,7 +17,10 @@ Handle<Value> fl_mrb_SetColor(const Arguments& args) {
     GLfloat r = (GLfloat)args[0]->NumberValue();
     GLfloat g = (GLfloat)args[1]->NumberValue();
     GLfloat b = (GLfloat)args[2]->NumberValue();
-    GLfloat a = (GLfloat)args[3]->NumberValue();
+    GLfloat a = 1.0f;
+    if(args.Length() == 4) {
+        a = (GLfloat)args[3]->NumberValue();
+    }
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     MeshRenderer* meshRenderer = static_cast<MeshRenderer*>(entVal->Value());
     meshRenderer->SetColor(r, g, b, a);

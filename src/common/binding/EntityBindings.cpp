@@ -8,6 +8,7 @@
 
 #include "EntityBindings.h"
 #include "Entity.h"
+#include "Transform.h"
 
 using namespace v8;
 
@@ -52,6 +53,15 @@ Handle<Value> fl_eb_Destroy(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_eb_GetTransform(Local<String> property, const AccessorInfo& info) {
+    HandleScope handle_scope;
+    Local<Object> self = info.Holder();
+    Local<External> entVal  = Local<External>::Cast(self->GetInternalField(0));
+    Entity* entity = static_cast<Entity*>(entVal->Value());
+    
+    return handle_scope.Close(entity->GetComponent<Transform>()->GetWrappedObject());
+}
+
 Handle<FunctionTemplate> fl_eb_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
@@ -59,6 +69,7 @@ Handle<FunctionTemplate> fl_eb_GetTemplate() {
     instance_templ->Set("addComponent", FunctionTemplate::New(fl_eb_AddComponent));
     instance_templ->Set("getComponent", FunctionTemplate::New(fl_eb_GetComponent));
     instance_templ->Set("destroy", FunctionTemplate::New(fl_eb_Destroy));
+    instance_templ->SetAccessor(String::New("transform"), fl_eb_GetTransform);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }
