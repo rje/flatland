@@ -12,16 +12,22 @@
 #include "EntityRegistry.h"
 #include "Transform.h"
 
-Entity::Entity() : m_name(NULL) {
+Entity::Entity() : m_name(NULL), m_destructionPending(false) {
     this->AddComponent(new Transform());
     EntityRegistry::instance()->RegisterEntity(this);
 }
 
 Entity::~Entity() {
+    printf("Deleting %s\n", m_name->c_str());
     EntityRegistry::instance()->UnregisterEntity(this);
+    for(ComponentVector::iterator i = m_components.begin(); i != m_components.end(); ++i){
+        Component* toDelete = *i;
+        delete toDelete;
+    }
     if(m_name) {
         delete m_name;
     }
+    m_wrappedObj.Dispose();
 }
 
 void Entity::Update(GLfloat delta) {
@@ -33,6 +39,14 @@ void Entity::Update(GLfloat delta) {
 
 void Entity::SetName(string* name) {
     m_name = name;
+}
+
+void Entity::MarkForDestruction() {
+    m_destructionPending = true;
+}
+
+GLboolean Entity::ShouldDestroy() {
+    return m_destructionPending;
 }
 
 string* Entity::GetName() {

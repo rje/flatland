@@ -22,6 +22,7 @@ public:
     void UnregisterEntity(Entity* toRemove);
     
     void CallUpdates(GLfloat delta);
+    void DestroyMarked();
     
     const vector<Entity*> GetEntities();
     

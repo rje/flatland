@@ -14,22 +14,25 @@ function createBox(w, h, name, r, g, b, a) {
 
 function createBoard(cols, rows) {
     var blockSize = {w: 64, h: 32};
-    var blockSpace = {w: 6, h: 6};
+    var blockSpace = {w: 16, h: 16};
     var screenSize = window.getSize();
     var rowWidth = cols * blockSize.w + (cols - 1) * blockSpace.w;
     var colHeight = rows * blockSize.h + (rows - 1) * blockSpace.h;
-    var xOffset = (screenSize.width - rowWidth) / 2;
-    var yOffset = screenSize.height - colHeight - xOffset;
+    var xOffset = (screenSize.width - rowWidth) / 2 + blockSize.w / 2;
+    var yOffset = screenSize.height - colHeight - xOffset + blockSize.w;
     for(var x = 0; x < cols; x++) {
         for(var y = 0; y < rows; y++) {
             var block = createBox(blockSize.w, blockSize.h, "block", 0.8, 0.8, 0.8);
             var t = block.getComponent("Transform");
             t.setPosition(xOffset + x * (blockSize.w + blockSpace.w),
-                yOffset + y * (blockSize.h + blockSpace.h));
+                          yOffset + y * (blockSize.h + blockSpace.h));
             var bc = new BoxCollider();
             bc.setSize(1, 0.5);
             block.addComponent(bc);
             bc.setRestitution(1);
+            bc.onCollision = function(other) {
+                this.getParent().destroy();
+            };
         }
     }
 }
@@ -63,21 +66,18 @@ function createBall() {
     var ball = createBox(16, 16, "ball", 0.8, 0.8, 0.8);
     var t = ball.getComponent("Transform");
     t.setPosition(screenSize.width / 2 - 8, 200);
-    var bc = new BoxCollider();
-    bc.setSize(0.25, 0.25);
-    ball.addComponent(bc);
-    bc.setType(Collider.dynamic);
-    bc.setLinearVelocity(3, -5);
-    bc.onCollision = function(other) {
-        console.log("We so hit something")
-    }
+    var cc = new CircleCollider();
+    cc.setSize(0.2);
+    ball.addComponent(cc);
+    cc.setType(Collider.dynamic);
+    cc.setLinearVelocity(3, -5);
 }
 
 function main() {
     window.setClearColor(0.33, 0.33, 0.33, 0);
     window.setSize(800, 600);
     window.setResizable(false);
-    createBoard(10, 6);
+    createBoard(9, 6);
     createPaddle();
     createBall();
 }

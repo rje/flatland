@@ -16,7 +16,7 @@ Collider::Collider() {
 }
 
 Collider::~Collider() {
-    
+    delete m_shape;
 }
 
 GLboolean Collider::HandleCollision(Collider* other) {

@@ -26,6 +26,8 @@ public:
     
     virtual void AddComponent(Component* toAdd);
     virtual void RemoveComponent(Component* toRemove);
+    virtual void MarkForDestruction();
+    virtual GLboolean ShouldDestroy();
     
     template <class T> T* GetComponent() {
         for(ComponentVector::iterator i = m_components.begin(); i != m_components.end(); ++i) {
@@ -46,6 +48,7 @@ protected:
     ComponentVector m_components;
     string* m_name;
     Persistent<Object> m_wrappedObj;
+    GLboolean m_destructionPending;
 };
 
 #endif

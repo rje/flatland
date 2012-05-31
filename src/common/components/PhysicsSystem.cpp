@@ -68,15 +68,15 @@ public:
     
     virtual void DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color) {
         GLint vertexCount = 36;
-        glColor4f(color.r, color.g, color.b, 0.5f);
+        glColor4f(color.r, color.g, color.b, 1.0f);
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnable(GL_BLEND);
         GLfloat* verts = new GLfloat[vertexCount * 3];
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
             int base = i * 3;
-            verts[base + 0] = center.x + radius * cos(i * 10.0f * M_PI / 180.0f);
-            verts[base + 1] = center.y + radius * sin(i * 10.0f * M_PI / 180.0f);
+            verts[base + 0] = (center.x + radius * cos(i * 10.0f * M_PI / 180.0f)) * 32.0f;
+            verts[base + 1] = (center.y + radius * sin(i * 10.0f * M_PI / 180.0f)) * 32.0f;
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }
@@ -142,9 +142,9 @@ b2Body* PhysicsSystem::RegisterCollider(Collider* toRegister) {
         b2BodyDef bodyDef;
         bodyDef.userData = toRegister;
         b2Body* toReturn = m_world->CreateBody(&bodyDef);
-        const b2PolygonShape& shape = toRegister->GetBodyShape();
+        b2Shape* shape = toRegister->GetBodyShape();
         toReturn->SetTransform(b2Vec2(1, 1), 0);
-        toReturn->CreateFixture(&shape, 0.0f);
+        toReturn->CreateFixture(shape, 0.0f);
         return toReturn;
         
     }
@@ -156,7 +156,7 @@ void PhysicsSystem::UnregisterCollider(Collider* toRemove) {
         Collider* toCheck = *i;
         if(toRemove == toCheck) {
             m_colliders.erase(i);
-            // FIXME: deregister from box2d here
+            m_world->DestroyBody(toCheck->GetBox2DBody());
             return;
         }
     }
@@ -170,8 +170,9 @@ void PhysicsSystem::Initialize() {
     m_world = new b2World(b2Vec2(0.0, 0.0));
     m_world->SetAllowSleeping(true);
     PSDebugDraw* debug = new PSDebugDraw();
-    //debug->AppendFlags(b2Draw::e_shapeBit);
-    //debug->AppendFlags(b2Draw::e_aabbBit);
+    debug->AppendFlags(b2Draw::e_shapeBit);
+    debug->AppendFlags(b2Draw::e_aabbBit);
+    debug->AppendFlags(b2Draw::e_pairBit);
     m_world->SetDebugDraw(debug);
     m_world->SetContactListener(new PSContactListner());
 }

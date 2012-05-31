@@ -1,58 +1,63 @@
 //
-//  BoxCollider.cpp
+//  CircleCollider.cpp
 //  flatland
 //
 //  Created by Ryan Evans on 5/30/12.
 //  Copyright (c) 2012 Mirror Match Games. All rights reserved.
 //
 
-#include "BoxCollider.h"
+#include "CircleCollider.h"
 #include "PhysicsSystem.h"
-#include "BoxColliderBindings.h"
+#include "CircleColliderBindings.h"
 #include "Transform.h"
 #include "Entity.h"
+#include <math.h>
 
-BoxCollider::BoxCollider() {
-    m_ident = new string("BoxCollider");
-    m_shape = new b2PolygonShape();
+CircleCollider::CircleCollider() {
+    m_ident = new string("CircleCollider");
+    m_shape = new b2CircleShape();
 }
 
-BoxCollider::~BoxCollider() {
+CircleCollider::~CircleCollider() {
     PhysicsSystem::instance()->UnregisterCollider(this);
 }
 
-Persistent<Object> BoxCollider::GetWrappedObject() {
+Persistent<Object> CircleCollider::GetWrappedObject() {
     HandleScope handle_scope;
     if(m_wrappedJSVersion.IsEmpty()) {
         m_wrappedJSVersion = 
-            Persistent<Object>::New(BoxColliderBindings_WrapBoxCollider(this)->ToObject());
+        Persistent<Object>::New(CircleColliderBindings_WrapCircleCollider(this)->ToObject());
     }
     return m_wrappedJSVersion;
 }
 
-void BoxCollider::SetSize(GLfloat halfWidth, GLfloat halfHeight) {
-    b2PolygonShape* s = static_cast<b2PolygonShape*>(m_shape);
-    s->SetAsBox(halfWidth, halfHeight);
+void CircleCollider::SetSize(GLfloat radius) {
+    b2CircleShape* s = static_cast<b2CircleShape*>(m_shape);
+    s->m_radius = radius;
 }
 
-void BoxCollider::Register() {
+void CircleCollider::Register() {
     m_body = PhysicsSystem::instance()->RegisterCollider(this);
+    b2MassData mass;
+    mass.mass = 100;
+    mass.I = 100;
+    m_body->SetMassData(&mass);
     Transform* t = m_owner->GetComponent<Transform>();
     if(t != NULL) {
         UpdateWithTransform(t, true, true);
     }
 }
 
-void BoxCollider::Unregister() {
+void CircleCollider::Unregister() {
     PhysicsSystem::instance()->UnregisterCollider(this);
 }
 
-void BoxCollider::Update(GLfloat delta) {
+void CircleCollider::Update(GLfloat delta) {
     Transform* t = m_owner->GetComponent<Transform>();
     t->PhysicsUpdate(m_body->GetPosition().x * 32.0f, m_body->GetPosition().y * 32.0f, m_body->GetAngle());
 }
 
-void BoxCollider::UpdateWithTransform(Transform* t, GLboolean pos, GLboolean angle) {
+void CircleCollider::UpdateWithTransform(Transform* t, GLboolean pos, GLboolean angle) {
     Vector3& vec = t->GetPosition();
     GLfloat x = pos ? vec.x / 32.0f : m_body->GetPosition().x;
     GLfloat y = pos ? vec.y / 32.0f : m_body->GetPosition().y;

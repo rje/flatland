@@ -27,14 +27,14 @@ public:
     virtual ~Collider();
     virtual void Update(GLfloat delta) {};
     virtual b2Body* GetBox2DBody() { return m_body; }
-    virtual b2PolygonShape& GetBodyShape() { return m_shape; }
-    virtual void UpdateWithTransform(Transform* t) = 0;
+    virtual b2Shape* GetBodyShape() { return m_shape; }
+    virtual void UpdateWithTransform(Transform* t, GLboolean pos, GLboolean angle) = 0;
     virtual void SetType(b2BodyType newType) { m_body->SetType(newType); }
     virtual GLboolean HandleCollision(Collider* other);
     virtual void SetRestitution(GLfloat rest) { m_body->GetFixtureList()->SetRestitution(1); }
 protected:
     b2Body* m_body;
-    b2PolygonShape m_shape;
+    b2Shape* m_shape;
 };
 
 #endif

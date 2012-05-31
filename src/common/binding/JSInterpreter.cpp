@@ -11,6 +11,7 @@
 #include "ScriptableBindings.h"
 #include "KeyboardBindings.h"
 #include "BoxColliderBindings.h"
+#include "CircleColliderBindings.h"
 
 using namespace v8;
 
@@ -61,6 +62,7 @@ void JSInterpreter::InitializeVM() {
     ScriptableBindings_BindToGlobal(m_globalObjDef);
     KeyboardBindings_BindToGlobal(m_globalObjDef);
     BoxColliderBindings_BindToGlobal(m_globalObjDef);
+    CircleColliderBindings_BindToGlobal(m_globalObjDef);
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
     

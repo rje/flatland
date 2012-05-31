@@ -8,6 +8,7 @@
 
 #include "BoxColliderBindings.h"
 #include "BoxCollider.h"
+#include "Entity.h"
 
 using namespace v8;
 
@@ -49,6 +50,13 @@ Handle<Value> fl_bc_SetRestitution(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_bc_GetParent(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    BoxCollider* boxCollider = static_cast<BoxCollider*>(entVal->Value());
+    return handle_scope.Close(boxCollider->GetOwner()->GetWrappedObject());
+}
+
 Handle<FunctionTemplate> fl_bc_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
@@ -57,6 +65,7 @@ Handle<FunctionTemplate> fl_bc_GetTemplate() {
     instance_templ->Set("setType", FunctionTemplate::New(fl_bc_SetType));
     instance_templ->Set("setLinearVelocity", FunctionTemplate::New(fl_bc_SetLinearVelocity));
     instance_templ->Set("setRestitution", FunctionTemplate::New(fl_bc_SetRestitution));
+    instance_templ->Set("getParent", FunctionTemplate::New(fl_bc_GetParent));
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }

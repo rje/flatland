@@ -40,6 +40,20 @@ void EntityRegistry::CallUpdates(GLfloat delta) {
     } 
 }
 
+void EntityRegistry::DestroyMarked() {
+    vector<Entity*>::iterator iter = m_entities.begin();
+    while(iter != m_entities.end()) {
+        Entity* toCheck = *iter;
+        if(toCheck->ShouldDestroy()) {
+            iter = m_entities.erase(iter);
+            delete toCheck;
+        }
+        else {
+            ++iter;
+        }
+    }
+}
+
 EntityRegistry::EntityRegistry() {
     
 }

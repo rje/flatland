@@ -31,8 +31,9 @@ int main(int argc, char** argv) {
         uint32_t newTicks = SDL_GetTicks();
         GLfloat delta = (newTicks - oldTicks) / 1000.0f;
         Window::GetWindow()->HandleUpdates();
-        Renderer* r = Window::GetWindow()->GetRenderer();
         PhysicsSystem::instance()->DoStep();
+        Renderer* r = Window::GetWindow()->GetRenderer();
+        EntityRegistry::instance()->DestroyMarked();
         EntityRegistry::instance()->CallUpdates(delta);
         oldTicks = newTicks;
         r->Prepare();

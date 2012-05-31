@@ -44,12 +44,21 @@ Handle<Value> fl_eb_GetComponent(const Arguments& args) {
     }
 }
 
+Handle<Value> fl_eb_Destroy(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Entity* entity = static_cast<Entity*>(entVal->Value());
+    entity->MarkForDestruction();
+    return Undefined();
+}
+
 Handle<FunctionTemplate> fl_eb_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("addComponent", FunctionTemplate::New(fl_eb_AddComponent));
     instance_templ->Set("getComponent", FunctionTemplate::New(fl_eb_GetComponent));
+    instance_templ->Set("destroy", FunctionTemplate::New(fl_eb_Destroy));
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }

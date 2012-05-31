@@ -38,7 +38,7 @@ void Transform::SetPosition(GLfloat x, GLfloat y, GLfloat z) {
     m_pos.z = z;
     Collider* c = m_owner->GetComponent<Collider>();
     if(c != NULL) {
-        c->UpdateWithTransform(this);
+        c->UpdateWithTransform(this, true, false);
     }
 }
 
@@ -50,7 +50,7 @@ void Transform::SetRotation(GLfloat angle) {
     m_angle = angle;
     Collider* c = m_owner->GetComponent<Collider>();
     if(c != NULL) {
-        c->UpdateWithTransform(this);
+        c->UpdateWithTransform(this, false, true);
     }
 }
 
