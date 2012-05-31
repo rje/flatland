@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Renderer.h"
 #include "EntityRegistry.h"
+#include "PhysicsSystem.h"
 
 int main(int argc, char** argv) {
     bool running = true;
@@ -31,10 +32,12 @@ int main(int argc, char** argv) {
         GLfloat delta = (newTicks - oldTicks) / 1000.0f;
         Window::GetWindow()->HandleUpdates();
         Renderer* r = Window::GetWindow()->GetRenderer();
+        PhysicsSystem::instance()->DoStep();
         EntityRegistry::instance()->CallUpdates(delta);
         oldTicks = newTicks;
         r->Prepare();
         r->Draw();
+        PhysicsSystem::instance()->DrawDebugData();
         r->Flush();
     }
     return 0;

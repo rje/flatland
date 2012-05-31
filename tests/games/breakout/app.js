@@ -26,6 +26,10 @@ function createBoard(cols, rows) {
             var t = block.getComponent("Transform");
             t.setPosition(xOffset + x * (blockSize.w + blockSpace.w),
                 yOffset + y * (blockSize.h + blockSpace.h));
+            var bc = new BoxCollider();
+            bc.setSize(1, 0.5);
+            block.addComponent(bc);
+            bc.setRestitution(1);
         }
     }
 }
@@ -47,6 +51,10 @@ function createPaddle() {
         t.setPosition(pos.x, pos.y, pos.z);
     };
     paddle.addComponent(s);
+    var bc = new BoxCollider();
+    bc.setSize(2, 0.25);
+    paddle.addComponent(bc);
+    bc.setRestitution(1);
     return paddle;
 }
 
@@ -55,6 +63,14 @@ function createBall() {
     var ball = createBox(16, 16, "ball", 0.8, 0.8, 0.8);
     var t = ball.getComponent("Transform");
     t.setPosition(screenSize.width / 2 - 8, 200);
+    var bc = new BoxCollider();
+    bc.setSize(0.25, 0.25);
+    ball.addComponent(bc);
+    bc.setType(Collider.dynamic);
+    bc.setLinearVelocity(3, -5);
+    bc.onCollision = function(other) {
+        console.log("We so hit something")
+    }
 }
 
 function main() {

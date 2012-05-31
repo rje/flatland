@@ -39,6 +39,10 @@
 		949420A2157001D700C36ECD /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A1157001D700C36ECD /* libm.dylib */; };
 		949420A71570021200C36ECD /* libSDL2main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A61570021200C36ECD /* libSDL2main.a */; };
 		949420A815700B1400C36ECD /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A3157001F300C36ECD /* libSDL2.a */; };
+		94E6BA211576CF1A0071AA38 /* PhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA201576CF1A0071AA38 /* PhysicsSystem.cpp */; };
+		94E6BA251576D1C00071AA38 /* Collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA241576D1C00071AA38 /* Collider.cpp */; };
+		94E6BA281576DFEF0071AA38 /* BoxCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA271576DFEF0071AA38 /* BoxCollider.cpp */; };
+		94E6BA2A1576E56A0071AA38 /* BoxColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA291576E56A0071AA38 /* BoxColliderBindings.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,6 +110,14 @@
 		949420A1157001D700C36ECD /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
 		949420A3157001F300C36ECD /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../out/lib/libSDL2.a; sourceTree = "<group>"; };
 		949420A61570021200C36ECD /* libSDL2main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2main.a; path = ../../out/lib/libSDL2main.a; sourceTree = "<group>"; };
+		94E6BA1F1576CC8B0071AA38 /* PhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSystem.h; sourceTree = "<group>"; };
+		94E6BA201576CF1A0071AA38 /* PhysicsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsSystem.cpp; sourceTree = "<group>"; };
+		94E6BA231576D11A0071AA38 /* Collider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Collider.h; sourceTree = "<group>"; };
+		94E6BA241576D1C00071AA38 /* Collider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Collider.cpp; sourceTree = "<group>"; };
+		94E6BA261576DF0F0071AA38 /* BoxCollider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxCollider.h; sourceTree = "<group>"; };
+		94E6BA271576DFEF0071AA38 /* BoxCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxCollider.cpp; sourceTree = "<group>"; };
+		94E6BA291576E56A0071AA38 /* BoxColliderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxColliderBindings.cpp; sourceTree = "<group>"; };
+		94E6BA2B1576E5780071AA38 /* BoxColliderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxColliderBindings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +149,7 @@
 		940E0E6B1570825800E80636 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				942E29C3157586C30060A53F /* libBox2D.a */,
 				949420A61570021200C36ECD /* libSDL2main.a */,
 				949420A3157001F300C36ECD /* libSDL2.a */,
 				949420A1157001D700C36ECD /* libm.dylib */,
@@ -159,7 +172,6 @@
 		94942045156FFE1000C36ECD = {
 			isa = PBXGroup;
 			children = (
-				942E29C3157586C30060A53F /* libBox2D.a */,
 				9494205D156FFE3700C36ECD /* src */,
 				94942053156FFE1000C36ECD /* flatland */,
 				940E0E6B1570825800E80636 /* frameworks */,
@@ -223,6 +235,8 @@
 				942E29C1157521A50060A53F /* ScriptableBindings.cpp */,
 				944236281576B0E500A6C5BD /* KeyboardBindings.h */,
 				944236251576939200A6C5BD /* KeyboardBindings.cpp */,
+				94E6BA2B1576E5780071AA38 /* BoxColliderBindings.h */,
+				94E6BA291576E56A0071AA38 /* BoxColliderBindings.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -243,6 +257,12 @@
 				940E0E661570583900E80636 /* Transform.cpp */,
 				942E29BC15751BC90060A53F /* Scriptable.h */,
 				942E29BE15751C180060A53F /* Scriptable.cpp */,
+				94E6BA1F1576CC8B0071AA38 /* PhysicsSystem.h */,
+				94E6BA201576CF1A0071AA38 /* PhysicsSystem.cpp */,
+				94E6BA231576D11A0071AA38 /* Collider.h */,
+				94E6BA241576D1C00071AA38 /* Collider.cpp */,
+				94E6BA261576DF0F0071AA38 /* BoxCollider.h */,
+				94E6BA271576DFEF0071AA38 /* BoxCollider.cpp */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -325,6 +345,10 @@
 				942E29BF15751C180060A53F /* Scriptable.cpp in Sources */,
 				942E29C2157521A50060A53F /* ScriptableBindings.cpp in Sources */,
 				944236261576939200A6C5BD /* KeyboardBindings.cpp in Sources */,
+				94E6BA211576CF1A0071AA38 /* PhysicsSystem.cpp in Sources */,
+				94E6BA251576D1C00071AA38 /* Collider.cpp in Sources */,
+				94E6BA281576DFEF0071AA38 /* BoxCollider.cpp in Sources */,
+				94E6BA2A1576E56A0071AA38 /* BoxColliderBindings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

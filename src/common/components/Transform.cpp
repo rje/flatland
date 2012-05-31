@@ -9,6 +9,7 @@
 #include "Transform.h"
 #include "Entity.h"
 #include "TransformBindings.h"
+#include "Collider.h"
 
 Transform::Transform() : m_pos(0.0f, 0.0f, 0.0f), m_angle(0.0f) {
     m_ident = new string("Transform");
@@ -35,6 +36,10 @@ void Transform::SetPosition(GLfloat x, GLfloat y, GLfloat z) {
     m_pos.x = x;
     m_pos.y = y;
     m_pos.z = z;
+    Collider* c = m_owner->GetComponent<Collider>();
+    if(c != NULL) {
+        c->UpdateWithTransform(this);
+    }
 }
 
 void Transform::SetDepth(GLfloat z) {
@@ -43,6 +48,10 @@ void Transform::SetDepth(GLfloat z) {
 
 void Transform::SetRotation(GLfloat angle) {
     m_angle = angle;
+    Collider* c = m_owner->GetComponent<Collider>();
+    if(c != NULL) {
+        c->UpdateWithTransform(this);
+    }
 }
 
 Vector3& Transform::GetPosition() {
@@ -51,4 +60,10 @@ Vector3& Transform::GetPosition() {
 
 GLfloat& Transform::GetAngle() {
     return m_angle;
+}
+
+void Transform::PhysicsUpdate(GLfloat x, GLfloat y, GLfloat angle) {
+    m_pos.x = x;
+    m_pos.y = y;
+    m_angle = angle;
 }

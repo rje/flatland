@@ -31,9 +31,11 @@ Mesh* Mesh::CreateRect(GLfloat w, GLfloat h) {
     toReturn->m_verts = new Vector3[4];
     toReturn->m_uvs = new Vector2[4];
     toReturn->m_indices = new GLushort[6];
+    GLfloat wd2 = w / 2.0f;
+    GLfloat hd2 = h / 2.0f;
     for(int i = 0; i < 4; i++) {
-        toReturn->m_verts[i].x = (i % 2 == 0) ? 0 : w;
-        toReturn->m_verts[i].y = (i / 2 == 0) ? 0 : h;
+        toReturn->m_verts[i].x = (i % 2 == 0) ? -wd2 : wd2;
+        toReturn->m_verts[i].y = (i / 2 == 0) ? hd2 : -hd2;
         toReturn->m_verts[i].z = 0;
         toReturn->m_uvs[i].x = (i % 2 == 0) ? 0 : 1;
         toReturn->m_uvs[i].y = (i / 2 == 0) ? 1 : 0;
