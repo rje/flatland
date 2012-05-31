@@ -9,26 +9,15 @@
 #include "ScriptableBindings.h"
 #include "Scriptable.h"
 #include "Entity.h"
+#include "ComponentBindings.h"
 
 using namespace v8;
-
-Handle<Value> fl_scr_GetParent(const Arguments& args) {
-    HandleScope handle_scope;
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    Scriptable* scriptable = static_cast<Scriptable*>(entVal->Value());
-    if(scriptable->GetOwner() == NULL) {
-        return Undefined();
-    }
-    else {
-        return handle_scope.Close(scriptable->GetOwner()->GetWrappedObject());
-    }
-}
 
 Handle<FunctionTemplate> fl_scr_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
-    instance_templ->Set("getParent", FunctionTemplate::New(fl_scr_GetParent));
+    ComponentBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }

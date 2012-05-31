@@ -41,6 +41,8 @@
 		949420A815700B1400C36ECD /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A3157001F300C36ECD /* libSDL2.a */; };
 		94C2A7F5157733D9008D58E6 /* CircleCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A7F4157733D8008D58E6 /* CircleCollider.cpp */; };
 		94C2A7F81577343E008D58E6 /* CircleColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A7F71577343E008D58E6 /* CircleColliderBindings.cpp */; };
+		94D86B7B157815960009BDAF /* ColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94D86B7A157815950009BDAF /* ColliderBindings.cpp */; };
+		94D86B7E157817190009BDAF /* ComponentBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94D86B7D157817190009BDAF /* ComponentBindings.cpp */; };
 		94E6BA211576CF1A0071AA38 /* PhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA201576CF1A0071AA38 /* PhysicsSystem.cpp */; };
 		94E6BA251576D1C00071AA38 /* Collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA241576D1C00071AA38 /* Collider.cpp */; };
 		94E6BA281576DFEF0071AA38 /* BoxCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA271576DFEF0071AA38 /* BoxCollider.cpp */; };
@@ -116,6 +118,10 @@
 		94C2A7F4157733D8008D58E6 /* CircleCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleCollider.cpp; sourceTree = "<group>"; };
 		94C2A7F615773419008D58E6 /* CircleColliderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleColliderBindings.h; sourceTree = "<group>"; };
 		94C2A7F71577343E008D58E6 /* CircleColliderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleColliderBindings.cpp; sourceTree = "<group>"; };
+		94D86B78157815480009BDAF /* ColliderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColliderBindings.h; sourceTree = "<group>"; };
+		94D86B7A157815950009BDAF /* ColliderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColliderBindings.cpp; sourceTree = "<group>"; };
+		94D86B7C157816E50009BDAF /* ComponentBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentBindings.h; sourceTree = "<group>"; };
+		94D86B7D157817190009BDAF /* ComponentBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentBindings.cpp; sourceTree = "<group>"; };
 		94E6BA1F1576CC8B0071AA38 /* PhysicsSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSystem.h; sourceTree = "<group>"; };
 		94E6BA201576CF1A0071AA38 /* PhysicsSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsSystem.cpp; sourceTree = "<group>"; };
 		94E6BA231576D11A0071AA38 /* Collider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Collider.h; sourceTree = "<group>"; };
@@ -241,10 +247,14 @@
 				942E29C1157521A50060A53F /* ScriptableBindings.cpp */,
 				944236281576B0E500A6C5BD /* KeyboardBindings.h */,
 				944236251576939200A6C5BD /* KeyboardBindings.cpp */,
+				94D86B78157815480009BDAF /* ColliderBindings.h */,
+				94D86B7A157815950009BDAF /* ColliderBindings.cpp */,
 				94E6BA2B1576E5780071AA38 /* BoxColliderBindings.h */,
 				94E6BA291576E56A0071AA38 /* BoxColliderBindings.cpp */,
 				94C2A7F615773419008D58E6 /* CircleColliderBindings.h */,
 				94C2A7F71577343E008D58E6 /* CircleColliderBindings.cpp */,
+				94D86B7C157816E50009BDAF /* ComponentBindings.h */,
+				94D86B7D157817190009BDAF /* ComponentBindings.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -361,6 +371,8 @@
 				94E6BA2A1576E56A0071AA38 /* BoxColliderBindings.cpp in Sources */,
 				94C2A7F5157733D9008D58E6 /* CircleCollider.cpp in Sources */,
 				94C2A7F81577343E008D58E6 /* CircleColliderBindings.cpp in Sources */,
+				94D86B7B157815960009BDAF /* ColliderBindings.cpp in Sources */,
+				94D86B7E157817190009BDAF /* ComponentBindings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

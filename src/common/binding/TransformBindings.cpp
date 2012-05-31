@@ -8,6 +8,7 @@
 
 #include "TransformBindings.h"
 #include "Transform.h"
+#include "ComponentBindings.h"
 
 using namespace v8;
 
@@ -53,6 +54,7 @@ Handle<FunctionTemplate> fl_tf_GetTemplate() {
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setPosition", FunctionTemplate::New(fl_tf_SetPosition));
     instance_templ->Set("getPosition", FunctionTemplate::New(fl_tf_GetPosition));
+    ComponentBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }

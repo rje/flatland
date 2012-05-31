@@ -1,36 +1,29 @@
 
-function createBox(w, h, name, r, g, b, a) {
-    r = (r == undefined) ? 1 : r;
-    g = (g == undefined) ? 1 : g;
-    b = (b == undefined) ? 1 : b;
-    a = (a == undefined) ? 1 : a;
+function createBox(w, h, name, r, g, b) {
     var e = new Entity(name);
     e.addComponent(Mesh.createRect(w, h));
-    var mr = new MeshRenderer();
-    mr.setColor(r, g, b, a);
-    e.addComponent(mr);
+    var mr = e.addComponent(new MeshRenderer());
+    mr.setColor(r, g, b, 1);
+
     return e;
 }
 
 function createBoard(cols, rows) {
-    var blockSize = {w: 64, h: 32};
-    var blockSpace = {w: 16, h: 16};
-    var screenSize = window.getSize();
+    var blockSize = {w: 3, h: 1.5};
+    var blockSpace = {w: 0.25, h: 0.25};
     var rowWidth = cols * blockSize.w + (cols - 1) * blockSpace.w;
     var colHeight = rows * blockSize.h + (rows - 1) * blockSpace.h;
-    var xOffset = (screenSize.width - rowWidth) / 2 + blockSize.w / 2;
-    var yOffset = screenSize.height - colHeight - xOffset + blockSize.w;
+    var xOffset = (32 - rowWidth) / 2 + blockSize.w / 2;
+    var yOffset = 24 - colHeight - xOffset + blockSize.w;
     for(var x = 0; x < cols; x++) {
         for(var y = 0; y < rows; y++) {
             var block = createBox(blockSize.w, blockSize.h, "block", 0.8, 0.8, 0.8);
             var t = block.getComponent("Transform");
             t.setPosition(xOffset + x * (blockSize.w + blockSpace.w),
                           yOffset + y * (blockSize.h + blockSpace.h));
-            var bc = new BoxCollider();
-            bc.setSize(1, 0.5);
-            block.addComponent(bc);
-            bc.setRestitution(1);
-            bc.onCollision = function(other) {
+            var bc = block.addComponent(new BoxCollider(1.5, 0.75));
+            bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
+            bc.onCollision = function(contact, otherCollider) {
                 this.getParent().destroy();
             };
         }
@@ -38,46 +31,68 @@ function createBoard(cols, rows) {
 }
 
 function createPaddle() {
-    var screenSize = window.getSize();
-    var paddle = createBox(128, 16, "paddle", 0.8, 0.8, 0.8);
+    var paddle = createBox(4, 0.5, "paddle", 0.8, 0.8, 0.8);
     var t = paddle.getComponent("Transform");
-    t.setPosition(screenSize.width / 2 - 64, 32);
+    t.setPosition(14, 1);
     var s = new Scriptable("Controls");
     s.onUpdate = function(delta) {
         var pos = t.getPosition();
         if(keyboard.isKeyDown(keyboard.codes.left)) {
-            pos.x -= 400.0 * delta;
+            pos.x -= 16.0 * delta;
         }
         if(keyboard.isKeyDown(keyboard.codes.right)) {
-            pos.x += 400.0 * delta;
+            pos.x += 16.0 * delta;
         }
         t.setPosition(pos.x, pos.y, pos.z);
     };
     paddle.addComponent(s);
-    var bc = new BoxCollider();
-    bc.setSize(2, 0.25);
-    paddle.addComponent(bc);
-    bc.setRestitution(1);
+    var bc = paddle.addComponent(new BoxCollider(2, 0.25));
+    bc.setPhysicsProperties({type: Collider.kinematic, restitution: 1, friction: 0, density: 10});
     return paddle;
 }
 
 function createBall() {
-    var screenSize = window.getSize();
-    var ball = createBox(16, 16, "ball", 0.8, 0.8, 0.8);
-    var t = ball.getComponent("Transform");
-    t.setPosition(screenSize.width / 2 - 8, 200);
-    var cc = new CircleCollider();
-    cc.setSize(0.2);
-    ball.addComponent(cc);
-    cc.setType(Collider.dynamic);
-    cc.setLinearVelocity(3, -5);
+    var ball = createBox(1, 1, "ball", 0.8, 0.8, 0.8);
+    ball.getComponent("Transform").setPosition(16, 8);
+    var cc = ball.addComponent(new CircleCollider(0.5));
+    cc.setPhysicsProperties({type: Collider.dynamic, restitution: 1, friction: 0, density: 1});
+    cc.setLinearVelocity(3, 5);
+}
+
+function createWalls() {
+    var e = new Entity();
+    e.getComponent("Transform").setPosition(0, 12);
+    var bc = e.addComponent(new BoxCollider(0.1, 20));
+    bc.setPhysicsProperties({type: Collider.static, restitution: 0, friction: 0});
+
+    e = new Entity();
+    e.getComponent("Transform").setPosition(32, 12);
+    bc = e.addComponent(new BoxCollider(0.1, 20));
+    bc.setPhysicsProperties({type: Collider.static, restitution: 0, friction: 0});
+
+    e = new Entity();
+    e.getComponent("Transform").setPosition(16, 24);
+    bc = e.addComponent(new BoxCollider(25, 0.1));
+    bc.setPhysicsProperties({type: Collider.static, restitution: 0, friction: 0});
+    bc.onCollision = function(contact, otherCollider) {
+        var ball = otherCollider.getParent();
+        if(!ball.hasDoubled) {
+            var vel = otherCollider.getLinearVelocity();
+            vel.x *= 2;
+            vel.y *= 2;
+            otherCollider.setLinearVelocity(vel.x, vel.y);
+            ball.hasDoubled = true;
+        }
+    }
 }
 
 function main() {
-    window.setClearColor(0.33, 0.33, 0.33, 0);
-    window.setSize(800, 600);
+    window.setSize(1024, 768);
+    window.setViewportSize(32, 24);
     window.setResizable(false);
-    createBoard(9, 6);
+    window.setClearColor(0.33, 0.33, 0.33, 0);
+    createBoard(8, 6);
+    createWalls();
     createPaddle();
     createBall();
 }

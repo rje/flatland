@@ -7,6 +7,7 @@
 //
 
 #include "BoxColliderBindings.h"
+#include "ColliderBindings.h"
 #include "BoxCollider.h"
 #include "Entity.h"
 
@@ -22,50 +23,12 @@ Handle<Value> fl_bc_SetSize(const Arguments& args) {
     return Undefined();
 }
 
-Handle<Value> fl_bc_SetType(const Arguments& args) {
-    HandleScope handle_scope;
-    b2BodyType type = (b2BodyType)args[0]->Int32Value();
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    BoxCollider* boxCollider = static_cast<BoxCollider*>(entVal->Value());
-    boxCollider->GetBox2DBody()->SetType(type);
-    return Undefined();
-}
-
-Handle<Value> fl_bc_SetLinearVelocity(const Arguments& args) {
-    HandleScope handle_scope;
-    GLfloat vx = args[0]->NumberValue();
-    GLfloat vy = args[1]->NumberValue();
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    BoxCollider* boxCollider = static_cast<BoxCollider*>(entVal->Value());
-    boxCollider->GetBox2DBody()->SetLinearVelocity(b2Vec2(vx, vy));
-    return Undefined();
-}
-
-Handle<Value> fl_bc_SetRestitution(const Arguments& args) {
-    HandleScope handle_scope;
-    GLfloat rest = args[0]->NumberValue();
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    BoxCollider* boxCollider = static_cast<BoxCollider*>(entVal->Value());
-    boxCollider->SetRestitution(rest);
-    return Undefined();
-}
-
-Handle<Value> fl_bc_GetParent(const Arguments& args) {
-    HandleScope handle_scope;
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    BoxCollider* boxCollider = static_cast<BoxCollider*>(entVal->Value());
-    return handle_scope.Close(boxCollider->GetOwner()->GetWrappedObject());
-}
-
 Handle<FunctionTemplate> fl_bc_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setSize", FunctionTemplate::New(fl_bc_SetSize));
-    instance_templ->Set("setType", FunctionTemplate::New(fl_bc_SetType));
-    instance_templ->Set("setLinearVelocity", FunctionTemplate::New(fl_bc_SetLinearVelocity));
-    instance_templ->Set("setRestitution", FunctionTemplate::New(fl_bc_SetRestitution));
-    instance_templ->Set("getParent", FunctionTemplate::New(fl_bc_GetParent));
+    ColliderBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }
@@ -86,17 +49,15 @@ Handle<Value> fl_bc_ConstructorCall(const Arguments& args) {
     }
     HandleScope handle_scope;
     BoxCollider* boxCollider = new BoxCollider();
+    if(args.Length() == 2) {
+        GLfloat w = args[0]->NumberValue();
+        GLfloat h = args[1]->NumberValue();
+        boxCollider->SetSize(w, h);
+    }
     return BoxColliderBindings_WrapBoxCollider(boxCollider);
 }
 
 void BoxColliderBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {
     HandleScope handle_scope;
     global->Set("BoxCollider", FunctionTemplate::New(fl_bc_ConstructorCall));
-    
-    //FIXME: Move this to another binding file
-    Handle<ObjectTemplate> constants = ObjectTemplate::New();
-    constants->Set("static", Integer::New(0));
-    constants->Set("kinematic", Integer::New(1));
-    constants->Set("dynamic", Integer::New(2));
-    global->Set("Collider", constants);
 }

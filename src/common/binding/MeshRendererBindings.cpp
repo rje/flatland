@@ -8,6 +8,7 @@
 
 #include "MeshRendererBindings.h"
 #include "MeshRenderer.h"
+#include "ComponentBindings.h"
 
 using namespace v8;
 
@@ -28,6 +29,7 @@ Handle<FunctionTemplate> fl_mrb_GetTemplate() {
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setColor", FunctionTemplate::New(fl_mrb_SetColor));
+    ComponentBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }

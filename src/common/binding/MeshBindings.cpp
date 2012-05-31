@@ -8,6 +8,7 @@
 
 #include "MeshBindings.h"
 #include "Mesh.h"
+#include "ComponentBindings.h"
 
 using namespace v8;
 
@@ -18,6 +19,7 @@ Handle<FunctionTemplate> fl_mb_GetTemplate() {
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->SetInternalFieldCount(1);
+    ComponentBindings_AddMethodsToTemplate(instance_templ);
     return handle_scope.Close(templ);
 }
 
@@ -42,8 +44,8 @@ Handle<Value> fl_mb_ConstructorCall(const Arguments& args) {
 
 Handle<Value> fl_mb_CreateRect(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat width = (GLfloat)args[0]->NumberValue();
-    GLfloat height = (GLfloat)args[1]->NumberValue();
+    GLfloat width = args[0]->NumberValue();
+    GLfloat height = args[1]->NumberValue();
     Mesh* mesh = Mesh::CreateRect(width, height);
     return MeshBindings_WrapMesh(mesh);
 }

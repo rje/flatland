@@ -25,7 +25,6 @@ Persistent<Object> MeshRenderer::GetWrappedObject() {
 }
 
 MeshRenderer::~MeshRenderer() {
-    printf("MeshRenderer::~MeshRenderer()\n");
 }
 
 void MeshRenderer::Register() {

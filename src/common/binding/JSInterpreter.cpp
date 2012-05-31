@@ -10,6 +10,7 @@
 #include "TransformBindings.h"
 #include "ScriptableBindings.h"
 #include "KeyboardBindings.h"
+#include "ColliderBindings.h"
 #include "BoxColliderBindings.h"
 #include "CircleColliderBindings.h"
 
@@ -61,6 +62,7 @@ void JSInterpreter::InitializeVM() {
     TransformBindings_BindToGlobal(m_globalObjDef);
     ScriptableBindings_BindToGlobal(m_globalObjDef);
     KeyboardBindings_BindToGlobal(m_globalObjDef);
+    ColliderBindings_BindToGlobal(m_globalObjDef);
     BoxColliderBindings_BindToGlobal(m_globalObjDef);
     CircleColliderBindings_BindToGlobal(m_globalObjDef);
     // BINDINGS BLOCK

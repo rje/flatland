@@ -14,11 +14,18 @@ using namespace v8;
 Handle<Value> fl_wb_SetSize(const Arguments& args) {
     Locker locker;
     HandleScope handle_scope;
-    Handle<Value> widthVal = args[0];
-    Handle<Value> heightVal = args[1];
-    GLfloat width = (GLfloat)widthVal->ToNumber()->NumberValue();
-    GLfloat height = (GLfloat)heightVal->ToNumber()->NumberValue();
+    GLfloat width = args[0]->NumberValue();
+    GLfloat height = args[1]->NumberValue();
     Window::GetWindow()->SetSize(width, height);
+    return Undefined();
+}
+
+Handle<Value> fl_wb_SetViewportSize(const Arguments& args) {
+    Locker locker;
+    HandleScope handle_scope;
+    GLfloat width = args[0]->NumberValue();
+    GLfloat height = args[1]->NumberValue();
+    Window::GetWindow()->SetViewportSize(width, height);
     return Undefined();
 }
 
@@ -39,7 +46,6 @@ Handle<Value> fl_wb_GetSize(const Arguments& args) {
     Handle<Object> toReturn = Object::New();
     toReturn->Set(String::New("width"), Number::New(Window::GetWindow()->GetWidth()));
     toReturn->Set(String::New("height"), Number::New(Window::GetWindow()->GetHeight()));
-    
     return handle_scope.Close(toReturn);
 }
 
@@ -59,5 +65,6 @@ void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     window->Set(String::New("getSize"), FunctionTemplate::New(fl_wb_GetSize));
     window->Set(String::New("setClearColor"), FunctionTemplate::New(fl_wb_SetClearColor));
     window->Set(String::New("setResizable"), FunctionTemplate::New(fl_wb_SetResizable));
+    window->Set(String::New("setViewportSize"), FunctionTemplate::New(fl_wb_SetViewportSize));
     global->Set("window", window);
 }

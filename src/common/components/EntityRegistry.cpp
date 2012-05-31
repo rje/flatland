@@ -59,7 +59,6 @@ EntityRegistry::EntityRegistry() {
 }
 
 void EntityRegistry::Init() {
-    LOG("EntityRegistry::Init()\n");
 }
 
 EntityRegistry::~EntityRegistry() {

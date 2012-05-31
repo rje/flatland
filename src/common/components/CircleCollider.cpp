@@ -54,13 +54,13 @@ void CircleCollider::Unregister() {
 
 void CircleCollider::Update(GLfloat delta) {
     Transform* t = m_owner->GetComponent<Transform>();
-    t->PhysicsUpdate(m_body->GetPosition().x * 32.0f, m_body->GetPosition().y * 32.0f, m_body->GetAngle());
+    t->PhysicsUpdate(m_body->GetPosition().x, m_body->GetPosition().y, m_body->GetAngle());
 }
 
 void CircleCollider::UpdateWithTransform(Transform* t, GLboolean pos, GLboolean angle) {
     Vector3& vec = t->GetPosition();
-    GLfloat x = pos ? vec.x / 32.0f : m_body->GetPosition().x;
-    GLfloat y = pos ? vec.y / 32.0f : m_body->GetPosition().y;
+    GLfloat x = pos ? vec.x : m_body->GetPosition().x;
+    GLfloat y = pos ? vec.y : m_body->GetPosition().y;
     GLfloat a = angle ? t->GetAngle() : m_body->GetAngle();
     m_body->SetTransform(b2Vec2(x, y), a);
 }

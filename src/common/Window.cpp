@@ -51,6 +51,12 @@ void Window::SetSize(GLfloat x, GLfloat y) {
     m_isDirty |= WINDOW_SIZE;
 }
 
+void Window::SetViewportSize(GLfloat x, GLfloat y) {
+    m_vpWidth = x;
+    m_vpHeight = y;
+    m_isDirty |= WINDOW_VIEWPORT_SIZE;
+}
+
 GLfloat Window::GetWidth() {
     return m_width;
 }
@@ -77,15 +83,18 @@ void Window::HandleUpdates() {
     if(m_isDirty & WINDOW_SIZE) {
         SDL_SetWindowSize(m_window, m_width, m_height);
         glViewport(0, 0, m_width, m_height);
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(0, m_width, 0, m_height, -1, 1);
-        glMatrixMode(GL_MODELVIEW);
         m_isDirty &= ~WINDOW_SIZE;
     }
     if(m_isDirty & WINDOW_CLEAR_COLOR) {
         glClearColor(m_clearR, m_clearG, m_clearB, m_clearA);
         m_isDirty &= ~WINDOW_CLEAR_COLOR;
+    }
+    if(m_isDirty & WINDOW_VIEWPORT_SIZE) {
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(0, m_vpWidth, 0, m_vpHeight, -1, 1);
+        glMatrixMode(GL_MODELVIEW);
+        m_isDirty &= ~WINDOW_VIEWPORT_SIZE;
     }
 }
 

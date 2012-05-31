@@ -18,8 +18,8 @@ public:
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
             int base = i * 3;
-            verts[base + 0] = vertices[i].x * 32.0f;
-            verts[base + 1] = vertices[i].y * 32.0f;
+            verts[base + 0] = vertices[i].x;
+            verts[base + 1] = vertices[i].y;
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }
@@ -38,8 +38,8 @@ public:
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
             int base = i * 3;
-            verts[base + 0] = vertices[i].x * 32.0f;
-            verts[base + 1] = vertices[i].y * 32.0f;
+            verts[base + 0] = vertices[i].x;
+            verts[base + 1] = vertices[i].y;
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }
@@ -75,8 +75,8 @@ public:
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
             int base = i * 3;
-            verts[base + 0] = (center.x + radius * cos(i * 10.0f * M_PI / 180.0f)) * 32.0f;
-            verts[base + 1] = (center.y + radius * sin(i * 10.0f * M_PI / 180.0f)) * 32.0f;
+            verts[base + 0] = (center.x + radius * cos(i * 10.0f * M_PI / 180.0f));
+            verts[base + 1] = (center.y + radius * sin(i * 10.0f * M_PI / 180.0f));
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }
@@ -89,8 +89,8 @@ public:
         glColor4f(color.r, color.g, color.b, 1.0f);
         glEnableClientState(GL_VERTEX_ARRAY);
         GLfloat verts[] = {
-            p1.x * 32.0f, p1.y * 32.0f, 0.0f,
-            p2.x * 32.0f, p2.y * 32.0f, 0.0f
+            p1.x, p1.y, 0.0f,
+            p2.x, p2.y, 0.0f
         };
         GLushort indices[] = {
             0, 1
@@ -100,19 +100,33 @@ public:
     }
     
     virtual void DrawTransform(const b2Transform& xf) {
-        
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glColor4f(1, 1, 1, 1);
+        GLfloat verts[] = {
+            xf.p.x,                       xf.p.y, 0.0f,
+            (xf.p.x + xf.q.GetXAxis().x), (xf.p.y + xf.q.GetXAxis().y), 0.0f,
+            xf.p.x,                       xf.p.y, 0.0f,
+            (xf.p.x + xf.q.GetYAxis().x), (xf.p.y + xf.q.GetYAxis().y), 0.0f
+        };
+        GLushort indices[] = {
+            0, 1, 2, 3
+        };
+        glVertexPointer(3, GL_FLOAT, 0, verts);
+        glDrawElements(GL_LINES, 4, GL_UNSIGNED_SHORT, indices);
     }
 };
 
 class PSContactListner : public b2ContactListener {
     virtual void BeginContact(b2Contact* contact) {
-        printf("Got a collision!\n");
+        if(!contact->IsTouching()) {
+            return;
+        }
         b2Body* a = contact->GetFixtureA()->GetBody();
         b2Body* b = contact->GetFixtureB()->GetBody();
         Collider* ac = (Collider*)a->GetUserData();
         Collider* bc = (Collider*)b->GetUserData();
-        if(!ac->HandleCollision(bc)) {
-            bc->HandleCollision(ac);
+        if(!ac->HandleCollision(contact, bc)) {
+            bc->HandleCollision(contact, ac);
         }
         
     }
@@ -170,9 +184,9 @@ void PhysicsSystem::Initialize() {
     m_world = new b2World(b2Vec2(0.0, 0.0));
     m_world->SetAllowSleeping(true);
     PSDebugDraw* debug = new PSDebugDraw();
-    debug->AppendFlags(b2Draw::e_shapeBit);
-    debug->AppendFlags(b2Draw::e_aabbBit);
-    debug->AppendFlags(b2Draw::e_pairBit);
+    //debug->AppendFlags(b2Draw::e_shapeBit);
+    //debug->AppendFlags(b2Draw::e_aabbBit);
+    //debug->AppendFlags(b2Draw::e_centerOfMassBit);
     m_world->SetDebugDraw(debug);
     m_world->SetContactListener(new PSContactListner());
 }

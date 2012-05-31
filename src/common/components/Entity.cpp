@@ -18,7 +18,6 @@ Entity::Entity() : m_name(NULL), m_destructionPending(false) {
 }
 
 Entity::~Entity() {
-    printf("Deleting %s\n", m_name->c_str());
     EntityRegistry::instance()->UnregisterEntity(this);
     for(ComponentVector::iterator i = m_components.begin(); i != m_components.end(); ++i){
         Component* toDelete = *i;

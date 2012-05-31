@@ -9,6 +9,7 @@
 #include "CircleColliderBindings.h"
 #include "CircleCollider.h"
 #include "Entity.h"
+#include "ColliderBindings.h"
 
 using namespace v8;
 
@@ -21,50 +22,12 @@ Handle<Value> fl_cc_SetSize(const Arguments& args) {
     return Undefined();
 }
 
-Handle<Value> fl_cc_SetType(const Arguments& args) {
-    HandleScope handle_scope;
-    b2BodyType type = (b2BodyType)args[0]->Int32Value();
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    CircleCollider* circleCollider = static_cast<CircleCollider*>(entVal->Value());
-    circleCollider->GetBox2DBody()->SetType(type);
-    return Undefined();
-}
-
-Handle<Value> fl_cc_SetLinearVelocity(const Arguments& args) {
-    HandleScope handle_scope;
-    GLfloat vx = args[0]->NumberValue();
-    GLfloat vy = args[1]->NumberValue();
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    CircleCollider* circleCollider = static_cast<CircleCollider*>(entVal->Value());
-    circleCollider->GetBox2DBody()->SetLinearVelocity(b2Vec2(vx, vy));
-    return Undefined();
-}
-
-Handle<Value> fl_cc_SetRestitution(const Arguments& args) {
-    HandleScope handle_scope;
-    GLfloat rest = args[0]->NumberValue();
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    CircleCollider* circleCollider = static_cast<CircleCollider*>(entVal->Value());
-    circleCollider->SetRestitution(rest);
-    return Undefined();
-}
-
-Handle<Value> fl_cc_GetParent(const Arguments& args) {
-    HandleScope handle_scope;
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    CircleCollider* circleCollider = static_cast<CircleCollider*>(entVal->Value());
-    return handle_scope.Close(circleCollider->GetOwner()->GetWrappedObject());
-}
-
 Handle<FunctionTemplate> fl_cc_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setSize", FunctionTemplate::New(fl_cc_SetSize));
-    instance_templ->Set("setType", FunctionTemplate::New(fl_cc_SetType));
-    instance_templ->Set("setLinearVelocity", FunctionTemplate::New(fl_cc_SetLinearVelocity));
-    instance_templ->Set("setRestitution", FunctionTemplate::New(fl_cc_SetRestitution));
-    instance_templ->Set("getParent", FunctionTemplate::New(fl_cc_GetParent));
+    ColliderBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }
@@ -85,6 +48,10 @@ Handle<Value> fl_cc_ConstructorCall(const Arguments& args) {
     }
     HandleScope handle_scope;
     CircleCollider* circleCollider = new CircleCollider();
+    if(args.Length() == 1) {
+        GLfloat radius = args[0]->NumberValue();
+        circleCollider->SetSize(radius);
+    }
     return CircleColliderBindings_WrapCircleCollider(circleCollider);
 }
 

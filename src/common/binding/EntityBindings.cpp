@@ -26,7 +26,7 @@ Handle<Value> fl_eb_AddComponent(const Arguments& args) {
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     Entity* entity = static_cast<Entity*>(entVal->Value());
     entity->AddComponent(comp);
-    return Undefined();
+    return handle_scope.Close(obj);
 }
 
 Handle<Value> fl_eb_GetComponent(const Arguments& args) {
