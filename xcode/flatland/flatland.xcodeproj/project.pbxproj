@@ -39,8 +39,13 @@
 		949420A2157001D700C36ECD /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A1157001D700C36ECD /* libm.dylib */; };
 		949420A71570021200C36ECD /* libSDL2main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A61570021200C36ECD /* libSDL2main.a */; };
 		949420A815700B1400C36ECD /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A3157001F300C36ECD /* libSDL2.a */; };
+		94C0F518157FB18A0073A510 /* TextureBinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C0F517157FB18A0073A510 /* TextureBinding.cpp */; };
 		94C2A7F5157733D9008D58E6 /* CircleCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A7F4157733D8008D58E6 /* CircleCollider.cpp */; };
 		94C2A7F81577343E008D58E6 /* CircleColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A7F71577343E008D58E6 /* CircleColliderBindings.cpp */; };
+		94CB4B17157EB40B004FDC51 /* libpng15.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94CB4B15157EB40B004FDC51 /* libpng15.a */; };
+		94CB4B18157EB40B004FDC51 /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94CB4B16157EB40B004FDC51 /* libz.a */; };
+		94CB4B1E157EC4E8004FDC51 /* FileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94CB4B1D157EC4E8004FDC51 /* FileIO.cpp */; };
+		94CB4B21157EDA92004FDC51 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94CB4B20157EDA92004FDC51 /* Texture.cpp */; };
 		94D86B7B157815960009BDAF /* ColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94D86B7A157815950009BDAF /* ColliderBindings.cpp */; };
 		94D86B7E157817190009BDAF /* ComponentBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94D86B7D157817190009BDAF /* ComponentBindings.cpp */; };
 		94E6BA211576CF1A0071AA38 /* PhysicsSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA201576CF1A0071AA38 /* PhysicsSystem.cpp */; };
@@ -99,7 +104,6 @@
 		94942075156FFE3700C36ECD /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		94942076156FFE3700C36ECD /* Vectors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vectors.h; sourceTree = "<group>"; };
 		94942077156FFE3700C36ECD /* Window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Window.h; sourceTree = "<group>"; };
-		949420891570013400C36ECD /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../out/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		9494208B1570014100C36ECD /* libv8_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_base.a; path = ../../out/lib/libv8_base.a; sourceTree = "<group>"; };
 		9494208C1570014100C36ECD /* libv8_snapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libv8_snapshot.a; path = ../../out/lib/libv8_snapshot.a; sourceTree = "<group>"; };
 		9494208F1570019500C36ECD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -114,10 +118,18 @@
 		949420A1157001D700C36ECD /* libm.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libm.dylib; path = usr/lib/libm.dylib; sourceTree = SDKROOT; };
 		949420A3157001F300C36ECD /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../out/lib/libSDL2.a; sourceTree = "<group>"; };
 		949420A61570021200C36ECD /* libSDL2main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2main.a; path = ../../out/lib/libSDL2main.a; sourceTree = "<group>"; };
+		94C0F516157FB15F0073A510 /* TextureBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureBindings.h; sourceTree = "<group>"; };
+		94C0F517157FB18A0073A510 /* TextureBinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureBinding.cpp; sourceTree = "<group>"; };
 		94C2A7F2157733A5008D58E6 /* CircleCollider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleCollider.h; sourceTree = "<group>"; };
 		94C2A7F4157733D8008D58E6 /* CircleCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleCollider.cpp; sourceTree = "<group>"; };
 		94C2A7F615773419008D58E6 /* CircleColliderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleColliderBindings.h; sourceTree = "<group>"; };
 		94C2A7F71577343E008D58E6 /* CircleColliderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleColliderBindings.cpp; sourceTree = "<group>"; };
+		94CB4B15157EB40B004FDC51 /* libpng15.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng15.a; path = ../../out/lib/libpng15.a; sourceTree = "<group>"; };
+		94CB4B16157EB40B004FDC51 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../out/lib/libz.a; sourceTree = "<group>"; };
+		94CB4B1C157EC247004FDC51 /* FileIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileIO.h; sourceTree = "<group>"; };
+		94CB4B1D157EC4E8004FDC51 /* FileIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileIO.cpp; sourceTree = "<group>"; };
+		94CB4B1F157ED9DE004FDC51 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		94CB4B20157EDA92004FDC51 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		94D86B78157815480009BDAF /* ColliderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColliderBindings.h; sourceTree = "<group>"; };
 		94D86B7A157815950009BDAF /* ColliderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColliderBindings.cpp; sourceTree = "<group>"; };
 		94D86B7C157816E50009BDAF /* ComponentBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComponentBindings.h; sourceTree = "<group>"; };
@@ -137,6 +149,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94CB4B17157EB40B004FDC51 /* libpng15.a in Frameworks */,
+				94CB4B18157EB40B004FDC51 /* libz.a in Frameworks */,
 				942E29C4157586C30060A53F /* libBox2D.a in Frameworks */,
 				949420A815700B1400C36ECD /* libSDL2.a in Frameworks */,
 				949420A71570021200C36ECD /* libSDL2main.a in Frameworks */,
@@ -161,11 +175,15 @@
 		940E0E6B1570825800E80636 /* frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94CB4B15157EB40B004FDC51 /* libpng15.a */,
+				94CB4B16157EB40B004FDC51 /* libz.a */,
 				942E29C3157586C30060A53F /* libBox2D.a */,
 				949420A61570021200C36ECD /* libSDL2main.a */,
 				949420A3157001F300C36ECD /* libSDL2.a */,
 				949420A1157001D700C36ECD /* libm.dylib */,
 				9494209F157001C000C36ECD /* libiconv.dylib */,
+				9494208B1570014100C36ECD /* libv8_base.a */,
+				9494208C1570014100C36ECD /* libv8_snapshot.a */,
 				9494208F1570019500C36ECD /* AudioToolbox.framework */,
 				949420901570019500C36ECD /* AudioUnit.framework */,
 				949420911570019500C36ECD /* Carbon.framework */,
@@ -174,9 +192,6 @@
 				949420941570019500C36ECD /* ForceFeedback.framework */,
 				949420951570019500C36ECD /* IOKit.framework */,
 				949420961570019500C36ECD /* OpenGL.framework */,
-				9494208B1570014100C36ECD /* libv8_base.a */,
-				9494208C1570014100C36ECD /* libv8_snapshot.a */,
-				949420891570013400C36ECD /* libSDL2-2.0.0.dylib */,
 			);
 			name = frameworks;
 			sourceTree = "<group>";
@@ -185,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				9494205D156FFE3700C36ECD /* src */,
-				94942053156FFE1000C36ECD /* flatland */,
 				940E0E6B1570825800E80636 /* frameworks */,
 				94942051156FFE1000C36ECD /* Products */,
 			);
@@ -197,13 +211,6 @@
 				94942050156FFE1000C36ECD /* flatland */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		94942053156FFE1000C36ECD /* flatland */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = flatland;
 			sourceTree = "<group>";
 		};
 		9494205D156FFE3700C36ECD /* src */ = {
@@ -219,6 +226,7 @@
 		9494205E156FFE3700C36ECD /* common */ = {
 			isa = PBXGroup;
 			children = (
+				94CB4B1B157EC23A004FDC51 /* resource */,
 				94942077156FFE3700C36ECD /* Window.h */,
 				940E0E6115702C2E00E80636 /* Window.cpp */,
 				9494205F156FFE3700C36ECD /* binding */,
@@ -255,6 +263,8 @@
 				94C2A7F71577343E008D58E6 /* CircleColliderBindings.cpp */,
 				94D86B7C157816E50009BDAF /* ComponentBindings.h */,
 				94D86B7D157817190009BDAF /* ComponentBindings.cpp */,
+				94C0F516157FB15F0073A510 /* TextureBindings.h */,
+				94C0F517157FB18A0073A510 /* TextureBinding.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -295,6 +305,17 @@
 				940E0E63157042C300E80636 /* Renderer.cpp */,
 			);
 			path = renderer;
+			sourceTree = "<group>";
+		};
+		94CB4B1B157EC23A004FDC51 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				94CB4B1C157EC247004FDC51 /* FileIO.h */,
+				94CB4B1D157EC4E8004FDC51 /* FileIO.cpp */,
+				94CB4B1F157ED9DE004FDC51 /* Texture.h */,
+				94CB4B20157EDA92004FDC51 /* Texture.cpp */,
+			);
+			path = resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +394,9 @@
 				94C2A7F81577343E008D58E6 /* CircleColliderBindings.cpp in Sources */,
 				94D86B7B157815960009BDAF /* ColliderBindings.cpp in Sources */,
 				94D86B7E157817190009BDAF /* ComponentBindings.cpp in Sources */,
+				94CB4B1E157EC4E8004FDC51 /* FileIO.cpp in Sources */,
+				94CB4B21157EDA92004FDC51 /* Texture.cpp in Sources */,
+				94C0F518157FB18A0073A510 /* TextureBinding.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +455,7 @@
 					../../out/include/SDL2,
 					../../deps/v8/include,
 					../../deps/box2d/Box2D,
+					../../out/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					../../out/lib,
@@ -447,6 +472,7 @@
 					../../out/include/SDL2,
 					../../deps/v8/include,
 					../../deps/box2d/Box2D,
+					../../out/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					../../out/lib,

@@ -1,19 +1,25 @@
+
 #include <stdio.h>
 #include "JSInterpreter.h"
-#include <SDL.h>
+#include <SDL_events.h>
 #include "Window.h"
 #include "Renderer.h"
 #include "EntityRegistry.h"
 #include "PhysicsSystem.h"
+#include "FileIO.h"
 
 int main(int argc, char** argv) {
     bool running = true;
     Window::GetWindow();
     string test = "tests/games/breakout/app.js";
-		if(argc == 2) {
-			test = argv[1];
-		}
-    JSInterpreter::Instance()->LoadFile(test);
+    if(argc == 2) {
+        test = argv[1];
+    }
+    string fullPath = FileIO::GetWorkingDirectory() + "/" + test;
+    string dir = FileIO::GetPathComponent(fullPath);
+    string file = FileIO::GetFileComponent(fullPath);
+    FileIO::SetWorkingDirectory(dir);
+    JSInterpreter::Instance()->LoadFile(file);
     uint32_t oldTicks = SDL_GetTicks();
     while(running) {
         SDL_Event evt;

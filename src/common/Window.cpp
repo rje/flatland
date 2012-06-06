@@ -25,6 +25,9 @@ Window::Window() : m_window(NULL) {
     m_glContext = SDL_GL_CreateContext(m_window);
     SDL_GL_MakeCurrent(m_window, m_glContext);
     glClearColor(0, 0, 0, 0);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     SDL_ShowWindow(m_window);
     m_isDirty = WINDOW_NONE;
     m_canResize = true;

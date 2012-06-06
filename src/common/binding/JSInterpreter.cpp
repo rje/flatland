@@ -1,7 +1,7 @@
 
 
 #include "JSInterpreter.h"
-#include <fstream>
+#include "FileIO.h"
 
 #include "WindowBindings.h"
 #include "EntityBindings.h"
@@ -13,6 +13,7 @@
 #include "ColliderBindings.h"
 #include "BoxColliderBindings.h"
 #include "CircleColliderBindings.h"
+#include "TextureBindings.h"
 
 using namespace v8;
 
@@ -65,14 +66,14 @@ void JSInterpreter::InitializeVM() {
     ColliderBindings_BindToGlobal(m_globalObjDef);
     BoxColliderBindings_BindToGlobal(m_globalObjDef);
     CircleColliderBindings_BindToGlobal(m_globalObjDef);
+    TextureBindings_BindToGlobal(m_globalObjDef);
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
     
 }
 
 void JSInterpreter::LoadFile(string& path, const string& name) {
-    ifstream ifs(path.c_str());
-    string content((istreambuf_iterator<char>(ifs)),istreambuf_iterator<char>());
+    string content = FileIO::GetTextFile(path);
     RunString(content, name);
 }
 

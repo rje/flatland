@@ -23,6 +23,7 @@ public:
     
     Vector3* GetVertexArray();
     GLushort* GetIndexArray();
+    Vector2* GetUVArray();
     GLint GetIndexCount();
     GLenum GetMeshType();
     

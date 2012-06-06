@@ -12,7 +12,7 @@
 #define _USE_MATH_DEFINES // needed for the windows build, yay windows
 #include <math.h>
 
-Mesh::Mesh() {
+Mesh::Mesh() : m_verts(NULL), m_uvs(NULL), m_indices(NULL) {
     m_ident = new string("Mesh");
 }
 
@@ -64,8 +64,8 @@ Mesh* Mesh::CreateCircle(GLfloat radius, GLint numPoints) {
         toReturn->m_verts[i].x = radius * cx;
         toReturn->m_verts[i].y = radius * sy;
         toReturn->m_verts[i].z = 0;
-        toReturn->m_uvs[i].x = 0.5 + cx;
-        toReturn->m_uvs[i].y = 0.5 + sy;
+        toReturn->m_uvs[i].x = 0.5 + cx/2;
+        toReturn->m_uvs[i].y = 0.5 + sy/2;
         toReturn->m_indices[i] = i;
     }
     toReturn->m_indexCount = numPoints;
@@ -76,6 +76,10 @@ Mesh* Mesh::CreateCircle(GLfloat radius, GLint numPoints) {
 
 Vector3* Mesh::GetVertexArray() {
     return m_verts;
+}
+
+Vector2* Mesh::GetUVArray() {
+    return m_uvs;
 }
 
 GLushort* Mesh::GetIndexArray() {

@@ -27,11 +27,30 @@ Handle<Value> fl_mrb_SetColor(const Arguments& args) {
     return handle_scope.Close(args.This());
 }
 
+Handle<Value> fl_mrb_SetTexture(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    MeshRenderer* meshRenderer = static_cast<MeshRenderer*>(entVal->Value());
+    
+    Local<Value> intVal = args[0]->ToObject()->GetInternalField(0);
+    if(!intVal->IsExternal()) {
+        return ThrowException(String::New("Entity.addComponent must be passed exactly 1 component as a parameter"));
+    }
+    Local<External> extVal = Local<External>::Cast(intVal);
+    Texture* t = static_cast<Texture*>(extVal->Value());
+    if(t) {
+        meshRenderer->SetTexture(t);
+    }
+    
+    return handle_scope.Close(args.This());
+}
+
 Handle<FunctionTemplate> fl_mrb_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setColor", FunctionTemplate::New(fl_mrb_SetColor));
+    instance_templ->Set("setTexture", FunctionTemplate::New(fl_mrb_SetTexture));
     ComponentBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);

@@ -11,6 +11,8 @@
 
 #include "Component.h"
 
+class Texture;
+
 class MeshRenderer : public Component {
 public:
     MeshRenderer();
@@ -21,11 +23,12 @@ public:
     virtual void Register();
     virtual void Unregister();
     virtual void SetColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
-    
+    virtual void SetTexture(Texture* tex);
     virtual void Render();
 
 protected:
     GLfloat m_r, m_g, m_b, m_a;
+    Texture* m_texture;
 };
 
 #endif

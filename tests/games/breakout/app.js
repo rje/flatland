@@ -21,6 +21,7 @@ function createBoard(cols, rows) {
     for(var x = 0; x < cols; x++) {
         for(var y = 0; y < rows; y++) {
             var block = createBox(blockSize.w, blockSize.h, "block", 0.8, 0.8, 0.8);
+            block.getComponent("MeshRenderer").setTexture(new Texture("textures/brick.png"));
             block.transform.setPosition(xOffset + x * (blockSize.w + blockSpace.w),
                                         yOffset + y * (blockSize.h + blockSpace.h));
             var bc = block.addComponent(new BoxCollider(1.5, 0.75));
@@ -35,6 +36,7 @@ function createBoard(cols, rows) {
 function createPaddle() {
     var paddle = createBox(4, 0.5, "paddle", 0.8, 0.8, 0.8);
     paddle.transform.setPosition(14, 1);
+    paddle.getComponent("MeshRenderer").setTexture(new Texture("textures/paddle.png"));
     var s = new Scriptable("Controls");
     s.onUpdate = function(delta) {
         var pos = paddle.transform.getPosition();
@@ -54,8 +56,9 @@ function createPaddle() {
 
 function createBall() {
     var ball = new Entity("ball");
-    ball.addComponent(Mesh.createCircle(ballRadius, 32));
+    ball.addComponent(Mesh.createRect(ballRadius * 2, ballRadius * 2));
     ball.addComponent(new MeshRenderer()).setColor(0.8, 0.8, 0.8);
+    ball.getComponent("MeshRenderer").setTexture(new Texture("textures/ball.png"));
     ball.transform.setPosition(viewSize.w / 2, viewSize.h / 3);
     var cc = ball.addComponent(new CircleCollider(ballRadius));
     cc.setPhysicsProperties({type: Collider.dynamic, restitution: 1, friction: 0, density: 1});
@@ -68,7 +71,6 @@ function createWalls() {
     var bc = e.addComponent(new BoxCollider(0.1, viewSize.h));
     bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
 
-    e = new Entity();
     e.transform.setPosition(viewSize.w, viewSize.h / 2);
     bc = e.addComponent(new BoxCollider(0.1, viewSize.h));
     bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
@@ -93,7 +95,7 @@ function main() {
     window.setSize(1024, 768);
     window.setViewportSize(viewSize.w, viewSize.h);
     window.setResizable(false);
-    window.setClearColor(0.33, 0.33, 0.33, 0);
+    window.setClearColor(0.8, 0.8, 0.8, 0);
     createBoard(numBlocks.cols, numBlocks.rows);
     createWalls();
     createPaddle();

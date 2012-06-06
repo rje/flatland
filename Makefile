@@ -1,14 +1,14 @@
 
-IFLAGS=-Ideps/box2d/Box2D -Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer
-CFLAGS=-c -Wall $(IFLAGS)
+CFLAGS=-c -Wall $(IFLAGS) -g
 OUTDIR=out
+IFLAGS=-I$(OUTDIR)/include -Ideps/box2d/Box2D -Ideps/v8/include -Isrc/common -Isrc/common/binding -Isrc/common/components -Isrc/common/renderer -Isrc/common/resource
 OBJ_DIR=$(OUTDIR)/objs
 SOURCES:=$(shell find src -name \*.cpp)
 OBJECTS:=$(patsubst src/%.cpp,out/%.o,$(SOURCES))
 BASE_DIR=${PWD}
 TARGET=flatland
 UNAME = $(shell uname -s)
-LDFLAGS=-L$(OUTDIR)/lib -lv8_base -lv8_snapshot -lBox2D
+LDFLAGS=-L$(OUTDIR)/lib -lz -lpng -lv8_base -lv8_snapshot -lBox2D
 
 ifeq ($(UNAME),Darwin)
 CC=clang++
@@ -22,7 +22,7 @@ endif
 
 all: create-out $(TARGET)
 
-clean: sdl-clean v8-clean box2d-clean $(TARGET)-clean
+clean: zlib-clean libpng-clean sdl-clean v8-clean box2d-clean $(TARGET)-clean
 
 create-out:
 	mkdir -p $(OUTDIR)
@@ -32,6 +32,8 @@ create-out:
 dependencies:
 	$(MAKE) -C deps/v8 dependencies
 	$(shell mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out)
+	$(shell cd deps/zlib &&./configure --static --prefix=${BASE_DIR}/out)
+	$(shell mkdir -p out/deps/libpng && cd out/deps/libpng && ../../../deps/libpng/configure --with-zlib-prefix=${BASE_DIR}/out --prefix=${BASE_DIR}/out)
 
 box2d: box2d-build
 	test -f out/lib/libBox2D.a || make -C deps/box2d/Box2D -f Makefile.flatland install
@@ -49,6 +51,24 @@ v8:
 v8-clean:
 	make -C deps/v8 clean
 
+libpng: libpng-build
+	test -f out/lib/libpng.a || make -C out/deps/libpng install
+
+libpng-build:
+	make -C out/deps/libpng
+
+libpng-clean:
+	make -C out/deps/libpng clean
+
+zlib: zlib-build
+	test -f out/lib/libz.a || make -C deps/zlib install
+
+zlib-build:
+	make -C deps/zlib
+
+zlib-clean:
+	make -C deps/zlib clean
+
 sdl: sdl-build
 	test -f out/lib/libSDL2.a || make -C out/deps/SDL install
 
@@ -65,6 +85,6 @@ $(TARGET)-clean:
 $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) -o $(OUTDIR)/$@
 
-$(OBJECTS): out/%.o : src/%.cpp v8 sdl box2d
+$(OBJECTS): out/%.o : src/%.cpp zlib libpng v8 sdl box2d
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(shell out/bin/sdl2-config --cflags) -c $< -o $@
