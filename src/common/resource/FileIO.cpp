@@ -12,6 +12,7 @@
 #include <sys/stat.h>
 #include <sys/param.h>
 #include <dirent.h>
+#include <stdlib.h>
 
 string* FileIO::m_exeDir = NULL;
 

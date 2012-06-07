@@ -12,9 +12,17 @@ SDL/VisualC/tests
 box2d/Box2D/out
 box2d/Contributions
 *.o
-deps/zlib/configure.log
-deps/zlib/example
-deps/zlib/libz.a
-deps/zlib/minigzip
-deps/zlib/zlib.pc
+zlib/configure.log
+zlib/example
+zlib/libz.a
+zlib/minigzip
+zlib/zlib.pc
+libpng/config.log
+zlib/configure.log
+zlib/example
+zlib/example64
+zlib/libz.a
+zlib/minigzip
+zlib/minigzip64
+zlib/zlib.pc
 

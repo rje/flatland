@@ -6,9 +6,11 @@ OBJ_DIR=$(OUTDIR)/objs
 SOURCES:=$(shell find src -name \*.cpp)
 OBJECTS:=$(patsubst src/%.cpp,out/%.o,$(SOURCES))
 BASE_DIR=${PWD}
+LIBPNG_CPPFLAGS=-I$(BASE_DIR)/$(OUTDIR)/include
+LIBPNG_LDFLAGS=-L$(BASE_DIR)/$(OUTDIR)/lib
 TARGET=flatland
 UNAME = $(shell uname -s)
-LDFLAGS=-L$(OUTDIR)/lib -lz -lpng -lv8_base -lv8_snapshot -lBox2D
+LDFLAGS=-L$(OUTDIR)/lib -lpng -lz -lv8_base -lv8_snapshot -lBox2D
 
 ifeq ($(UNAME),Darwin)
 CC=clang++
@@ -29,56 +31,59 @@ create-out:
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OUTDIR)/lib
 
-dependencies: zlib
+dependencies: zlib libpng-configure
 	$(MAKE) -C deps/v8 dependencies
-	-$(shell mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out)
-	-$(shell mkdir -p out/deps/libpng && cd out/deps/libpng && ../../../deps/libpng/configure --with-zlib-prefix=${BASE_DIR}/out --prefix=${BASE_DIR}/out)
+	mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out
 
 box2d: box2d-build
-	test -f out/lib/libBox2D.a || make -C deps/box2d/Box2D -f Makefile.flatland install
+	test -f out/lib/libBox2D.a || $(MAKE) -C deps/box2d/Box2D -f Makefile.flatland install
 
 box2d-build:
-	make -C deps/box2d/Box2D -f Makefile.flatland
+	$(MAKE) -C deps/box2d/Box2D -f Makefile.flatland
 
 box2d-clean:
-	make -C deps/box2d/Box2D -f Makefile.flatland clean
+	$(MAKE) -C deps/box2d/Box2D -f Makefile.flatland clean
 
 v8:
-	make -C deps/v8 native -j8
+	$(MAKE) -C deps/v8 native -j8
 	cp $(V8BUILDDIR)/*.a $(OUTDIR)/lib
 
 v8-clean:
-	make -C deps/v8 clean
+	$(MAKE) -C deps/v8 clean
+
+libpng-configure:
+	mkdir -p out/deps/libpng
+	cd out/deps/libpng && LDFLAGS=$(LIBPNG_LDFLAGS) CPPFLAGS=$(LIBPNG_CPPFLAGS) ../../../deps/libpng/configure --enable-static --disable-shared --with-zlib-prefix=${BASE_DIR}/out --prefix=${BASE_DIR}/out
 
 libpng: libpng-build
-	test -f out/lib/libpng.a || make -C out/deps/libpng install
+	test -f out/lib/libpng.a || $(MAKE) -C out/deps/libpng install
 
 libpng-build:
-	make -C out/deps/libpng
+	$(MAKE) -C out/deps/libpng
 
 libpng-clean:
-	make -C out/deps/libpng clean
+	$(MAKE) -C out/deps/libpng clean
 
 zlib: zlib-build
-	test -f out/lib/libz.a || make -C deps/zlib install
+	test -f out/lib/libz.a || $(MAKE) -C deps/zlib install
 
 zlib-build: zlib-prepare
-	make -C deps/zlib
+	$(MAKE) -C deps/zlib
 
 zlib-prepare: create-out
 	-$(shell cd deps/zlib &&./configure --static --prefix=${BASE_DIR}/out)
 
 zlib-clean:
-	make -C deps/zlib distclean
+	$(MAKE) -C deps/zlib distclean
 
 sdl: sdl-build
-	test -f out/lib/libSDL2.a || make -C out/deps/SDL install
+	test -f out/lib/libSDL2.a || $(MAKE) -C out/deps/SDL install
 
 sdl-build:
-	make -C out/deps/SDL
+	$(MAKE) -C out/deps/SDL
 
 sdl-clean:
-	make -C out/deps/SDL clean
+	$(MAKE) -C out/deps/SDL clean
 
 $(TARGET)-clean:
 	rm -rf $(OUTDIR)/obj
@@ -89,6 +94,6 @@ $(TARGET): $(OBJECTS)
 	rm -rf $(OUTDIR)/builtins
 	cp -R src/lib $(OUTDIR)/builtins
 
-$(OBJECTS): out/%.o : src/%.cpp zlib libpng v8 sdl box2d
+$(OBJECTS): out/%.o : src/%.cpp libpng v8 sdl box2d
 	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(shell out/bin/sdl2-config --cflags) -c $< -o $@
