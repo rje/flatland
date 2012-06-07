@@ -25,4 +25,5 @@ zlib/libz.a
 zlib/minigzip
 zlib/minigzip64
 zlib/zlib.pc
-
+zlib/Makefile
+zlib/zconf.h
