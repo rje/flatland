@@ -29,11 +29,10 @@ create-out:
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OUTDIR)/lib
 
-dependencies:
+dependencies: zlib
 	$(MAKE) -C deps/v8 dependencies
-	$(shell mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out)
-	$(shell cd deps/zlib &&./configure --static --prefix=${BASE_DIR}/out)
-	$(shell mkdir -p out/deps/libpng && cd out/deps/libpng && ../../../deps/libpng/configure --with-zlib-prefix=${BASE_DIR}/out --prefix=${BASE_DIR}/out)
+	-$(shell mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out)
+	-$(shell mkdir -p out/deps/libpng && cd out/deps/libpng && ../../../deps/libpng/configure --with-zlib-prefix=${BASE_DIR}/out --prefix=${BASE_DIR}/out)
 
 box2d: box2d-build
 	test -f out/lib/libBox2D.a || make -C deps/box2d/Box2D -f Makefile.flatland install
@@ -63,11 +62,14 @@ libpng-clean:
 zlib: zlib-build
 	test -f out/lib/libz.a || make -C deps/zlib install
 
-zlib-build:
+zlib-build: zlib-prepare
 	make -C deps/zlib
 
+zlib-prepare: create-out
+	-$(shell cd deps/zlib &&./configure --static --prefix=${BASE_DIR}/out)
+
 zlib-clean:
-	make -C deps/zlib clean
+	make -C deps/zlib distclean
 
 sdl: sdl-build
 	test -f out/lib/libSDL2.a || make -C out/deps/SDL install

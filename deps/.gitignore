@@ -11,3 +11,10 @@ SDL/VisualC/SDLmain/Win32
 SDL/VisualC/tests
 box2d/Box2D/out
 box2d/Contributions
+*.o
+deps/zlib/configure.log
+deps/zlib/example
+deps/zlib/libz.a
+deps/zlib/minigzip
+deps/zlib/zlib.pc
+
