@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/param.h>
+#include <dirent.h>
+
+string* FileIO::m_exeDir = NULL;
 
 GLboolean FileIO::FileExists(string& fullPath) {
     struct stat info;
@@ -68,13 +71,46 @@ string FileIO::GetWorkingDirectory() {
 }
 
 string FileIO::GetTextFile(const string& relativePath) {
-    string full_path = FileIO::GetWorkingDirectory() + "/" + relativePath;
+    string full_path = FileIO::GetExpandedPath(relativePath);
     ifstream ifs(relativePath.c_str());
     return string(istreambuf_iterator<char>(ifs),istreambuf_iterator<char>());
 }
 
+string FileIO::GetExpandedPath(const string& relativePath) {
+    //printf("--> expanding %s\n", relativePath.c_str());
+    if(relativePath[0] == '/') {
+        //printf("  --> already expanded, returning\n");
+        return relativePath;
+    }
+    string toReturn = FileIO::GetWorkingDirectory() + "/" + relativePath;
+    //printf(" --> adding wd, now: %s\n", toReturn.c_str());
+    return toReturn;
+}
 
 FILE* FileIO::OpenFileDescriptor(const string& relativePath) {
-    string full_path = FileIO::GetWorkingDirectory() + "/" + relativePath;
+    string full_path = FileIO::GetExpandedPath(relativePath);
     return fopen(full_path.c_str(), "rb");
+}
+
+void FileIO::DetermineExecutableDirectory(char* argv0) {
+    char path[MAXPATHLEN];
+    string expanded = GetExpandedPath(argv0);
+    realpath(expanded.c_str(), path);
+    m_exeDir = new string(expanded);
+    //printf("FULLPATH: %s\n", path);
+}
+
+vector<string> FileIO::FindRequiredLibraryFiles() {
+    vector<string> results;
+    string libdir = GetPathComponent(*m_exeDir) + "/builtins";
+    DIR* builtindir = opendir(libdir.c_str());
+    struct dirent* entry;
+    while((entry = readdir(builtindir)) != NULL) {
+        string name(entry->d_name);
+        if(name.rfind(".js") != string::npos) {
+            results.push_back(libdir + "/" + name);
+        }
+    }
+    closedir(builtindir);
+    return results;
 }

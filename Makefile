@@ -84,6 +84,8 @@ $(TARGET)-clean:
 
 $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) -o $(OUTDIR)/$@
+	rm -rf $(OUTDIR)/builtins
+	cp -R src/lib $(OUTDIR)/builtins
 
 $(OBJECTS): out/%.o : src/%.cpp zlib libpng v8 sdl box2d
 	mkdir -p $(dir $@)

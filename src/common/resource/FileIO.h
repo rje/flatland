@@ -11,6 +11,7 @@
 
 #include <SDL_opengl.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -24,7 +25,13 @@ public:
     static string GetWorkingDirectory();
     static void SetWorkingDirectory(string& path);
     static string GetTextFile(const string& relativePath);
+    static string GetExpandedPath(const string& relativePath);
     static FILE* OpenFileDescriptor(const string& relativePath);
+    static void DetermineExecutableDirectory(char* argv0);
+    static vector<string> FindRequiredLibraryFiles();
+    
+private:
+    static string* m_exeDir;
 };
 
 

@@ -1,4 +1,5 @@
+var o = require('./lib/other.js');
+var o2 = require('./lib/other2.js');
 
-var other = require('./lib/other.js');
-
-console.log(other);
+var result = o.c(o2.a, o2.b);
+console.log("3 = " + result);

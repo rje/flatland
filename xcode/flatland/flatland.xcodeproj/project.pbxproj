@@ -52,17 +52,21 @@
 		94E6BA251576D1C00071AA38 /* Collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA241576D1C00071AA38 /* Collider.cpp */; };
 		94E6BA281576DFEF0071AA38 /* BoxCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA271576DFEF0071AA38 /* BoxCollider.cpp */; };
 		94E6BA2A1576E56A0071AA38 /* BoxColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA291576E56A0071AA38 /* BoxColliderBindings.cpp */; };
+		94F811E715810BD40075BEF4 /* require.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94F811E515810BBF0075BEF4 /* require.js */; };
+		94F811EA15811D3B0075BEF4 /* util.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94F811E815811C880075BEF4 /* util.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9494204E156FFE1000C36ECD /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = builtins;
+			dstSubfolderSpec = 16;
 			files = (
+				94F811E715810BD40075BEF4 /* require.js in CopyFiles */,
+				94F811EA15811D3B0075BEF4 /* util.js in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -142,6 +146,8 @@
 		94E6BA271576DFEF0071AA38 /* BoxCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxCollider.cpp; sourceTree = "<group>"; };
 		94E6BA291576E56A0071AA38 /* BoxColliderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoxColliderBindings.cpp; sourceTree = "<group>"; };
 		94E6BA2B1576E5780071AA38 /* BoxColliderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxColliderBindings.h; sourceTree = "<group>"; };
+		94F811E515810BBF0075BEF4 /* require.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = require.js; sourceTree = "<group>"; };
+		94F811E815811C880075BEF4 /* util.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = util.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +222,7 @@
 		9494205D156FFE3700C36ECD /* src */ = {
 			isa = PBXGroup;
 			children = (
+				94F811E415810BBF0075BEF4 /* lib */,
 				949103991572F57800BFDF65 /* main.cpp */,
 				9494205E156FFE3700C36ECD /* common */,
 			);
@@ -316,6 +323,15 @@
 				94CB4B20157EDA92004FDC51 /* Texture.cpp */,
 			);
 			path = resource;
+			sourceTree = "<group>";
+		};
+		94F811E415810BBF0075BEF4 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				94F811E515810BBF0075BEF4 /* require.js */,
+				94F811E815811C880075BEF4 /* util.js */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

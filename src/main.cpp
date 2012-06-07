@@ -11,7 +11,13 @@
 int main(int argc, char** argv) {
     bool running = true;
     Window::GetWindow();
-    string test = "tests/games/breakout/app.js";
+    FileIO::DetermineExecutableDirectory(argv[0]);
+    std::vector<std::string> libraryFiles = FileIO::FindRequiredLibraryFiles();
+    for(std::vector<std::string>::iterator i = libraryFiles.begin(); i != libraryFiles.end(); i++) {
+        string toLoad = *i;
+        JSInterpreter::Instance()->LoadFile(toLoad);
+    }
+    string test = "tests/require_test/app.js";
     if(argc == 2) {
         test = argv[1];
     }

@@ -15,6 +15,12 @@
 #include "CircleColliderBindings.h"
 #include "TextureBindings.h"
 
+#include <map>
+typedef map<string, Persistent<Object> > ModuleMap;
+typedef ModuleMap::iterator ModuleMapIter;
+
+ModuleMap _sm_maps;
+
 using namespace v8;
 
 JSInterpreter* JSInterpreter::Instance() {
@@ -42,6 +48,26 @@ Handle<Value> _fl_jsi_console_log(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> _fl_jsi_loadfile(const Arguments& args) {
+    HandleScope handle_scope;
+    String::Utf8Value arg(args[0]);
+    string path(*arg);
+    string prepend = "(function() { var module = { exports: {} };";
+    string append = " return module.exports;})();";
+    string content = FileIO::GetTextFile(path);
+    content = prepend + content + append;
+    
+    Handle<Value> results = JSInterpreter::Instance()->RunString(content, path);
+    return handle_scope.Close(results);
+}
+
+void JSInterpreter::BindBuiltins() {
+    this->RegisterConsole();
+    
+    HandleScope handle_scope;
+    this->m_globalObjDef->Set("_loadfile", FunctionTemplate::New(_fl_jsi_loadfile));
+}
+
 void JSInterpreter::RegisterConsole() {
     HandleScope handle_scope;
     Handle<ObjectTemplate> consoleObj = ObjectTemplate::New();
@@ -55,7 +81,6 @@ void JSInterpreter::InitializeVM() {
     Handle<ObjectTemplate> global = ObjectTemplate::New();
     m_globalObjDef = Persistent<ObjectTemplate>::New(global);
     // BINDINGS BLOCK
-    this->RegisterConsole();
     WindowBindings_BindToGlobal(m_globalObjDef);
     EntityBindings_BindToGlobal(m_globalObjDef);
     MeshBindings_BindToGlobal(m_globalObjDef);
@@ -67,19 +92,21 @@ void JSInterpreter::InitializeVM() {
     BoxColliderBindings_BindToGlobal(m_globalObjDef);
     CircleColliderBindings_BindToGlobal(m_globalObjDef);
     TextureBindings_BindToGlobal(m_globalObjDef);
+    this->BindBuiltins();
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
-    
 }
 
-void JSInterpreter::LoadFile(string& path, const string& name) {
-    string content = FileIO::GetTextFile(path);
-    RunString(content, name);
-}
-
-void JSInterpreter::RunString(string& contents, const string& name) {
+Handle<Value> JSInterpreter::LoadFile(string& path, const string& name) {
     Locker locker;
-    HandleScope current_scope;
+    HandleScope handle_scope;
+    string content = FileIO::GetTextFile(path);
+    return RunString(content, name);
+}
+
+Handle<Value> JSInterpreter::RunString(string& contents, const string& name) {
+    Locker locker;
+    HandleScope handle_scope;
     Context::Scope context_scope(m_context);
     TryCatch trycatch;
     Handle<String> source = String::New(contents.c_str());
@@ -88,7 +115,7 @@ void JSInterpreter::RunString(string& contents, const string& name) {
         Handle<Value> stack = trycatch.StackTrace();
         String::Utf8Value result(stack);
         printf("Stack trace:\n%s\n", *result);
-        return;
+        return Undefined();
     }
     Handle<Value> val = script->Run();
     if(val.IsEmpty()) {
@@ -96,8 +123,5 @@ void JSInterpreter::RunString(string& contents, const string& name) {
         String::Utf8Value result(stack);
         printf("Stack trace:\n%s\n", *result);
     }
-    else {
-        String::Utf8Value result(val);
-        printf("Result: %s\n", *result);
-    }
+    return handle_scope.Close(val);
 }

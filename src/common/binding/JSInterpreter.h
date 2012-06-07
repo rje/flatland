@@ -11,8 +11,8 @@ using namespace std;
 class JSInterpreter {
 public:
     static JSInterpreter* Instance();
-    void LoadFile(string& path, const string& name = "");
-    void RunString(string& contents, const string& name = "");
+    v8::Handle<v8::Value> LoadFile(string& path, const string& name = "");
+    v8::Handle<v8::Value> RunString(string& contents, const string& name = "");
     
     v8::Persistent<v8::Context> m_context;
 private:
@@ -21,6 +21,7 @@ private:
     void InitializeVM();
     v8::Persistent<v8::ObjectTemplate> m_globalObjDef;
     void RegisterConsole();
+    void BindBuiltins();
 };
 
 #endif

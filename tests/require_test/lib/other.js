@@ -1,7 +1,5 @@
-
+var o2 = require('./lib/other2.js');
 module.exports = {
-  a: 1,
-  b: 2,
   c: function(x, y) {
     return x + y;
   }
