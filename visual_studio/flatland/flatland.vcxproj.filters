@@ -26,6 +26,9 @@
     <ClCompile Include="..\..\src\common\components\Collider.cpp" />
     <ClCompile Include="..\..\src\common\components\Scriptable.cpp" />
     <ClCompile Include="..\..\src\common\components\PhysicsSystem.cpp" />
+    <ClCompile Include="..\..\src\common\binding\TextureBinding.cpp" />
+    <ClCompile Include="..\..\src\common\resource\FileIO.cpp" />
+    <ClCompile Include="..\..\src\common\resource\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\common\binding\EntityBindings.h" />
@@ -54,5 +57,8 @@
     <ClInclude Include="..\..\src\common\components\CircleCollider.h" />
     <ClInclude Include="..\..\src\common\components\Scriptable.h" />
     <ClInclude Include="..\..\src\common\components\PhysicsSystem.h" />
+    <ClInclude Include="..\..\src\common\binding\TextureBindings.h" />
+    <ClInclude Include="..\..\src\common\resource\FileIO.h" />
+    <ClInclude Include="..\..\src\common\resource\Texture.h" />
   </ItemGroup>
 </Project>

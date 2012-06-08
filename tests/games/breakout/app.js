@@ -95,7 +95,7 @@ function main() {
     window.setSize(1024, 768);
     window.setViewportSize(viewSize.w, viewSize.h);
     window.setResizable(false);
-    window.setClearColor(0.8, 0.8, 0.8, 0);
+    window.setClearColor(0.2, 0.2, 0.2, 0);
     createBoard(numBlocks.cols, numBlocks.rows);
     createWalls();
     createPaddle();

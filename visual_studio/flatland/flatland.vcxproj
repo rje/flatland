@@ -21,6 +21,7 @@
     <ClCompile Include="..\..\src\common\binding\MeshBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\MeshRendererBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\ScriptableBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\TextureBinding.cpp" />
     <ClCompile Include="..\..\src\common\binding\TransformBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\WindowBindings.cpp" />
     <ClCompile Include="..\..\src\common\components\BoxCollider.cpp" />
@@ -34,6 +35,8 @@
     <ClCompile Include="..\..\src\common\components\Scriptable.cpp" />
     <ClCompile Include="..\..\src\common\components\Transform.cpp" />
     <ClCompile Include="..\..\src\common\renderer\Renderer.cpp" />
+    <ClCompile Include="..\..\src\common\resource\FileIO.cpp" />
+    <ClCompile Include="..\..\src\common\resource\Texture.cpp" />
     <ClCompile Include="..\..\src\common\Window.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
   </ItemGroup>
@@ -48,6 +51,7 @@
     <ClInclude Include="..\..\src\common\binding\MeshBindings.h" />
     <ClInclude Include="..\..\src\common\binding\MeshRendererBindings.h" />
     <ClInclude Include="..\..\src\common\binding\ScriptableBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\TextureBindings.h" />
     <ClInclude Include="..\..\src\common\binding\TransformBindings.h" />
     <ClInclude Include="..\..\src\common\binding\WindowBindings.h" />
     <ClInclude Include="..\..\src\common\components\BoxCollider.h" />
@@ -63,6 +67,8 @@
     <ClInclude Include="..\..\src\common\components\Transform.h" />
     <ClInclude Include="..\..\src\common\renderer\Renderer.h" />
     <ClInclude Include="..\..\src\common\renderer\Vectors.h" />
+    <ClInclude Include="..\..\src\common\resource\FileIO.h" />
+    <ClInclude Include="..\..\src\common\resource\Texture.h" />
     <ClInclude Include="..\..\src\common\Window.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -94,14 +100,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(ProjectDir)..\..\deps\SDL\VisualC\SDLmain\Win32\Release;$(ProjectDir)..\..\deps\SDL\VisualC\SDL\Win32\Release;$(ProjectDir)..\..\deps\v8\build\Release\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\v8\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)..\..\deps\box2d\Box2D\Build\vs2010\bin\Debug;$(ProjectDir)..\..\deps\SDL\VisualC\SDLmain\Win32\Debug;$(ProjectDir)..\..\deps\SDL\VisualC\SDL\Win32\Debug;$(OutDir);$(ProjectDir)..\..\deps\v8\build\Debug\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\resource;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\libpng;$(ProjectDir)..\..\deps\box2d\Box2D;$(ProjectDir)..\..\deps\v8\include;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)..\..\out\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>$(ProjectDir)..\..\deps\SDL\VisualC\SDLmain\Win32\Release;$(ProjectDir)..\..\deps\SDL\VisualC\SDL\Win32\Release;$(ProjectDir)..\..\deps\v8\build\Release\lib;$(ProjectDir)..\..\deps\box2d\Box2D\Build\vs2010\bin\Release;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\v8\include;$(ProjectDir)..\..\deps\box2d\Box2D;$(IncludePath)</IncludePath>
-    <OutDir>$(ProjectDir)\..\..\out\</OutDir>
+    <LibraryPath>$(ProjectDir)..\..\deps\SDL\VisualC\SDLmain\Win32\Release;$(ProjectDir)..\..\deps\SDL\VisualC\SDL\Win32\Release;$(OutDir);$(ProjectDir)..\..\deps\v8\build\Release\lib;$(ProjectDir)..\..\deps\box2d\Box2D\Build\vs2010\bin\Release;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\resource;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\libpng;$(ProjectDir)..\..\deps\box2d\Box2D;$(ProjectDir)..\..\deps\v8\include;$(ProjectDir)..\..\deps\box2d\Box2D;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)..\..\out\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -115,12 +122,12 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;SDL.lib;SDLmain.lib;libpng15.lib;zlib.lib;Shlwapi.lib;Box2D.lib;opengl32.lib;winmm.lib;ws2_32.lib;glu32.lib;imm32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent>
-      <Command>call "$(ProjectDir)\build_prep.bat"</Command>
+      <Command>call "$(ProjectDir)\build_prep.bat" $(Configuration)</Command>
       <Message>Creating out dir and copying the SDL.dll</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -140,14 +147,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;SDL.lib;SDLmain.lib;Box2D.lib;opengl32.lib;winmm.lib;ws2_32.lib;glu32.lib;imm32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>v8_base.lib;v8_snapshot.lib;SDL.lib;SDLmain.lib;libpng15.lib;zlib.lib;Shlwapi.lib;Box2D.lib;opengl32.lib;winmm.lib;ws2_32.lib;glu32.lib;imm32.lib;version.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>
       </IgnoreSpecificDefaultLibraries>
     </Link>
     <PreBuildEvent />
     <PreBuildEvent />
     <PreBuildEvent>
-      <Command>call "$(ProjectDir)\build_prep.bat"</Command>
+      <Command>call "$(ProjectDir)\build_prep.bat" $(Configuration)</Command>
     </PreBuildEvent>
     <PreBuildEvent>
       <Message>Creating out dir and copying the SDL.dll</Message>

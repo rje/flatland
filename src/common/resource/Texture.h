@@ -11,8 +11,13 @@
 #include <string>
 #include <SDL_opengl.h>
 #include <v8.h>
+#include <map>
 using namespace v8;
 using namespace std;
+
+class Texture;
+typedef map<string, Texture*> TextureMap;
+typedef TextureMap::iterator TextureMapIter;
 
 class Texture {
 public:
@@ -24,6 +29,8 @@ public:
     
     virtual void SetWrappedObject(Persistent<Object>& handle);
     virtual Persistent<Object> GetWrappedObject();
+
+	static Texture* TextureForFile(string& filepath);
     
 protected:
     GLuint m_glTextureID;
@@ -33,6 +40,9 @@ protected:
     GLenum m_pixelFormat;
     GLenum m_dataType;
     Persistent<Object> m_wrappedObj;
+
+private:
+	static TextureMap sm_textures;
 };
 
 #endif

@@ -17,11 +17,11 @@ int main(int argc, char** argv) {
         string toLoad = *i;
         JSInterpreter::Instance()->LoadFile(toLoad);
     }
-    string test = "tests/require_test/app.js";
+    string test = "tests/games/breakout/app.js";
     if(argc == 2) {
         test = argv[1];
     }
-    string fullPath = FileIO::GetWorkingDirectory() + "/" + test;
+    string fullPath = FileIO::GetExpandedPath(test);
     string dir = FileIO::GetPathComponent(fullPath);
     string file = FileIO::GetFileComponent(fullPath);
     FileIO::SetWorkingDirectory(dir);

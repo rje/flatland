@@ -46,13 +46,15 @@ Handle<Value> fl_tex_ConstructorCall(const Arguments& args) {
         return ThrowException(String::New("Cannot call constructor like a function"));
     }
     HandleScope handle_scope;
-    Texture* texture = new Texture();
     if(args.Length() == 1) {
         String::Utf8Value arg(args[0]);
         string path(*arg);
-        texture->InitWithFile(path);
+		Texture* t = Texture::TextureForFile(path);
+		return t->GetWrappedObject();
     }
-    return TextureBindings_WrapTexture(texture);
+	else {
+		return Undefined();
+	}
 }
 
 void TextureBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {

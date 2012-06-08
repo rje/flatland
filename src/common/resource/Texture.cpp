@@ -11,6 +11,8 @@
 #include "FileIO.h"
 #include <png.h>
 
+TextureMap Texture::sm_textures;
+
 Texture::Texture() {
     
 }
@@ -121,4 +123,16 @@ Persistent<Object> Texture::GetWrappedObject() {
         m_wrappedObj = Persistent<Object>::New(TextureBindings_WrapTexture(this)->ToObject());
     }
     return m_wrappedObj;
+}
+
+Texture* Texture::TextureForFile(string& filepath) {
+	if(sm_textures.find(filepath) != sm_textures.end()) {
+		return sm_textures[filepath];
+	}
+	else {
+		Texture* t = new Texture();
+		t->InitWithFile(filepath);
+		sm_textures[filepath] = t;
+		return t;
+	}
 }
