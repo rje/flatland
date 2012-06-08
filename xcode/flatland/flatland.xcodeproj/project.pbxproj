@@ -11,6 +11,8 @@
 		940E0E64157042C300E80636 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E63157042C300E80636 /* Renderer.cpp */; };
 		940E0E671570583A00E80636 /* Transform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E661570583900E80636 /* Transform.cpp */; };
 		940E0E6A15707D5100E80636 /* TransformBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 940E0E6915707D5100E80636 /* TransformBindings.cpp */; };
+		9418A45A1582908B0092C096 /* ProgramArguments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9418A4591582908B0092C096 /* ProgramArguments.cpp */; };
+		9418A4601582B8C00092C096 /* app.js in Copy Scaffold */ = {isa = PBXBuildFile; fileRef = 9418A45D1582B41F0092C096 /* app.js */; };
 		942E29BF15751C180060A53F /* Scriptable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942E29BE15751C180060A53F /* Scriptable.cpp */; };
 		942E29C2157521A50060A53F /* ScriptableBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 942E29C1157521A50060A53F /* ScriptableBindings.cpp */; };
 		942E29C4157586C30060A53F /* libBox2D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 942E29C3157586C30060A53F /* libBox2D.a */; };
@@ -52,20 +54,32 @@
 		94E6BA251576D1C00071AA38 /* Collider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA241576D1C00071AA38 /* Collider.cpp */; };
 		94E6BA281576DFEF0071AA38 /* BoxCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA271576DFEF0071AA38 /* BoxCollider.cpp */; };
 		94E6BA2A1576E56A0071AA38 /* BoxColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94E6BA291576E56A0071AA38 /* BoxColliderBindings.cpp */; };
-		94F811E715810BD40075BEF4 /* require.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94F811E515810BBF0075BEF4 /* require.js */; };
-		94F811EA15811D3B0075BEF4 /* util.js in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94F811E815811C880075BEF4 /* util.js */; };
+		94F811E715810BD40075BEF4 /* require.js in Copy Standard Library */ = {isa = PBXBuildFile; fileRef = 94F811E515810BBF0075BEF4 /* require.js */; };
+		94F811EA15811D3B0075BEF4 /* util.js in Copy Standard Library */ = {isa = PBXBuildFile; fileRef = 94F811E815811C880075BEF4 /* util.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9494204E156FFE1000C36ECD /* CopyFiles */ = {
+		9418A45B1582B3F70092C096 /* Copy Scaffold */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = scaffold;
+			dstSubfolderSpec = 16;
+			files = (
+				9418A4601582B8C00092C096 /* app.js in Copy Scaffold */,
+			);
+			name = "Copy Scaffold";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9494204E156FFE1000C36ECD /* Copy Standard Library */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
 			dstPath = builtins;
 			dstSubfolderSpec = 16;
 			files = (
-				94F811E715810BD40075BEF4 /* require.js in CopyFiles */,
-				94F811EA15811D3B0075BEF4 /* util.js in CopyFiles */,
+				94F811E715810BD40075BEF4 /* require.js in Copy Standard Library */,
+				94F811EA15811D3B0075BEF4 /* util.js in Copy Standard Library */,
 			);
+			name = "Copy Standard Library";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -77,6 +91,10 @@
 		940E0E661570583900E80636 /* Transform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Transform.cpp; sourceTree = "<group>"; };
 		940E0E6815707D0300E80636 /* TransformBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransformBindings.h; sourceTree = "<group>"; };
 		940E0E6915707D5100E80636 /* TransformBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformBindings.cpp; sourceTree = "<group>"; };
+		9418A45615828FDA0092C096 /* ProgramArguments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgramArguments.h; sourceTree = "<group>"; };
+		9418A4581582901C0092C096 /* flatland_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = flatland_common.h; sourceTree = "<group>"; };
+		9418A4591582908B0092C096 /* ProgramArguments.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProgramArguments.cpp; sourceTree = "<group>"; };
+		9418A45D1582B41F0092C096 /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		942E29BC15751BC90060A53F /* Scriptable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scriptable.h; sourceTree = "<group>"; };
 		942E29BE15751C180060A53F /* Scriptable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scriptable.cpp; sourceTree = "<group>"; };
 		942E29C01575216A0060A53F /* ScriptableBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptableBindings.h; sourceTree = "<group>"; };
@@ -202,6 +220,14 @@
 			name = frameworks;
 			sourceTree = "<group>";
 		};
+		9418A45C1582B41F0092C096 /* scaffold */ = {
+			isa = PBXGroup;
+			children = (
+				9418A45D1582B41F0092C096 /* app.js */,
+			);
+			path = scaffold;
+			sourceTree = "<group>";
+		};
 		94942045156FFE1000C36ECD = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +248,7 @@
 		9494205D156FFE3700C36ECD /* src */ = {
 			isa = PBXGroup;
 			children = (
+				9418A45C1582B41F0092C096 /* scaffold */,
 				94F811E415810BBF0075BEF4 /* lib */,
 				949103991572F57800BFDF65 /* main.cpp */,
 				9494205E156FFE3700C36ECD /* common */,
@@ -239,6 +266,7 @@
 				9494205F156FFE3700C36ECD /* binding */,
 				9494206A156FFE3700C36ECD /* components */,
 				94942074156FFE3700C36ECD /* renderer */,
+				9418A4581582901C0092C096 /* flatland_common.h */,
 			);
 			path = common;
 			sourceTree = "<group>";
@@ -321,6 +349,8 @@
 				94CB4B1D157EC4E8004FDC51 /* FileIO.cpp */,
 				94CB4B1F157ED9DE004FDC51 /* Texture.h */,
 				94CB4B20157EDA92004FDC51 /* Texture.cpp */,
+				9418A45615828FDA0092C096 /* ProgramArguments.h */,
+				9418A4591582908B0092C096 /* ProgramArguments.cpp */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -343,7 +373,8 @@
 			buildPhases = (
 				9494204C156FFE1000C36ECD /* Sources */,
 				9494204D156FFE1000C36ECD /* Frameworks */,
-				9494204E156FFE1000C36ECD /* CopyFiles */,
+				9494204E156FFE1000C36ECD /* Copy Standard Library */,
+				9418A45B1582B3F70092C096 /* Copy Scaffold */,
 			);
 			buildRules = (
 			);
@@ -413,6 +444,7 @@
 				94CB4B1E157EC4E8004FDC51 /* FileIO.cpp in Sources */,
 				94CB4B21157EDA92004FDC51 /* Texture.cpp in Sources */,
 				94C0F518157FB18A0073A510 /* TextureBinding.cpp in Sources */,
+				9418A45A1582908B0092C096 /* ProgramArguments.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

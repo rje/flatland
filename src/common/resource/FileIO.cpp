@@ -10,6 +10,9 @@
 #include <fstream>
 #include <stdio.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/mman.h>
+#include <fcntl.h>
 #ifndef WIN32
 #include <sys/param.h>
 #include <dirent.h>
@@ -21,7 +24,15 @@
 #endif
 #include <stdlib.h>
 
+using namespace std;
+
 string* FileIO::m_exeDir = NULL;
+
+#ifndef WIN32
+const string FileIO::sep = "/";
+#else
+const string FileIO::sep = "\\";
+#endif
 
 GLboolean FileIO::FileExists(string& fullPath) {
     struct stat info;
@@ -41,15 +52,11 @@ GLboolean FileIO::IsDirectory(string& path) {
 GLboolean FileIO::IsFile(string& path) {
     struct stat info;
     int err = stat(path.c_str(), &info);
-    return err && S_ISREG(info.st_mode);
+    return !err && S_ISREG(info.st_mode);
 }
 
 string FileIO::GetPathComponent(string& fullFilePath) {
-#ifndef WIN32
-    size_t loc = fullFilePath.find_last_of('/');
-#else
-    size_t loc = fullFilePath.find_last_of('\\');
-#endif
+    size_t loc = fullFilePath.find_last_of(FileIO::sep);
     if(loc == string::npos) {
         return "";
     }
@@ -59,11 +66,7 @@ string FileIO::GetPathComponent(string& fullFilePath) {
 }
 
 string FileIO::GetFileComponent(string& fullFilePath) {
-#ifndef WIN32
-    size_t loc = fullFilePath.find_last_of('/');
-#else
-    size_t loc = fullFilePath.find_last_of('\\');
-#endif
+    size_t loc = fullFilePath.find_last_of(FileIO::sep);
     size_t len = fullFilePath.length() - loc;
     if(loc == string::npos) {
         return "";
@@ -109,22 +112,17 @@ void searchAndReplace(std::string& value, std::string const& search, std::string
 }
 
 string FileIO::GetExpandedPath(string& relativePath) {
-    //printf("--> expanding %s\n", relativePath.c_str());
 #ifndef WIN32
-	string sep = "/";
     if(relativePath[0] == '/') {
-        //printf("  --> already expanded, returning\n");
         return relativePath;
     }
 #else
-	string sep = "\\";
 	searchAndReplace(relativePath, "/", "\\");
 	if(!PathIsRelativeA(relativePath.c_str())) {
 		return relativePath;
 	}
 #endif
-    string toReturn = FileIO::GetWorkingDirectory() + sep + relativePath;
-    //printf(" --> adding wd, now: %s\n", toReturn.c_str());
+    string toReturn = FileIO::GetWorkingDirectory() + FileIO::sep + relativePath;
     return toReturn;
 }
 
@@ -143,35 +141,86 @@ void FileIO::DetermineExecutableDirectory(char* argv0) {
 	PathCanonicalizeA(path, expanded.c_str());
 #endif
     m_exeDir = new string(path);
-    //printf("FULLPATH: %s\n", path);
 }
 
-vector<string> FileIO::FindRequiredLibraryFiles() {
-    vector<string> results;
+StringVector FileIO::FindRequiredLibraryFiles() {
+    StringVector results;
+    string libdir = GetPathComponent(*m_exeDir) + FileIO::sep + "builtins";
 #ifndef WIN32
-    string libdir = GetPathComponent(*m_exeDir) + "/builtins";
     DIR* builtindir = opendir(libdir.c_str());
     struct dirent* entry;
     while((entry = readdir(builtindir)) != NULL) {
         string name(entry->d_name);
         if(name.rfind(".js") != string::npos) {
-            results.push_back(libdir + "/" + name);
+            results.push_back(libdir + FileIO::sep + name);
         }
     }
     closedir(builtindir);
 #else
-    string libdir = GetPathComponent(*m_exeDir) + "\\builtins";
-	string searchString = libdir + "\\*.js";
+	string searchString = libdir + FileIO::sep + "*.js";
 	WIN32_FIND_DATAA finddata;
 	HANDLE dhandle;
 	dhandle = FindFirstFileA(searchString.c_str(), &finddata);
 	if(dhandle != INVALID_HANDLE_VALUE) {
-		results.push_back(libdir + "\\" + finddata.cFileName);
+		results.push_back(libdir + FileIO::sep + finddata.cFileName);
 		while(FindNextFileA(dhandle, &finddata)) {
-			results.push_back(libdir + "\\" + string(finddata.cFileName));
+			results.push_back(libdir + FileIO::sep + string(finddata.cFileName));
 		}
 	}
 	FindClose(dhandle);
 #endif
     return results;
+}
+
+StringVector FileIO::GetScaffoldFiles() {
+    StringVector results;
+    string libdir = GetPathComponent(*m_exeDir) + FileIO::sep + "scaffold";
+#ifndef WIN32
+    DIR* builtindir = opendir(libdir.c_str());
+    struct dirent* entry;
+    while((entry = readdir(builtindir)) != NULL) {
+        string name(entry->d_name);
+        if(name.compare(".") && name.compare("..")) {
+            results.push_back(libdir + FileIO::sep + name);
+        }
+    }
+    closedir(builtindir);
+#else
+	string searchString = libdir + FileIO::sep + "*";
+	WIN32_FIND_DATAA finddata;
+	HANDLE dhandle;
+	dhandle = FindFirstFileA(searchString.c_str(), &finddata);
+	if(dhandle != INVALID_HANDLE_VALUE) {
+		results.push_back(libdir + FileIO::sep + finddata.cFileName);
+		while(FindNextFileA(dhandle, &finddata)) {
+			results.push_back(libdir + FileIO::sep + string(finddata.cFileName));
+		}
+	}
+	FindClose(dhandle);
+#endif
+    return results;
+}
+
+GLboolean FileIO::MakeDirectory(string& fullpath) {
+    int err = mkdir(fullpath.c_str(), S_IRWXU|S_IRWXG);
+    return !err;
+}
+
+void FileIO::CopyFile(string& src, string& dst) {
+    int in, out;
+    void* src_buf, *dst_buf;
+    struct stat statbuf;
+    
+    in = open(src.c_str(), O_RDONLY);
+    out = open(src.c_str(), O_RDWR|O_CREAT|O_TRUNC, S_IRWXU|S_IRWXG);
+    fstat(in, &statbuf);
+    lseek(out, statbuf.st_size - 1, SEEK_SET);
+    write(out, "", 1);
+    src_buf = mmap(0, statbuf.st_size, PROT_READ, MAP_SHARED, in, 0);
+    dst_buf = mmap(0, statbuf.st_size, PROT_READ|PROT_WRITE, MAP_SHARED, out, 0);
+    memcpy(dst_buf, src_buf, statbuf.st_size);
+    munmap(src_buf, statbuf.st_size);
+    munmap(dst_buf, statbuf.st_size);
+    close(out);
+    close(in);
 }

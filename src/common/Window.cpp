@@ -82,6 +82,10 @@ void Window::SetClearColor(GLclampf r, GLclampf g, GLclampf b, GLclampf a) {
     m_isDirty |= WINDOW_CLEAR_COLOR;
 }
 
+void Window::CenterOnScreen() {
+    m_isDirty |= WINDOW_CENTER;
+}
+
 void Window::HandleUpdates() {
     if(m_isDirty & WINDOW_SIZE) {
         SDL_SetWindowSize(m_window, m_width, m_height);
@@ -98,6 +102,10 @@ void Window::HandleUpdates() {
         glOrtho(0, m_vpWidth, 0, m_vpHeight, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         m_isDirty &= ~WINDOW_VIEWPORT_SIZE;
+    }
+    if(m_isDirty & WINDOW_CENTER) {
+        SDL_SetWindowPosition(m_window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+        m_isDirty &= ~WINDOW_CENTER;
     }
 }
 

@@ -20,7 +20,8 @@ enum WindowDirtyMask {
     WINDOW_NONE          = 0x0000,
     WINDOW_SIZE          = 0x0001,
     WINDOW_VIEWPORT_SIZE = 0x0002,
-    WINDOW_CLEAR_COLOR   = 0x0004
+    WINDOW_CLEAR_COLOR   = 0x0004,
+    WINDOW_CENTER        = 0x0008
 };
 
 class Window {
@@ -36,6 +37,7 @@ public:
     virtual GLfloat GetHeight();
     
     virtual void SetResizeable(GLboolean canResize);
+    virtual void CenterOnScreen();
     
     virtual Renderer* GetRenderer();
 private:

@@ -9,11 +9,7 @@
 #ifndef flatland_FileIO_h
 #define flatland_FileIO_h
 
-#include <SDL_opengl.h>
-#include <string>
-#include <vector>
-
-using namespace std;
+#include "flatland_common.h"
 
 class FileIO {
 public:
@@ -28,8 +24,12 @@ public:
     static string GetExpandedPath(string& relativePath);
     static FILE* OpenFileDescriptor(string& relativePath);
     static void DetermineExecutableDirectory(char* argv0);
-    static vector<string> FindRequiredLibraryFiles();
+    static GLboolean MakeDirectory(string& fullpath);
+    static void CopyFile(string& src, string& dst);
+    static StringVector FindRequiredLibraryFiles();
+    static StringVector GetScaffoldFiles();
     
+    static const string sep;
 private:
     static string* m_exeDir;
 };

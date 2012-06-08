@@ -10,12 +10,12 @@ function createSprite(x, y) {
 }
 
 function main() {
-  window.setSize(800, 600);
-    window.setViewportSize(32, 24);
-    window.setResizable(false);
-  window.setClearColor(1, 0, 0, 1);
+  window.setSize(640, 480);
+  window.setViewportSize(20, 15);
+  window.setResizable(false);
+  window.setClearColor(0.2, 0.2, 0.2, 0);
   for(var i = 0; i < 10; i++) {
-      createSprite(i * 64, i * 64);
+      createSprite(1 + i * 2, 1+ i * 2);
   }
 }
 

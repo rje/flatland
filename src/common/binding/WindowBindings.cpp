@@ -57,6 +57,13 @@ Handle<Value> fl_wb_SetResizable(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_wb_CenterOnScreen(const Arguments& args) {
+    Locker locker;
+    HandleScope handle_scope;
+    Window::GetWindow()->CenterOnScreen();
+    return Undefined();
+}
+
 void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     Locker locker;
     HandleScope handle_scope;
@@ -66,5 +73,6 @@ void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     window->Set(String::New("setClearColor"), FunctionTemplate::New(fl_wb_SetClearColor));
     window->Set(String::New("setResizable"), FunctionTemplate::New(fl_wb_SetResizable));
     window->Set(String::New("setViewportSize"), FunctionTemplate::New(fl_wb_SetViewportSize));
+    window->Set(String::New("centerOnScreen"), FunctionTemplate::New(fl_wb_CenterOnScreen));
     global->Set("window", window);
 }

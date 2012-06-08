@@ -92,7 +92,9 @@ $(TARGET)-clean:
 $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) $(LDFLAGS) $(shell out/bin/sdl2-config --static-libs) -o $(OUTDIR)/$@
 	rm -rf $(OUTDIR)/builtins
+	rm -rf $(OUTDIR)/scaffold
 	cp -R src/lib $(OUTDIR)/builtins
+	cp -R src/scaffold $(OUTDIR)/scaffold
 
 $(OBJECTS): out/%.o : src/%.cpp libpng v8 sdl box2d
 	mkdir -p $(dir $@)
