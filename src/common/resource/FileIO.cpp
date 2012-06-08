@@ -135,7 +135,8 @@ FILE* FileIO::OpenFileDescriptor(string& relativePath) {
 
 void FileIO::DetermineExecutableDirectory(char* argv0) {
     char path[MAXPATHLEN];
-    string expanded = GetExpandedPath(string(argv0));
+    string toExpand(argv0);
+    string expanded = GetExpandedPath(toExpand);
 #ifndef WIN32
     realpath(expanded.c_str(), path);
 #else
