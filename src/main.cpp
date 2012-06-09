@@ -118,10 +118,8 @@ int main(int argc, char** argv) {
     ProgramArguments* args = new ProgramArguments(argc, argv);
     StringVector arglist = args->GetArguments();
     
-    // FIXME: Eventually remove this, just for quick ide-based testing
-    string test = "tests/games/breakout/app.js";
     if(arglist.size() == 0) {
-        arglist.push_back(test);
+        arglist.push_back("app.js");
     }
     
     if(!arglist[0].compare("new")) {

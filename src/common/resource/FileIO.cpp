@@ -212,9 +212,9 @@ void FileIO::CopyFile(string& src, string& dst) {
     struct stat statbuf;
     
     in = open(src.c_str(), O_RDONLY);
-    out = open(src.c_str(), O_RDWR|O_CREAT|O_TRUNC, S_IRWXU|S_IRWXG);
-    fstat(in, &statbuf);
-    lseek(out, statbuf.st_size - 1, SEEK_SET);
+    out = open(dst.c_str(), O_RDWR|O_CREAT|O_TRUNC, S_IRWXU|S_IRWXG);
+    int err = fstat(in, &statbuf);
+    err = lseek(out, statbuf.st_size - 1, SEEK_SET);
     write(out, "", 1);
     src_buf = mmap(0, statbuf.st_size, PROT_READ, MAP_SHARED, in, 0);
     dst_buf = mmap(0, statbuf.st_size, PROT_READ|PROT_WRITE, MAP_SHARED, out, 0);
