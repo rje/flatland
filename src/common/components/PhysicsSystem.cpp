@@ -156,10 +156,13 @@ b2Body* PhysicsSystem::RegisterCollider(Collider* toRegister) {
         m_colliders.push_back(toRegister);
         b2BodyDef bodyDef;
         bodyDef.userData = toRegister;
+        bodyDef.type = toRegister->GetType();
         b2Body* toReturn = m_world->CreateBody(&bodyDef);
         b2Shape* shape = toRegister->GetBodyShape();
         toReturn->SetTransform(b2Vec2(1, 1), 0);
-        toReturn->CreateFixture(shape, 0.0f);
+        b2Fixture* fix = toReturn->CreateFixture(shape, toRegister->GetDensity());
+        fix->SetFriction(toRegister->GetFriction());
+        fix->SetRestitution(toRegister->GetRestitution());
         return toReturn;
         
     }
