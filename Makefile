@@ -33,7 +33,7 @@ create-out:
 
 dependencies: zlib libpng-configure
 	$(MAKE) -C deps/v8 dependencies
-	mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out
+	mkdir -p out/deps/SDL && cd out/deps/SDL && ../../../deps/SDL/configure --prefix=${BASE_DIR}/out --enable-static --disable-shared
 
 box2d: box2d-build
 	test -f out/lib/libBox2D.a || $(MAKE) -C deps/box2d/Box2D -f Makefile.flatland install
