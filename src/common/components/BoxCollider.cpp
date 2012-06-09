@@ -35,6 +35,14 @@ void BoxCollider::SetSize(GLfloat halfWidth, GLfloat halfHeight) {
     s->SetAsBox(halfWidth, halfHeight);
 }
 
+GLfloat BoxCollider::GetHalfWidth() {
+    return m_halfWidth;
+}
+
+GLfloat BoxCollider::GetHalfHeight() {
+    return m_halfHeight;
+}
+
 void BoxCollider::Register() {
     m_body = PhysicsSystem::instance()->RegisterCollider(this);
     Transform* t = m_owner->GetComponent<Transform>();

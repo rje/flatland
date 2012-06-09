@@ -10,6 +10,7 @@
 #define flatland_MeshRenderer_h
 
 #include "Component.h"
+#include "Vectors.h"
 
 class Texture;
 
@@ -24,6 +25,8 @@ public:
     virtual void Unregister();
     virtual void SetColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
     virtual void SetTexture(Texture* tex);
+    virtual Color GetColor();
+    virtual Texture* GetTexture();
     virtual void Render();
 
 protected:

@@ -93,6 +93,34 @@ Handle<Value> fl_col_SetPhysicsProperties(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_col_GetType(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Collider* collider = static_cast<Collider*>(entVal->Value());
+    return handle_scope.Close(Integer::New(collider->GetType()));
+}
+
+Handle<Value> fl_col_GetRestitution(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Collider* collider = static_cast<Collider*>(entVal->Value());
+    return handle_scope.Close(Number::New(collider->GetRestitution()));
+}
+
+Handle<Value> fl_col_GetFriction(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Collider* collider = static_cast<Collider*>(entVal->Value());
+    return handle_scope.Close(Number::New(collider->GetFriction()));
+}
+
+Handle<Value> fl_col_GetDensity(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Collider* collider = static_cast<Collider*>(entVal->Value());
+    return handle_scope.Close(Number::New(collider->GetDensity()));
+}
+
 void ColliderBindings_AddMethodsToTemplate(Handle<ObjectTemplate>& instance_templ) {
     instance_templ->Set("setType", FunctionTemplate::New(fl_col_SetType));
     instance_templ->Set("getLinearVelocity", FunctionTemplate::New(fl_col_GetLinearVelocity));
@@ -101,6 +129,10 @@ void ColliderBindings_AddMethodsToTemplate(Handle<ObjectTemplate>& instance_temp
     instance_templ->Set("setFriction", FunctionTemplate::New(fl_col_SetFriction));
     instance_templ->Set("setDensity", FunctionTemplate::New(fl_col_SetDensity));
     instance_templ->Set("setPhysicsProperties", FunctionTemplate::New(fl_col_SetPhysicsProperties));
+    instance_templ->Set("getType", FunctionTemplate::New(fl_col_GetType));
+    instance_templ->Set("getRestitution", FunctionTemplate::New(fl_col_GetRestitution));
+    instance_templ->Set("getFriction", FunctionTemplate::New(fl_col_GetFriction));
+    instance_templ->Set("getDensity", FunctionTemplate::New(fl_col_GetDensity));
     ComponentBindings_AddMethodsToTemplate(instance_templ);
 }
 

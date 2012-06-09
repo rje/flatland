@@ -21,7 +21,7 @@ public:
     void SetPosition(GLfloat x, GLfloat y);
     void SetPosition(GLfloat x, GLfloat y, GLfloat z);
     void SetDepth(GLfloat z);
-    void SetRotation(GLfloat angle);
+    void SetAngle(GLfloat angle);
     void PhysicsUpdate(GLfloat x, GLfloat y, GLfloat angle);
     
     Vector3& GetPosition();

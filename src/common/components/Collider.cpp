@@ -12,12 +12,61 @@
 
 using namespace v8;
 
-Collider::Collider() {
+Collider::Collider() : 
+        m_body(NULL), 
+        m_shape(NULL), 
+        m_bodyType(b2_staticBody), 
+        m_restitution(0.0f),
+        m_density(1.0f),
+        m_friction(0.5f) {
     
 }
 
 Collider::~Collider() {
     delete m_shape;
+}
+
+void Collider::SetType(b2BodyType newType) {
+    m_bodyType = newType;
+    if(m_body != NULL) {
+        m_body->SetType(newType);
+    }
+}
+
+void Collider::SetRestitution(GLfloat rest) {
+    m_restitution = rest;
+    if(m_body != NULL) {
+        m_body->GetFixtureList()->SetRestitution(rest);
+    }
+}
+void Collider::SetFriction(GLfloat friction) {
+    m_friction = friction;
+    if(m_body != NULL) {
+        m_body->GetFixtureList()->SetFriction(friction);
+    }
+}
+
+void Collider::SetDensity(GLfloat density) {
+    m_density = density;
+    if(m_body != NULL) {
+        m_body->GetFixtureList()->SetDensity(density);
+    }
+}
+
+b2BodyType Collider::GetType() {
+    return m_bodyType;
+}
+
+GLfloat Collider::GetRestitution() {
+    return m_restitution;
+}
+
+GLfloat Collider::GetFriction() {
+    return m_friction;
+}
+
+GLfloat Collider::GetDensity() {
+    return m_density;
 }
 
 Handle<Object> Collider::WrapContact(b2Contact* toWrap) {

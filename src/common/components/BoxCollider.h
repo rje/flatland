@@ -16,6 +16,8 @@ public:
     BoxCollider();
     virtual ~BoxCollider();
     virtual void SetSize(GLfloat halfWidth, GLfloat halfHeight);
+    virtual GLfloat GetHalfWidth();
+    virtual GLfloat GetHalfHeight();
     virtual void Register();
     virtual void Unregister();
     virtual void Update(GLfloat delta);

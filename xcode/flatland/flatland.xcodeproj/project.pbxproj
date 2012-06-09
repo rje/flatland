@@ -41,7 +41,7 @@
 		949420A2157001D700C36ECD /* libm.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A1157001D700C36ECD /* libm.dylib */; };
 		949420A71570021200C36ECD /* libSDL2main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A61570021200C36ECD /* libSDL2main.a */; };
 		949420A815700B1400C36ECD /* libSDL2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 949420A3157001F300C36ECD /* libSDL2.a */; };
-		94C0F518157FB18A0073A510 /* TextureBinding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C0F517157FB18A0073A510 /* TextureBinding.cpp */; };
+		94C0F518157FB18A0073A510 /* TextureBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C0F517157FB18A0073A510 /* TextureBindings.cpp */; };
 		94C2A7F5157733D9008D58E6 /* CircleCollider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A7F4157733D8008D58E6 /* CircleCollider.cpp */; };
 		94C2A7F81577343E008D58E6 /* CircleColliderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A7F71577343E008D58E6 /* CircleColliderBindings.cpp */; };
 		94CB4B17157EB40B004FDC51 /* libpng15.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 94CB4B15157EB40B004FDC51 /* libpng15.a */; };
@@ -141,7 +141,7 @@
 		949420A3157001F300C36ECD /* libSDL2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2.a; path = ../../out/lib/libSDL2.a; sourceTree = "<group>"; };
 		949420A61570021200C36ECD /* libSDL2main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDL2main.a; path = ../../out/lib/libSDL2main.a; sourceTree = "<group>"; };
 		94C0F516157FB15F0073A510 /* TextureBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextureBindings.h; sourceTree = "<group>"; };
-		94C0F517157FB18A0073A510 /* TextureBinding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureBinding.cpp; sourceTree = "<group>"; };
+		94C0F517157FB18A0073A510 /* TextureBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureBindings.cpp; sourceTree = "<group>"; };
 		94C2A7F2157733A5008D58E6 /* CircleCollider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleCollider.h; sourceTree = "<group>"; };
 		94C2A7F4157733D8008D58E6 /* CircleCollider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleCollider.cpp; sourceTree = "<group>"; };
 		94C2A7F615773419008D58E6 /* CircleColliderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleColliderBindings.h; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 				94D86B7C157816E50009BDAF /* ComponentBindings.h */,
 				94D86B7D157817190009BDAF /* ComponentBindings.cpp */,
 				94C0F516157FB15F0073A510 /* TextureBindings.h */,
-				94C0F517157FB18A0073A510 /* TextureBinding.cpp */,
+				94C0F517157FB18A0073A510 /* TextureBindings.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -443,7 +443,7 @@
 				94D86B7E157817190009BDAF /* ComponentBindings.cpp in Sources */,
 				94CB4B1E157EC4E8004FDC51 /* FileIO.cpp in Sources */,
 				94CB4B21157EDA92004FDC51 /* Texture.cpp in Sources */,
-				94C0F518157FB18A0073A510 /* TextureBinding.cpp in Sources */,
+				94C0F518157FB18A0073A510 /* TextureBindings.cpp in Sources */,
 				9418A45A1582908B0092C096 /* ProgramArguments.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

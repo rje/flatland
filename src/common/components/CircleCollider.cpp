@@ -36,6 +36,10 @@ void CircleCollider::SetSize(GLfloat radius) {
     s->m_radius = radius;
 }
 
+GLfloat CircleCollider::GetSize() {
+    return m_radius;
+}
+
 void CircleCollider::Register() {
     m_body = PhysicsSystem::instance()->RegisterCollider(this);
     b2MassData mass;

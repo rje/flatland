@@ -9,6 +9,7 @@
 #include "MeshRendererBindings.h"
 #include "MeshRenderer.h"
 #include "ComponentBindings.h"
+#include "Texture.h"
 
 using namespace v8;
 
@@ -45,12 +46,41 @@ Handle<Value> fl_mrb_SetTexture(const Arguments& args) {
     return handle_scope.Close(args.This());
 }
 
+Handle<Value> fl_mrb_GetColor(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    MeshRenderer* meshRenderer = static_cast<MeshRenderer*>(entVal->Value());
+    Color c = meshRenderer->GetColor();
+    Local<Object> toReturn = Object::New();
+    toReturn->Set(String::New("r"), Number::New(c.r));
+    toReturn->Set(String::New("g"), Number::New(c.g));
+    toReturn->Set(String::New("b"), Number::New(c.b));
+    toReturn->Set(String::New("a"), Number::New(c.a));
+    
+    return handle_scope.Close(toReturn);
+}
+
+Handle<Value> fl_mrb_GetTexture(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    MeshRenderer* meshRenderer = static_cast<MeshRenderer*>(entVal->Value());
+    if(meshRenderer->GetTexture()) {
+        return handle_scope.Close(meshRenderer->GetTexture()->GetWrappedObject());
+    }
+    else {
+        return Undefined();
+    }
+}
+
 Handle<FunctionTemplate> fl_mrb_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setColor", FunctionTemplate::New(fl_mrb_SetColor));
     instance_templ->Set("setTexture", FunctionTemplate::New(fl_mrb_SetTexture));
+    instance_templ->Set("getColor", FunctionTemplate::New(fl_mrb_GetColor));
+    instance_templ->Set("getTexture", FunctionTemplate::New(fl_mrb_GetTexture));
+    
     ComponentBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);

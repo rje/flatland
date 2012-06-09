@@ -22,11 +22,19 @@ Handle<Value> fl_cc_SetSize(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_cc_GetSize(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    CircleCollider* circleCollider = static_cast<CircleCollider*>(entVal->Value());
+    return handle_scope.Close(Number::New(circleCollider->GetRestitution()));
+}
+
 Handle<FunctionTemplate> fl_cc_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setSize", FunctionTemplate::New(fl_cc_SetSize));
+    instance_templ->Set("getSize", FunctionTemplate::New(fl_cc_GetSize));
     ColliderBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);

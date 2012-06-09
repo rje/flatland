@@ -48,6 +48,22 @@ Handle<Value> fl_tf_GetPosition(const Arguments& args) {
     return handle_scope.Close(toReturn);
 }
 
+Handle<Value> fl_tf_SetAngle(const Arguments& args) {
+    HandleScope handle_scope;
+    GLfloat angle = (GLfloat)args[0]->NumberValue();
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Transform* transform = static_cast<Transform*>(entVal->Value());
+    transform->SetAngle(angle);
+    return handle_scope.Close(args.This());
+}
+
+Handle<Value> fl_tf_GetAngle(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    Transform* transform = static_cast<Transform*>(entVal->Value());
+    return handle_scope.Close(Number::New(transform->GetAngle()));
+}
+
 Handle<FunctionTemplate> fl_tf_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();

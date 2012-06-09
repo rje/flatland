@@ -46,6 +46,19 @@ void MeshRenderer::SetTexture(Texture* tex) {
     m_texture = tex;
 }
 
+Color MeshRenderer::GetColor() {
+    Color toReturn;
+    toReturn.r = m_r;
+    toReturn.g = m_g;
+    toReturn.b = m_b;
+    toReturn.a = m_a;
+    return toReturn;
+}
+
+Texture* MeshRenderer::GetTexture() {
+    return m_texture;
+}
+
 void MeshRenderer::Render() {
     Mesh* m = m_owner->GetComponent<Mesh>();
     Transform* t = m_owner->GetComponent<Transform>();

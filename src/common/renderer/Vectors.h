@@ -25,4 +25,8 @@ typedef struct Vector4 {
     GLfloat x, y, z, w;
 } Vector4;
 
+typedef struct Color {
+    GLfloat r, g, b, a;
+} Color;
+
 #endif

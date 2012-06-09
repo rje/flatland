@@ -23,11 +23,22 @@ Handle<Value> fl_bc_SetSize(const Arguments& args) {
     return Undefined();
 }
 
+Handle<Value> fl_bc_GetSize(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    BoxCollider* boxCollider = static_cast<BoxCollider*>(entVal->Value());
+    Local<Object> toReturn = Object::New();
+    toReturn->Set(String::New("halfWidth"), Number::New(boxCollider->GetHalfWidth()));
+    toReturn->Set(String::New("halfHeight"), Number::New(boxCollider->GetHalfHeight()));
+    return handle_scope.Close(toReturn);
+}
+
 Handle<FunctionTemplate> fl_bc_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setSize", FunctionTemplate::New(fl_bc_SetSize));
+    instance_templ->Set("getSize", FunctionTemplate::New(fl_bc_GetSize));
     ColliderBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);

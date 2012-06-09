@@ -16,6 +16,7 @@ public:
     CircleCollider();
     virtual ~CircleCollider();
     virtual void SetSize(GLfloat radius);
+    virtual GLfloat GetSize();
     virtual void Register();
     virtual void Unregister();
     virtual void Update(GLfloat delta);

@@ -46,7 +46,7 @@ void Transform::SetDepth(GLfloat z) {
     m_pos.z = z;
 }
 
-void Transform::SetRotation(GLfloat angle) {
+void Transform::SetAngle(GLfloat angle) {
     m_angle = angle;
     Collider* c = m_owner->GetComponent<Collider>();
     if(c != NULL) {

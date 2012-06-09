@@ -29,15 +29,28 @@ public:
     virtual b2Body* GetBox2DBody() { return m_body; }
     virtual b2Shape* GetBodyShape() { return m_shape; }
     virtual void UpdateWithTransform(Transform* t, GLboolean pos, GLboolean angle) = 0;
-    virtual void SetType(b2BodyType newType) { m_body->SetType(newType); }
+    
     virtual GLboolean HandleCollision(b2Contact* contact, Collider* other);
-    virtual void SetRestitution(GLfloat rest) { m_body->GetFixtureList()->SetRestitution(rest); }
-    virtual void SetFriction(GLfloat friction) { m_body->GetFixtureList()->SetFriction(friction); }
-    virtual void SetDensity(GLfloat density) { m_body->GetFixtureList()->SetDensity(density); }
+    
+    virtual void SetType(b2BodyType newType);
+    virtual void SetRestitution(GLfloat rest);
+    virtual void SetFriction(GLfloat friction);
+    virtual void SetDensity(GLfloat density);
+    
+    virtual b2BodyType GetType();
+    virtual GLfloat GetRestitution();
+    virtual GLfloat GetFriction();
+    virtual GLfloat GetDensity();
+    
 protected:
     v8::Handle<v8::Object> WrapContact(b2Contact* contact);
     b2Body* m_body;
     b2Shape* m_shape;
+    
+    b2BodyType m_bodyType;
+    GLfloat m_restitution;
+    GLfloat m_friction;
+    GLfloat m_density;
 };
 
 #endif
