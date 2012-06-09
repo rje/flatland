@@ -64,8 +64,8 @@ void fl_kb_SetScancodeConstants(v8::Handle<v8::ObjectTemplate>& codes) {
     codes->Set(v8::String::New("tab"), v8::Integer::New(SDL_SCANCODE_TAB));
     codes->Set(v8::String::New("space"), v8::Integer::New(SDL_SCANCODE_SPACE));
     
-    codes->Set(v8::String::New("Minus"), v8::Integer::New(SDL_SCANCODE_MINUS));
-    codes->Set(v8::String::New("Equals"), v8::Integer::New(SDL_SCANCODE_EQUALS));
+    codes->Set(v8::String::New("minus"), v8::Integer::New(SDL_SCANCODE_MINUS));
+    codes->Set(v8::String::New("equals"), v8::Integer::New(SDL_SCANCODE_EQUALS));
     codes->Set(v8::String::New("left_bracket"), v8::Integer::New(SDL_SCANCODE_LEFTBRACKET));
     codes->Set(v8::String::New("right_bracket"), v8::Integer::New(SDL_SCANCODE_RIGHTBRACKET));
     codes->Set(v8::String::New("backslash"), v8::Integer::New(SDL_SCANCODE_BACKSLASH));
