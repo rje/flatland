@@ -1,3 +1,4 @@
 # Flatland: A multi-platform game engine in C++ and Javascript
 
-[Build instructions](flatland/wiki/Building)
+* [Javascript API Docs](flatland/wiki/Javascript-API-Docs)
+* [Build instructions](flatland/wiki/Building)
