@@ -36,6 +36,7 @@
     <ClCompile Include="..\..\src\common\components\Transform.cpp" />
     <ClCompile Include="..\..\src\common\renderer\Renderer.cpp" />
     <ClCompile Include="..\..\src\common\resource\FileIO.cpp" />
+    <ClCompile Include="..\..\src\common\resource\ProgramArguments.cpp" />
     <ClCompile Include="..\..\src\common\resource\Texture.cpp" />
     <ClCompile Include="..\..\src\common\Window.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
@@ -65,9 +66,11 @@
     <ClInclude Include="..\..\src\common\components\PhysicsSystem.h" />
     <ClInclude Include="..\..\src\common\components\Scriptable.h" />
     <ClInclude Include="..\..\src\common\components\Transform.h" />
+    <ClInclude Include="..\..\src\common\flatland_common.h" />
     <ClInclude Include="..\..\src\common\renderer\Renderer.h" />
     <ClInclude Include="..\..\src\common\renderer\Vectors.h" />
     <ClInclude Include="..\..\src\common\resource\FileIO.h" />
+    <ClInclude Include="..\..\src\common\resource\ProgramArguments.h" />
     <ClInclude Include="..\..\src\common\resource\Texture.h" />
     <ClInclude Include="..\..\src\common\Window.h" />
   </ItemGroup>

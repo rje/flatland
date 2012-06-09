@@ -29,6 +29,7 @@
     <ClCompile Include="..\..\src\common\binding\TextureBinding.cpp" />
     <ClCompile Include="..\..\src\common\resource\FileIO.cpp" />
     <ClCompile Include="..\..\src\common\resource\Texture.cpp" />
+    <ClCompile Include="..\..\src\common\resource\ProgramArguments.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\common\binding\EntityBindings.h" />
@@ -60,5 +61,7 @@
     <ClInclude Include="..\..\src\common\binding\TextureBindings.h" />
     <ClInclude Include="..\..\src\common\resource\FileIO.h" />
     <ClInclude Include="..\..\src\common\resource\Texture.h" />
+    <ClInclude Include="..\..\src\common\resource\ProgramArguments.h" />
+    <ClInclude Include="..\..\src\common\flatland_common.h" />
   </ItemGroup>
 </Project>

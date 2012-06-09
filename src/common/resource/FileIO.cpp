@@ -11,12 +11,12 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <sys/mman.h>
 #include <string.h>
 #include <fcntl.h>
 #ifndef WIN32
 #include <sys/param.h>
 #include <dirent.h>
+#include <sys/mman.h>
 #else
 #include <Shlwapi.h>
 #define S_ISREG(x) (_S_IFREG & x)
@@ -203,11 +203,16 @@ StringVector FileIO::GetScaffoldFiles() {
 }
 
 GLboolean FileIO::MakeDirectory(string& fullpath) {
+#ifndef WIN32
     int err = mkdir(fullpath.c_str(), S_IRWXU|S_IRWXG);
     return !err;
+#else
+	return CreateDirectoryA(fullpath.c_str(), NULL);
+#endif
 }
 
 void FileIO::CopyFile(string& src, string& dst) {
+#ifndef WIN32
     int in, out;
     void* src_buf, *dst_buf;
     struct stat statbuf;
@@ -224,4 +229,7 @@ void FileIO::CopyFile(string& src, string& dst) {
     munmap(dst_buf, statbuf.st_size);
     close(out);
     close(in);
+#else
+	CopyFileA(src.c_str(), dst.c_str(), true);
+#endif
 }
