@@ -12,7 +12,7 @@
 #include <Box2D/Box2D.h>
 #include "Collider.h"
 
-using namespace std;
+class PSDebugDraw;
 
 class PhysicsSystem {
 public:
@@ -20,6 +20,11 @@ public:
     void DoStep();
     b2Body* RegisterCollider(Collider* toRegister);
     void UnregisterCollider(Collider* toRemove);
+    
+    void SetGravity(GLfloat x, GLfloat y);
+    b2Vec2 GetGravity();
+    
+    void ToggleDebugDrawFlag(GLuint flag, GLboolean state);
     void DrawDebugData();
 private:
     PhysicsSystem();
@@ -28,6 +33,8 @@ private:
     
     b2World* m_world;
     ColliderVector m_colliders;
+    PSDebugDraw* m_debug;
+    
 };
 
 

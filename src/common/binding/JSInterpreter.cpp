@@ -14,6 +14,7 @@
 #include "BoxColliderBindings.h"
 #include "CircleColliderBindings.h"
 #include "TextureBindings.h"
+#include "PhysicsSystemBindings.h"
 
 #include <map>
 typedef map<string, Persistent<Object> > ModuleMap;
@@ -92,6 +93,7 @@ void JSInterpreter::InitializeVM() {
     BoxColliderBindings_BindToGlobal(m_globalObjDef);
     CircleColliderBindings_BindToGlobal(m_globalObjDef);
     TextureBindings_BindToGlobal(m_globalObjDef);
+    PhysicsSystemBindings_BindToGlobal(m_globalObjDef);
     this->BindBuiltins();
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);

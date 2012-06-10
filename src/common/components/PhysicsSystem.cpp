@@ -184,14 +184,28 @@ PhysicsSystem::PhysicsSystem() {
     
 }
 
+void PhysicsSystem::ToggleDebugDrawFlag(GLuint flag, GLboolean state) {
+    if(state) {
+        m_debug->AppendFlags(flag);
+    }
+    else {
+        m_debug->ClearFlags(flag);
+    }
+}
+
+void PhysicsSystem::SetGravity(GLfloat x, GLfloat y) {
+    m_world->SetGravity(b2Vec2(x, y));
+}
+
+b2Vec2 PhysicsSystem::GetGravity() {
+    return m_world->GetGravity();
+}
+
 void PhysicsSystem::Initialize() {
     m_world = new b2World(b2Vec2(0.0, 0.0));
     m_world->SetAllowSleeping(true);
-    PSDebugDraw* debug = new PSDebugDraw();
-    //debug->AppendFlags(b2Draw::e_shapeBit);
-    //debug->AppendFlags(b2Draw::e_aabbBit);
-    //debug->AppendFlags(b2Draw::e_centerOfMassBit);
-    m_world->SetDebugDraw(debug);
+    m_debug = new PSDebugDraw();
+    m_world->SetDebugDraw(m_debug);
     m_world->SetContactListener(new PSContactListner());
 }
 
