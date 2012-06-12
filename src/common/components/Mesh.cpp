@@ -37,7 +37,7 @@ Mesh* Mesh::CreateRect(GLfloat w, GLfloat h) {
     GLfloat hd2 = h / 2.0f;
     for(int i = 0; i < 4; i++) {
         toReturn->m_verts[i].x = (i % 2 == 0) ? -wd2 : wd2;
-        toReturn->m_verts[i].y = (i / 2 == 0) ? hd2 : -hd2;
+        toReturn->m_verts[i].y = (i / 2 == 0) ? -hd2 : hd2;
         toReturn->m_verts[i].z = 0;
         toReturn->m_uvs[i].x = (i % 2 == 0) ? 0 : 1;
         toReturn->m_uvs[i].y = (i / 2 == 0) ? 1 : 0;
@@ -70,7 +70,7 @@ Mesh* Mesh::CreateCircle(GLfloat radius, GLint numPoints) {
     }
     toReturn->m_indexCount = numPoints;
     toReturn->m_meshType = GL_TRIANGLE_FAN;
-    
+
     return toReturn;
 }
 

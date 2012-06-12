@@ -88,7 +88,7 @@ void Texture::InitWithFile(string& filepath) {
     }
     
     for (int i = 0; i < m_height; ++i) {
-        row_pointers[m_height - 1 - i] = image_data + i * rowbytes;
+        row_pointers[i] = image_data + i * rowbytes;
     }
     
     png_read_image(png_ptr, row_pointers);
