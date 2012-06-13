@@ -27,7 +27,7 @@ public:
     GLint GetIndexCount();
     GLenum GetMeshType();
     
-    void BindBuffers();
+    void BindBuffers(GLboolean enableUVs);
     
 protected:
     Vector3* m_verts;

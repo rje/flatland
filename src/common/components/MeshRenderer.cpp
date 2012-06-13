@@ -80,7 +80,7 @@ void MeshRenderer::Render() {
         glUniform1f(glGetUniformLocation(m_shader->GetProgram(), "u_tex"), m_texture->GetTextureID());
     }
     else {
-        glBindTexture(GL_TEXTURE_2D, NULL);
+        //glBindTexture(GL_TEXTURE_2D, NULL);
     }
     if(m) {
         glUniform4f(glGetUniformLocation(m_shader->GetProgram(), "u_color"), m_r, m_g, m_b, m_a);
@@ -88,7 +88,7 @@ void MeshRenderer::Render() {
                            1, false, cam->GetMatrix().GetData());
         glUniformMatrix4fv(glGetUniformLocation(m_shader->GetProgram(), "u_mvMatrix"),
                            1, false, t->GetMatrix().GetData());
-        m->BindBuffers();
+        m->BindBuffers(m_texture != NULL);
         glDrawElements(m->GetMeshType(), m->GetIndexCount(), GL_UNSIGNED_SHORT, 0);
     }
 }
