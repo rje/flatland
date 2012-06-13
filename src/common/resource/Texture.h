@@ -8,12 +8,11 @@
 
 #ifndef flatland_Texture_h
 #define flatland_Texture_h
-#include <string>
-#include <SDL_opengl.h>
+
+#include "flatland_common.h"
 #include <v8.h>
-#include <map>
+
 using namespace v8;
-using namespace std;
 
 class Texture;
 typedef map<string, Texture*> TextureMap;

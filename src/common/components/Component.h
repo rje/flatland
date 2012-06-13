@@ -9,11 +9,7 @@
 #ifndef flatland_Component_h
 #define flatland_Component_h
 
-#include <SDL_opengl.h>
-
-#include <vector>
-#include <string>
-using namespace std;
+#include "flatland_common.h"
 
 #include <v8.h>
 using namespace v8;

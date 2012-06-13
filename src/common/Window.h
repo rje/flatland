@@ -10,7 +10,7 @@
 #define flatland_Window_h
 
 #include <SDL.h>
-#include <SDL_opengl.h>
+#include "flatland_common.h"
 
 #include <v8.h>
 
