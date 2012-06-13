@@ -91,15 +91,29 @@ Handle<Value> fl_mrb_SetShader(const Arguments& args) {
     return handle_scope.Close(args.This());
 }
 
+Handle<Value> fl_mrb_GetShader(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    MeshRenderer* meshRenderer = static_cast<MeshRenderer*>(entVal->Value());
+    if(meshRenderer->GetTexture()) {
+        return handle_scope.Close(meshRenderer->GetShader()->GetWrappedObject());
+    }
+    else {
+        return Undefined();
+    }
+    
+}
+
 Handle<FunctionTemplate> fl_mrb_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
     instance_templ->Set("setColor", FunctionTemplate::New(fl_mrb_SetColor));
     instance_templ->Set("setTexture", FunctionTemplate::New(fl_mrb_SetTexture));
+    instance_templ->Set("setShader", FunctionTemplate::New(fl_mrb_SetShader));
     instance_templ->Set("getColor", FunctionTemplate::New(fl_mrb_GetColor));
     instance_templ->Set("getTexture", FunctionTemplate::New(fl_mrb_GetTexture));
-    instance_templ->Set("setShader", FunctionTemplate::New(fl_mrb_SetShader));
+    instance_templ->Set("getShader", FunctionTemplate::New(fl_mrb_GetShader));
     
     ComponentBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);

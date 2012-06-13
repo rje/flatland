@@ -12,21 +12,10 @@
 
 using namespace v8;
 
-Handle<Value> fl_tex_InitWithFile(const Arguments& args) {
-    HandleScope handle_scope;
-    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
-    Texture* texture = static_cast<Texture*>(entVal->Value());
-    String::Utf8Value arg(args[0]);
-    string path(*arg);
-    texture->InitWithFile(path);
-    return handle_scope.Close(args.This());
-}
-
 Handle<FunctionTemplate> fl_tex_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
     Handle<ObjectTemplate> instance_templ = templ->InstanceTemplate();
-    instance_templ->Set("initWithFile", FunctionTemplate::New(fl_tex_InitWithFile));
     instance_templ->SetInternalFieldCount(1);
     return handle_scope.Close(templ);
 }
