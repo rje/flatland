@@ -57,7 +57,7 @@ Handle<Value> _fl_jsi_loadfile(const Arguments& args) {
     HandleScope handle_scope;
     String::Utf8Value arg(args[0]);
     string path(*arg);
-    string prepend = "(function() { var module = { exports: {}, path: \"" + path + "\" };";
+    string prepend = "(function() { var module = { exports: {}, path: \"" + path + "\" }; var exports = module.exports;";
     string append = " return module.exports;})();";
     string content = FileIO::GetTextFile(path);
     content = prepend + content + append;

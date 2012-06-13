@@ -4,3 +4,4 @@ xcode/flatland/flatland.xcodeproj/project.xcworkspace/
 xcode/flatland/flatland.xcodeproj/xcuserdata/
 xcode/flatland/Build
 .idea
+tests/shimbage
