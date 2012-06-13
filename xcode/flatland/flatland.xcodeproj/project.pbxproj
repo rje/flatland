@@ -20,6 +20,10 @@
 		9438D6BC1587FE7D009DF12F /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9438D6BB1587FE7D009DF12F /* Camera.cpp */; };
 		9438D6BF1588006F009DF12F /* CameraBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9438D6BE1588006F009DF12F /* CameraBindings.cpp */; };
 		9438D6C215883997009DF12F /* ShaderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9438D6C115883996009DF12F /* ShaderBindings.cpp */; };
+		9438D6C615884ACB009DF12F /* FragmentShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9438D6C515884ACB009DF12F /* FragmentShader.cpp */; };
+		9438D6C815884AEE009DF12F /* VertexShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9438D6C715884AEE009DF12F /* VertexShader.cpp */; };
+		9438D6CB15884B97009DF12F /* FragmentShaderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9438D6CA15884B96009DF12F /* FragmentShaderBindings.cpp */; };
+		9438D6CE15884CD4009DF12F /* VertexShaderBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9438D6CD15884CD4009DF12F /* VertexShaderBindings.cpp */; };
 		944236261576939200A6C5BD /* KeyboardBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 944236251576939200A6C5BD /* KeyboardBindings.cpp */; };
 		9491039A1572F57800BFDF65 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 949103991572F57800BFDF65 /* main.cpp */; };
 		9494207D156FFE3700C36ECD /* EntityBindings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94942060156FFE3700C36ECD /* EntityBindings.cpp */; };
@@ -114,6 +118,14 @@
 		9438D6BE1588006F009DF12F /* CameraBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraBindings.cpp; sourceTree = "<group>"; };
 		9438D6C015883605009DF12F /* ShaderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderBindings.h; sourceTree = "<group>"; };
 		9438D6C115883996009DF12F /* ShaderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderBindings.cpp; sourceTree = "<group>"; };
+		9438D6C315884A74009DF12F /* FragmentShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragmentShader.h; sourceTree = "<group>"; };
+		9438D6C415884A98009DF12F /* VertexShader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VertexShader.h; sourceTree = "<group>"; };
+		9438D6C515884ACB009DF12F /* FragmentShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FragmentShader.cpp; sourceTree = "<group>"; };
+		9438D6C715884AEE009DF12F /* VertexShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexShader.cpp; sourceTree = "<group>"; };
+		9438D6C915884B6C009DF12F /* FragmentShaderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FragmentShaderBindings.h; sourceTree = "<group>"; };
+		9438D6CA15884B96009DF12F /* FragmentShaderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FragmentShaderBindings.cpp; sourceTree = "<group>"; };
+		9438D6CC15884CB6009DF12F /* VertexShaderBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VertexShaderBindings.h; sourceTree = "<group>"; };
+		9438D6CD15884CD4009DF12F /* VertexShaderBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VertexShaderBindings.cpp; sourceTree = "<group>"; };
 		944236251576939200A6C5BD /* KeyboardBindings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KeyboardBindings.cpp; sourceTree = "<group>"; };
 		944236281576B0E500A6C5BD /* KeyboardBindings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardBindings.h; sourceTree = "<group>"; };
 		949103991572F57800BFDF65 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -322,6 +334,10 @@
 				9438D6BE1588006F009DF12F /* CameraBindings.cpp */,
 				9438D6C015883605009DF12F /* ShaderBindings.h */,
 				9438D6C115883996009DF12F /* ShaderBindings.cpp */,
+				9438D6C915884B6C009DF12F /* FragmentShaderBindings.h */,
+				9438D6CA15884B96009DF12F /* FragmentShaderBindings.cpp */,
+				9438D6CC15884CB6009DF12F /* VertexShaderBindings.h */,
+				9438D6CD15884CD4009DF12F /* VertexShaderBindings.cpp */,
 			);
 			path = binding;
 			sourceTree = "<group>";
@@ -378,6 +394,10 @@
 				9418A4591582908B0092C096 /* ProgramArguments.cpp */,
 				9438D6B51587F016009DF12F /* Shader.h */,
 				9438D6B71587F100009DF12F /* Shader.cpp */,
+				9438D6C315884A74009DF12F /* FragmentShader.h */,
+				9438D6C515884ACB009DF12F /* FragmentShader.cpp */,
+				9438D6C415884A98009DF12F /* VertexShader.h */,
+				9438D6C715884AEE009DF12F /* VertexShader.cpp */,
 			);
 			path = resource;
 			sourceTree = "<group>";
@@ -477,6 +497,10 @@
 				9438D6BC1587FE7D009DF12F /* Camera.cpp in Sources */,
 				9438D6BF1588006F009DF12F /* CameraBindings.cpp in Sources */,
 				9438D6C215883997009DF12F /* ShaderBindings.cpp in Sources */,
+				9438D6C615884ACB009DF12F /* FragmentShader.cpp in Sources */,
+				9438D6C815884AEE009DF12F /* VertexShader.cpp in Sources */,
+				9438D6CB15884B97009DF12F /* FragmentShaderBindings.cpp in Sources */,
+				9438D6CE15884CD4009DF12F /* VertexShaderBindings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

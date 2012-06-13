@@ -17,6 +17,8 @@
 #include "PhysicsSystemBindings.h"
 #include "CameraBindings.h"
 #include "ShaderBindings.h"
+#include "FragmentShaderBindings.h"
+#include "VertexShaderBindings.h"
 
 #include <map>
 typedef map<string, Persistent<Object> > ModuleMap;
@@ -98,6 +100,8 @@ void JSInterpreter::InitializeVM() {
     PhysicsSystemBindings_BindToGlobal(m_globalObjDef);
     CameraBindings_BindToGlobal(m_globalObjDef);
     ShaderBindings_BindToGlobal(m_globalObjDef);
+    FragmentShaderBindings_BindToGlobal(m_globalObjDef);
+    VertexShaderBindings_BindToGlobal(m_globalObjDef);
     this->BindBuiltins();
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);

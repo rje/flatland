@@ -10,49 +10,11 @@
 #define flatland_Shader_h
 
 #include "flatland_common.h"
+#include "FragmentShader.h"
+#include "VertexShader.h"
 
 #include <v8.h>
 using namespace v8;
-
-
-// FIXME: move the sub shader types to their own files
-class FragmentShader;
-
-typedef vector<FragmentShader*> FragmentShaderVector;
-typedef FragmentShaderVector::iterator FragmentShaderVectorIter;
-
-class FragmentShader {
-public:
-    FragmentShader();
-    virtual ~FragmentShader();
-    
-    GLuint GetShaderID();
-    void SetSource(string source);
-    void Compile();
-    
-private:
-    GLuint m_shaderID;
-    string m_src;
-};
-
-class VertexShader;
-
-typedef vector<VertexShader*> VertexShaderVector;
-typedef VertexShaderVector::iterator VertexShaderVectorIter;
-
-class VertexShader {
-public:
-    VertexShader();
-    virtual ~VertexShader();
-    
-    GLuint GetShaderID();
-    void SetSource(string source);
-    void Compile();
-    
-private:
-    GLuint m_shaderID;
-    string m_src;
-};
 
 class Shader {
 public:
