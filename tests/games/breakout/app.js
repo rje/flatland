@@ -75,17 +75,17 @@ function createCamera() {
 }
 
 function createWalls() {
-    var e = new Entity();
+    var e = new Entity('left-wall');
     e.transform.setPosition(0, viewSize.h / 2);
     var bc = e.addComponent(new BoxCollider(0.1, viewSize.h));
     bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
 
-    e = new Entity();
+    e = new Entity('right-wall');
     e.transform.setPosition(viewSize.w, viewSize.h / 2);
     bc = e.addComponent(new BoxCollider(0.1, viewSize.h));
     bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});
 
-    e = new Entity();
+    e = new Entity('top-wall');
     e.transform.setPosition(viewSize.w / 2, viewSize.h);
     bc = e.addComponent(new BoxCollider(viewSize.w, 0.1));
     bc.setPhysicsProperties({type: Collider.static, restitution: 1, friction: 0});

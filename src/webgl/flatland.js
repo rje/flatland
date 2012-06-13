@@ -1024,7 +1024,7 @@ KeyboardHandler.prototype.isKeyDown = function(code) {
 };
 
 function Scriptable(name) {
-    this._type = "Scriptable"
+    this._type = "Scriptable";
     this._name = name;
 }
 __extends(Component, Scriptable);
