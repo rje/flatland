@@ -104,10 +104,10 @@ function createWalls() {
 
 function main() {
     flwindow.setSize(windowSize.w, windowSize.h);
-    createCamera();
-    flwindow.setResizable(false);
     flwindow.setClearColor(0.2, 0.2, 0.2, 1);
-    flwindow.centerOnScreen();
+    //flwindow.centerOnScreen();
+    flwindow.setResizable(false);
+    createCamera();
 
     createBoard(numBlocks.cols, numBlocks.rows);
     createWalls();

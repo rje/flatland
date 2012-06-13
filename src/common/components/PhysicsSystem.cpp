@@ -12,6 +12,7 @@
 #include "EntityRegistry.h"
 #include "Camera.h"
 #include "Shader.h"
+#include "flatland_common.h"
 
 class PSDebugDraw : public b2Draw {
 public:
