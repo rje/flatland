@@ -57,7 +57,17 @@ Handle<Value> fl_tex_ConstructorCall(const Arguments& args) {
 	}
 }
 
+Handle<Value> fl_tex_GetTexture(const Arguments& args) {
+    HandleScope handle_scope;
+    String::Utf8Value arg(args[0]);
+    string path(*arg);
+    Texture* t = Texture::TextureForFile(path);
+    return handle_scope.Close(t->GetWrappedObject());
+}
+
 void TextureBindings_BindToGlobal(v8::Persistent<v8::ObjectTemplate>& global) {
     HandleScope handle_scope;
-    global->Set("Texture", FunctionTemplate::New(fl_tex_ConstructorCall));
+    Handle<ObjectTemplate> tc = ObjectTemplate::New();
+    tc->Set("getTexture", FunctionTemplate::New(fl_tex_GetTexture));
+    global->Set("TextureCache", tc);
 }

@@ -92,6 +92,7 @@ void runGame(StringVector& arguments) {
     string file = FileIO::GetFileComponent(fullPath);
     FileIO::SetWorkingDirectory(dir);
     JSInterpreter::Instance()->LoadFile(file);
+    JSInterpreter::Instance()->CallMain();
     runGameLoop();
 }
 
@@ -114,6 +115,7 @@ void createGameScaffold(StringVector& arguments) {
 }
 
 int main(int argc, char** argv) {
+    Window::GetWindow();
     loadJavascriptLibrary(argv[0]);
     ProgramArguments* args = new ProgramArguments(argc, argv);
     StringVector arglist = args->GetArguments();

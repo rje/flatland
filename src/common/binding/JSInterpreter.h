@@ -15,6 +15,8 @@ public:
     v8::Handle<v8::Value> RunString(string& contents, const string& name = "");
     
     v8::Persistent<v8::Context> m_context;
+    
+    void CallMain();
 private:
     JSInterpreter();
     virtual ~JSInterpreter();

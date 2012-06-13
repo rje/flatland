@@ -9,12 +9,13 @@
 #include "PhysicsSystem.h"
 #define _USE_MATH_DEFINES // needed for the windows build, yay windows
 #include <math.h>
+#include "EntityRegistry.h"
+#include "Camera.h"
+#include "Shader.h"
 
 class PSDebugDraw : public b2Draw {
 public:
     virtual void DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
-        glColor4f(color.r, color.g, color.b, 1.0f);
-        glEnableClientState(GL_VERTEX_ARRAY);
         GLfloat* verts = new GLfloat[vertexCount * 3];
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
@@ -24,17 +25,38 @@ public:
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }
-        glVertexPointer(3, GL_FLOAT, 0, verts);
-        glDrawElements(GL_LINE_LOOP, vertexCount, GL_UNSIGNED_SHORT, indices);
+        Shader* s = Shader::defaultNoTextureShader;
+        Camera* cam = EntityRegistry::instance()->GetCameras()[0];
+        glUseProgram(s->GetProgram());
+        
+        glEnableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        
+        if(!m_vertBuffer) {
+            glGenBuffers(1, &m_vertBuffer);
+        }
+        glBindBuffer(GL_ARRAY_BUFFER, m_vertBuffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 3 * vertexCount, verts, GL_STATIC_DRAW);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+        
+        if(!m_indexBuffer) {
+            glGenBuffers(1, &m_indexBuffer);
+        }
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * vertexCount, indices, GL_STATIC_DRAW);
+        
+        glUniform4f(glGetUniformLocation(s->GetProgram(), "u_color"), color.r, color.g, color.b, 1.0f);
+        glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "u_pMatrix"), 
+                            1, false, cam->GetMatrix().GetData());
+        glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "u_mvMatrix"),
+                            1, false, Matrix4::Identity().GetData());
+        
+        glDrawElements(GL_LINE_LOOP, vertexCount, GL_UNSIGNED_SHORT, 0);
         delete verts;
         delete indices;
     }
     
     virtual void DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color) {
-        glColor4f(color.r, color.g, color.b, 0.5f);
-        glEnableClientState(GL_VERTEX_ARRAY);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         GLfloat* verts = new GLfloat[vertexCount * 3];
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
@@ -44,8 +66,33 @@ public:
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }
-        glVertexPointer(3, GL_FLOAT, 0, verts);
-        glDrawElements(GL_TRIANGLE_FAN, vertexCount, GL_UNSIGNED_SHORT, indices);
+        Shader* s = Shader::defaultNoTextureShader;
+        Camera* cam = EntityRegistry::instance()->GetCameras()[0];
+        glUseProgram(s->GetProgram());
+        
+        glEnableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+        
+        if(!m_vertBuffer) {
+            glGenBuffers(1, &m_vertBuffer);
+        }
+        glBindBuffer(GL_ARRAY_BUFFER, m_vertBuffer);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 3 * vertexCount, verts, GL_STATIC_DRAW);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+        
+        if(!m_indexBuffer) {
+            glGenBuffers(1, &m_indexBuffer);
+        }
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * vertexCount, indices, GL_STATIC_DRAW);
+        
+        glUniform4f(glGetUniformLocation(s->GetProgram(), "u_color"), color.r, color.g, color.b, 0.5f);
+        glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "u_pMatrix"), 
+                           1, false, cam->GetMatrix().GetData());
+        glUniformMatrix4fv(glGetUniformLocation(s->GetProgram(), "u_mvMatrix"),
+                           1, false, Matrix4::Identity().GetData());
+        
+        glDrawElements(GL_TRIANGLE_FAN, vertexCount, GL_UNSIGNED_SHORT, 0);
         delete verts;
         delete indices;
     }
@@ -53,6 +100,7 @@ public:
     virtual void DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color) {
         GLint vertexCount = 36;
         glColor4f(color.r, color.g, color.b, 1.0f);
+        glUseProgram(NULL);
         glEnableClientState(GL_VERTEX_ARRAY);
         GLfloat* verts = new GLfloat[vertexCount * 3];
         GLushort* indices = new GLushort[vertexCount];
@@ -70,6 +118,7 @@ public:
     virtual void DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color) {
         GLint vertexCount = 36;
         glColor4f(color.r, color.g, color.b, 1.0f);
+        glUseProgram(NULL);
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnable(GL_BLEND);
         GLfloat* verts = new GLfloat[vertexCount * 3];
@@ -89,6 +138,7 @@ public:
     virtual void DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color) {
         glColor4f(color.r, color.g, color.b, 1.0f);
         glEnableClientState(GL_VERTEX_ARRAY);
+        glUseProgram(NULL);
         GLfloat verts[] = {
             p1.x, p1.y, 0.0f,
             p2.x, p2.y, 0.0f
@@ -101,6 +151,7 @@ public:
     }
     
     virtual void DrawTransform(const b2Transform& xf) {
+        glUseProgram(NULL);
         glEnableClientState(GL_VERTEX_ARRAY);
         glColor4f(1, 1, 1, 1);
         GLfloat verts[] = {
@@ -115,6 +166,8 @@ public:
         glVertexPointer(3, GL_FLOAT, 0, verts);
         glDrawElements(GL_LINES, 4, GL_UNSIGNED_SHORT, indices);
     }
+private:
+    GLuint m_vertBuffer, m_indexBuffer;
 };
 
 class PSContactListner : public b2ContactListener {

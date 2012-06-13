@@ -20,15 +20,6 @@ Handle<Value> fl_wb_SetSize(const Arguments& args) {
     return Undefined();
 }
 
-Handle<Value> fl_wb_SetViewportSize(const Arguments& args) {
-    Locker locker;
-    HandleScope handle_scope;
-    GLfloat width = args[0]->NumberValue();
-    GLfloat height = args[1]->NumberValue();
-    Window::GetWindow()->SetViewportSize(width, height);
-    return Undefined();
-}
-
 Handle<Value> fl_wb_SetClearColor(const Arguments& args) {
     Locker locker;
     HandleScope handle_scope;
@@ -72,7 +63,6 @@ void WindowBindings_BindToGlobal(Persistent<ObjectTemplate>& global) {
     window->Set(String::New("getSize"), FunctionTemplate::New(fl_wb_GetSize));
     window->Set(String::New("setClearColor"), FunctionTemplate::New(fl_wb_SetClearColor));
     window->Set(String::New("setResizable"), FunctionTemplate::New(fl_wb_SetResizable));
-    window->Set(String::New("setViewportSize"), FunctionTemplate::New(fl_wb_SetViewportSize));
     window->Set(String::New("centerOnScreen"), FunctionTemplate::New(fl_wb_CenterOnScreen));
-    global->Set("window", window);
+    global->Set("flwindow", window);
 }

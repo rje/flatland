@@ -26,6 +26,7 @@ public:
     
     void InitWithFile(string& filepath);
     void SetAsActive();
+    GLuint GetTextureID();
     
     virtual void SetWrappedObject(Persistent<Object>& handle);
     virtual Persistent<Object> GetWrappedObject();

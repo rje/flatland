@@ -15,6 +15,8 @@
 #include "CircleColliderBindings.h"
 #include "TextureBindings.h"
 #include "PhysicsSystemBindings.h"
+#include "CameraBindings.h"
+#include "ShaderBindings.h"
 
 #include <map>
 typedef map<string, Persistent<Object> > ModuleMap;
@@ -94,6 +96,8 @@ void JSInterpreter::InitializeVM() {
     CircleColliderBindings_BindToGlobal(m_globalObjDef);
     TextureBindings_BindToGlobal(m_globalObjDef);
     PhysicsSystemBindings_BindToGlobal(m_globalObjDef);
+    CameraBindings_BindToGlobal(m_globalObjDef);
+    ShaderBindings_BindToGlobal(m_globalObjDef);
     this->BindBuiltins();
     // BINDINGS BLOCK
     m_context = Context::New(NULL, m_globalObjDef);
@@ -104,6 +108,15 @@ Handle<Value> JSInterpreter::LoadFile(string& path, const string& name) {
     HandleScope handle_scope;
     string content = FileIO::GetTextFile(path);
     return RunString(content, name);
+}
+
+
+void JSInterpreter::CallMain() {
+    Locker locker;
+    HandleScope handle_scope;
+    Context::Scope context_scope(m_context);
+    string toCall = "main();";
+    RunString(toCall, "entry");
 }
 
 Handle<Value> JSInterpreter::RunString(string& contents, const string& name) {

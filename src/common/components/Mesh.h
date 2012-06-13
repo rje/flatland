@@ -27,12 +27,21 @@ public:
     GLint GetIndexCount();
     GLenum GetMeshType();
     
+    void BindBuffers();
+    
 protected:
     Vector3* m_verts;
     Vector2* m_uvs;
     GLushort* m_indices;
+    GLint m_numVerts;
     GLint m_indexCount;
     GLenum m_meshType;
+    
+    GLuint m_vertBuffer;
+    GLuint m_uvBuffer;
+    GLuint m_indexBuffer;
+    
+    void CreateBuffers();
 };
 
 

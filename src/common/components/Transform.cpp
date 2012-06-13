@@ -67,3 +67,7 @@ void Transform::PhysicsUpdate(GLfloat x, GLfloat y, GLfloat angle) {
     m_pos.y = y;
     m_angle = angle;
 }
+
+Matrix4 Transform::GetMatrix() {
+    return Matrix4::Translate(m_pos);
+}

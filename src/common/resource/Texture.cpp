@@ -109,6 +109,10 @@ void Texture::InitWithFile(string& filepath) {
 
 }
 
+GLuint Texture::GetTextureID() {
+    return m_glTextureID;
+}
+
 void Texture::SetAsActive() {
     glBindTexture(GL_TEXTURE_2D, m_glTextureID);
 }

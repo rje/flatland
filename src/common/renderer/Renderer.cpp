@@ -11,9 +11,10 @@
 #include "EntityRegistry.h"
 #include "Entity.h"
 #include "MeshRenderer.h"
+#include "Shader.h"
 
 Renderer::Renderer(Window* owningWindow) : m_owner(owningWindow) {
-    
+    Shader::CreateDefaultShaders();
 }
 
 Renderer::~Renderer() {

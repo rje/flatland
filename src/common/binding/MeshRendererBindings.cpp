@@ -10,6 +10,7 @@
 #include "MeshRenderer.h"
 #include "ComponentBindings.h"
 #include "Texture.h"
+#include "Shader.h"
 
 using namespace v8;
 
@@ -72,6 +73,24 @@ Handle<Value> fl_mrb_GetTexture(const Arguments& args) {
     }
 }
 
+Handle<Value> fl_mrb_SetShader(const Arguments& args) {
+    HandleScope handle_scope;
+    Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
+    MeshRenderer* meshRenderer = static_cast<MeshRenderer*>(entVal->Value());
+    
+    Local<Value> intVal = args[0]->ToObject()->GetInternalField(0);
+    if(!intVal->IsExternal()) {
+        return ThrowException(String::New("Entity.addComponent must be passed exactly 1 component as a parameter"));
+    }
+    Local<External> extVal = Local<External>::Cast(intVal);
+    Shader* s = static_cast<Shader*>(extVal->Value());
+    if(s) {
+        meshRenderer->SetShader(s);
+    }
+    
+    return handle_scope.Close(args.This());
+}
+
 Handle<FunctionTemplate> fl_mrb_GetTemplate() {
     HandleScope handle_scope;
     Handle<FunctionTemplate> templ = FunctionTemplate::New();
@@ -80,6 +99,7 @@ Handle<FunctionTemplate> fl_mrb_GetTemplate() {
     instance_templ->Set("setTexture", FunctionTemplate::New(fl_mrb_SetTexture));
     instance_templ->Set("getColor", FunctionTemplate::New(fl_mrb_GetColor));
     instance_templ->Set("getTexture", FunctionTemplate::New(fl_mrb_GetTexture));
+    instance_templ->Set("setShader", FunctionTemplate::New(fl_mrb_SetShader));
     
     ComponentBindings_AddMethodsToTemplate(instance_templ);
     instance_templ->SetInternalFieldCount(1);
@@ -102,6 +122,8 @@ Handle<Value> fl_mrb_ConstructorCall(const Arguments& args) {
     }
     HandleScope handle_scope;
     MeshRenderer* meshRenderer = new MeshRenderer();
+    // FIXME: Eventually expose setshader call from javascript side
+    meshRenderer->SetShader(Shader::defaultShader);
     return MeshRendererBindings_WrapMeshRenderer(meshRenderer);
 }
 

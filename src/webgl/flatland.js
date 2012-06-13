@@ -1,5 +1,4 @@
 
-
 var b2Vec2 = Box2D.Common.Math.b2Vec2;
 var b2BodyDef = Box2D.Dynamics.b2BodyDef;
 var b2Body = Box2D.Dynamics.b2Body;
@@ -12,13 +11,9 @@ var b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 var b2ContactListener = Box2D.Dynamics.b2ContactListener;
 var b2Contact = Box2D.Dynamics.Contacts.b2Contact;
 
-flatland = {
-    window: undefined,
-    defaultShader: undefined,
-    defaultNoTextureShader: undefined,
-    physicsSystem: undefined,
-    keyboard: undefined
-};
+flwindow = undefined;
+PhysicsSystem = undefined;
+keyboard = undefined;
 
 window.requestAnimFrame = (function(){
           return  window.requestAnimationFrame       ||
@@ -41,9 +36,9 @@ function __extends(baseClass, subClass) {
 }
 
 function flatland_init(canvas_id) {
-    flatland.window = new Window();
-    flatland.window.initialize(canvas_id);
-    flatland.window.setSize(1024, 768);
+    flwindow = new Window();
+    flwindow.initialize(canvas_id);
+    flwindow.setSize(1024, 768);
     main();
     window.requestAnimFrame(_flatland_tick, 1000/60);
 }
@@ -54,25 +49,25 @@ function _flatland_tick() {
     if(this._lastUpdate != undefined) {
         delta = (time - this._lastUpdate) / 1000.0;
     }
-    flatland.physicsSystem.doStep(delta);
+    PhysicsSystem.doStep(delta);
     EntityRegistry.destroyMarked();
     EntityRegistry.callUpdates(delta);
-    var renderer = flatland.window.getRenderer();
+    var renderer = flwindow.getRenderer();
     renderer.prepare();
     renderer.draw();
-    flatland.physicsSystem.drawDebugData();
+    PhysicsSystem.drawDebugData();
     renderer.flush();
     window.requestAnimFrame(_flatland_tick, 1000/60);
 }
 
 function Renderer() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
 }
 
 Renderer.prototype.prepare = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 };
 
@@ -122,13 +117,13 @@ Window.prototype.initialize = function(canvas_id) {
     this._gl.clear(this._gl.COLOR_BUFFER_BIT | this._gl.DEPTH_BUFFER_BIT);
     this._renderer = new Renderer();
     this._createDefaultShader();
-    flatland.physicsSystem = new PhysicsSystem();
-    flatland.keyboard = new KeyboardHandler();
-    flatland.keyboard.register();
+    PhysicsSystem = new PhysicsSystemImpl();
+    keyboard = new KeyboardHandler();
+    keyboard.register();
 };
 
 Window.prototype._createDefaultShader = function() {
-    if(flatland.defaultShader) {
+    if(Shader.defaultShader) {
         return;
     }
 
@@ -179,7 +174,7 @@ Window.prototype._createDefaultShader = function() {
     shader.addVertexShader(vs);
 
     shader.linkShader();
-    flatland.defaultShader = shader;
+    Shader.defaultShader = shader;
 
     shader = new Shader();
     fs = new FragmentShader();
@@ -193,7 +188,7 @@ Window.prototype._createDefaultShader = function() {
     shader.addVertexShader(vs);
 
     shader.linkShader();
-    flatland.defaultNoTextureShader = shader;
+    Shader.defaultNoTextureShader = shader;
 };
 
 Window.prototype.setSize = function(w, h) {
@@ -372,14 +367,14 @@ function Mesh() {
 __extends(Component, Mesh);
 
 Mesh.prototype.destroy = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     gl.deleteBuffer(this._vertBuffer);
     gl.deleteBuffer(this._uvBuffer);
     gl.deleteBuffer(this._indexBuffer);
 };
 
 Mesh.prototype.createBuffers = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     this._vertBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, this._vertBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this._verts), gl.STATIC_DRAW);
@@ -394,7 +389,7 @@ Mesh.prototype.createBuffers = function() {
 };
 
 Mesh.prototype.bindBuffers = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     gl.enableVertexAttribArray(0);
     gl.enableVertexAttribArray(1);
     gl.bindBuffer(gl.ARRAY_BUFFER, this._vertBuffer);
@@ -428,7 +423,7 @@ Mesh.createRect = function(width, height) {
     m._indices[4] = 2;
     m._indices[5] = 3;
     m._indexCount = 6;
-    m._meshType = flatland.window.getGLContext().TRIANGLES;
+    m._meshType = flwindow.getGLContext().TRIANGLES;
 
     m.createBuffers();
 
@@ -455,7 +450,7 @@ Mesh.createCircle = function(radius, numPoints) {
         m._indices[i] = i;
     }
     m._indexCount = numPoints;
-    m._meshType = flatland.window.getGLContext().TRIANGLE_FAN;
+    m._meshType = flwindow.getGLContext().TRIANGLE_FAN;
 
     return m;
 };
@@ -523,7 +518,7 @@ MeshRenderer.prototype.render = function(camera) {
     if(this._shader) {
         this._shader.useShader();
     }
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     var m = this.getParent().getComponent("Mesh");
     m.bindBuffers();
     gl.uniform4f(gl.getUniformLocation(this._shader._program, "u_color"), this._color.r, this._color.g, this._color.b, this._color.a);
@@ -556,8 +551,8 @@ Camera.prototype.setOrtho = function(left, right, bottom, top, near, far) {
     this._matrix = mat4.ortho(left, right, bottom, top, near, far);
 };
 
-Camera.prototype.setPerspective = function(fovy, aspect, near, far, dest) {
-    this._matrix = mat4.perspective(fovy, aspect, near, far, dest);
+Camera.prototype.setPerspective = function(fovy, aspect, near, far) {
+    this._matrix = mat4.perspective(fovy, aspect, near, far);
 };
 
 Camera.prototype.getMatrix = function() {
@@ -574,6 +569,14 @@ function Shader() {
     this._program = undefined;
 }
 
+Shader.getDefaultShader = function() {
+    return Shader.defaultShader;
+};
+
+Shader.getDefaultNoTextureShader = function() {
+    return Shader.defaultNoTextureShader;
+}
+
 Shader.prototype.addVertexShader = function(toAdd) {
     this._vertShaders.push(toAdd);
 };
@@ -583,7 +586,7 @@ Shader.prototype.addFragmentShader = function(toAdd) {
 };
 
 Shader.prototype.linkShader = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     this._program = gl.createProgram();
     var i;
     for(i = 0; i < this._vertShaders.length; i++) {
@@ -601,16 +604,11 @@ Shader.prototype.linkShader = function() {
         this._program = undefined;
         throw new Error(err);
     }
-    this._createAttributeMap();
-};
-
-Shader.prototype._createAttributeMap = function() {
-    var gl = flatland.window.getGLContext();
 };
 
 Shader.prototype.useShader = function() {
     if(this._program) {
-        var gl = flatland.window.getGLContext();
+        var gl = flwindow.getGLContext();
         gl.useProgram(this._program);
     }
 };
@@ -628,7 +626,7 @@ FragmentShader.prototype.setSource = function(src) {
 };
 
 FragmentShader.prototype.compile = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     this._shaderID = gl.createShader(gl.FRAGMENT_SHADER);
     gl.shaderSource(this._shaderID, this._src);
     gl.compileShader(this._shaderID);
@@ -652,7 +650,7 @@ VertexShader.prototype.setSource = function(src) {
 };
 
 VertexShader.prototype.compile = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     this._shaderID = gl.createShader(gl.VERTEX_SHADER);
     gl.shaderSource(this._shaderID, this._src);
     gl.compileShader(this._shaderID);
@@ -675,7 +673,7 @@ Collider = function() {
 __extends(Component, Collider);
 
 Collider.prototype.destroy = function() {
-    flatland.physicsSystem.destroyCollider(this);
+    PhysicsSystem.destroyCollider(this);
 };
 
 Collider.static = b2Body.b2_staticBody;
@@ -766,7 +764,7 @@ Collider.prototype.update = function(delta) {
 };
 
 Collider.prototype.register = function() {
-    this._body = flatland.physicsSystem.registerCollider(this);
+    this._body = PhysicsSystem.registerCollider(this);
     var xform = this.getParent().transform;
     if(xform) {
         this.updateWithTransform(xform, true, true);
@@ -830,7 +828,7 @@ CircleCollider.prototype.setSize = function(radius) {
 
 var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
-function PhysicsSystem() {
+function PhysicsSystemImpl() {
     this._world = new b2World(new b2Vec2(0.0, 0.0));
 
     var debugDraw = new FlatlandDebugDraw();
@@ -845,11 +843,11 @@ function PhysicsSystem() {
         if(!ac.handleCollision(contact, bc)) {
             bc.handleCollision(contact, ac);
         }
-    }
+    };
     this._world.SetContactListener(this._contactListener);
 }
 
-PhysicsSystem.prototype.getGravity = function() {
+PhysicsSystemImpl.prototype.getGravity = function() {
     var g = this._world.GetGravity();
     var toReturn = {};
     toReturn.x = g.x;
@@ -857,15 +855,15 @@ PhysicsSystem.prototype.getGravity = function() {
     return toReturn;
 };
 
-PhysicsSystem.prototype.setGravity = function(x, y) {
+PhysicsSystemImpl.prototype.setGravity = function(x, y) {
     this._world.SetGravity(new b2Vec2(x, y));
 };
 
-PhysicsSystem.prototype.doStep = function(delta) {
+PhysicsSystemImpl.prototype.doStep = function(delta) {
     this._world.Step(delta, 8, 3);
 };
 
-PhysicsSystem.prototype.registerCollider = function(collider) {
+PhysicsSystemImpl.prototype.registerCollider = function(collider) {
     if(this._colliders.indexOf(collider) == -1) {
         var bodyDef = new b2BodyDef();
         bodyDef.userData = collider;
@@ -880,11 +878,11 @@ PhysicsSystem.prototype.registerCollider = function(collider) {
     }
 };
 
-PhysicsSystem.prototype.destroyCollider = function(collider) {
+PhysicsSystemImpl.prototype.destroyCollider = function(collider) {
     this._world.DestroyBody(collider.getBody());
 };
 
-PhysicsSystem.prototype.drawDebugData = function() {
+PhysicsSystemImpl.prototype.drawDebugData = function() {
     this._world.DrawDebugData();
 };
 
@@ -893,9 +891,9 @@ function FlatlandDebugDraw() {
 }
 
 FlatlandDebugDraw.prototype.DrawPolygon = function (vertices, vertexCount, color) {
-    var shader = flatland.defaultNoTextureShader;
+    var shader = Shader.defaultNoTextureShader;
     shader.useShader();
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     var vertBuffer = gl.createBuffer();
     var verts = [];
     var indices = [];
@@ -929,9 +927,9 @@ FlatlandDebugDraw.prototype.DrawPolygon = function (vertices, vertexCount, color
 };
 
 FlatlandDebugDraw.prototype.DrawSolidPolygon = function (vertices, vertexCount, color) {
-    var shader = flatland.defaultNoTextureShader;
+    var shader = Shader.defaultNoTextureShader;
     shader.useShader();
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     var vertBuffer = gl.createBuffer();
     var verts = [];
     var indices = [];
@@ -1059,7 +1057,7 @@ function Texture() {
 }
 
 Texture.prototype.loadImage = function(src) {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     this._texID = gl.createTexture();
     var img = new Image();
     var $this = this;
@@ -1076,7 +1074,7 @@ Texture.prototype.loadImage = function(src) {
 };
 
 Texture.prototype.bind = function() {
-    var gl = flatland.window.getGLContext();
+    var gl = flwindow.getGLContext();
     gl.bindTexture(gl.TEXTURE_2D, this._texID);
 };
 

@@ -10,7 +10,7 @@ function createBox(w, h, name, r, g, b) {
     e.addComponent(Mesh.createRect(w, h));
     var mr = e.addComponent(new MeshRenderer());
     mr.setColor(r, g, b);
-    mr.setShader(flatland.defaultShader); // TODO: SYNC TO MAIN
+    mr.setShader(Shader.getDefaultShader());
     return e;
 }
 
@@ -37,11 +37,10 @@ function createBoard(cols, rows) {
 
 function createPaddle() {
     var paddle = createBox(4, 0.5, "paddle", 0.8, 0.8, 0.8);
-    paddle.transform.setPosition(viewSize.w / 2, 1); // TODO: SYNC TO MAIN
+    paddle.transform.setPosition(viewSize.w / 2, 1);
     paddle.getComponent("MeshRenderer").setTexture(TextureCache.getTexture("textures/paddle.png"));
     var s = new Scriptable("Controls");
     s.onUpdate = function(delta) {
-        var keyboard = flatland.keyboard; // TODO: SYNC TO MAIN
         var pos = paddle.transform.getPosition();
         if(keyboard.isKeyDown(keyboard.codes.left)) {
             pos.x -= (viewSize.w / 2.0) * delta;
@@ -60,13 +59,13 @@ function createPaddle() {
 function createBall() {
     var ball = new Entity("ball");
     ball.addComponent(Mesh.createRect(ballRadius * 2, ballRadius * 2));
-    ball.addComponent(new MeshRenderer()).setColor(0.8, 0.8, 0.8).setShader(flatland.defaultShader);
+    ball.addComponent(new MeshRenderer()).setColor(0.8, 0.8, 0.8).setShader(Shader.getDefaultShader());
     ball.transform.setPosition(viewSize.w / 2, viewSize.h / 3);
 
     ball.getComponent("MeshRenderer").setTexture(TextureCache.getTexture("textures/ball.png"));
     var cc = ball.addComponent(new CircleCollider(ballRadius));
     cc.setPhysicsProperties({type: Collider.dynamic, restitution: 1, friction: 0, density: 1});
-    cc.setLinearVelocity(0, 5);
+    cc.setLinearVelocity(3, 5);
 }
 
 function createCamera() {
@@ -98,18 +97,17 @@ function createWalls() {
             vel.y *= 2;
             otherCollider.setLinearVelocity(vel.x, vel.y);
             ball.hasDoubled = true;
-            return true;
         }
+        return true;
     }
 }
 
 function main() {
-    flatland.window.setSize(windowSize.w, windowSize.h);
-    //window.setViewportSize(viewSize.w, viewSize.h);  // TODO: SYNC TO MAIN VERSION
-    createCamera(); // TODO: SYNC TO MAIN VERSION
-    flatland.window.setResizable(false);
-    flatland.window.setClearColor(0.2, 0.2, 0.2, 1); // TODO: Alpha behaves differently on browser
-    flatland.window.centerOnScreen();
+    flwindow.setSize(windowSize.w, windowSize.h);
+    createCamera();
+    flwindow.setResizable(false);
+    flwindow.setClearColor(0.2, 0.2, 0.2, 1);
+    flwindow.centerOnScreen();
 
     createBoard(numBlocks.cols, numBlocks.rows);
     createWalls();

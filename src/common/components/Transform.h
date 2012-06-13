@@ -11,6 +11,7 @@
 
 #include "Component.h"
 #include "Vectors.h"
+#include "Matrix.h"
 
 class Transform : public Component {
 public:
@@ -26,6 +27,8 @@ public:
     
     Vector3& GetPosition();
     GLfloat& GetAngle();
+    
+    Matrix4 GetMatrix();
     
 private:
     Vector3 m_pos;

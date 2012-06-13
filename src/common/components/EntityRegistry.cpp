@@ -65,7 +65,22 @@ EntityRegistry::~EntityRegistry() {
     
 }
 
-
 const vector<Entity*> EntityRegistry::GetEntities() {
     return m_entities;
+}
+
+
+void EntityRegistry::AddCamera(Camera* toAdd) {
+    m_cameras.push_back(toAdd);
+}
+
+void EntityRegistry::RemoveCamera(Camera* toRemove) {
+    vector<Camera*>::iterator i = find(m_cameras.begin(), m_cameras.end(), toRemove);
+    if(i != m_cameras.end()) {
+        m_cameras.erase(i);
+    }
+}
+
+const vector<Camera*> EntityRegistry::GetCameras() {
+    return m_cameras;
 }

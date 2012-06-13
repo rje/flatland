@@ -49,7 +49,9 @@ Mesh* Mesh::CreateRect(GLfloat w, GLfloat h) {
     toReturn->m_indices[4] = 2;
     toReturn->m_indices[5] = 3;
     toReturn->m_indexCount = 6;
+    toReturn->m_numVerts = 4;
     toReturn->m_meshType = GL_TRIANGLES;
+    toReturn->CreateBuffers();
     return toReturn;
 }
 
@@ -58,6 +60,7 @@ Mesh* Mesh::CreateCircle(GLfloat radius, GLint numPoints) {
     toReturn->m_verts = new Vector3[numPoints];
     toReturn->m_uvs = new Vector2[numPoints];
     toReturn->m_indices = new GLushort[numPoints];
+    toReturn->m_numVerts = numPoints;
     for(int i = 0; i < numPoints; i++) {
         GLfloat cx = cos(2 * M_PI * i / (GLfloat)numPoints);
         GLfloat sy = sin(2 * M_PI * i / (GLfloat)numPoints);
@@ -70,7 +73,7 @@ Mesh* Mesh::CreateCircle(GLfloat radius, GLint numPoints) {
     }
     toReturn->m_indexCount = numPoints;
     toReturn->m_meshType = GL_TRIANGLE_FAN;
-
+    toReturn->CreateBuffers();
     return toReturn;
 }
 
@@ -92,4 +95,28 @@ GLint Mesh::GetIndexCount() {
 
 GLenum Mesh::GetMeshType() {
     return m_meshType;
+}
+
+void Mesh::CreateBuffers() {
+    glGenBuffers(1, &m_vertBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vertBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 3 * m_numVerts, m_verts, GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &m_uvBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_uvBuffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 2 * m_numVerts, m_uvs, GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &m_indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * m_indexCount, m_indices, GL_STATIC_DRAW);
+}
+
+void Mesh::BindBuffers() {
+    glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, m_vertBuffer);
+    glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, m_uvBuffer);
+    glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
 }

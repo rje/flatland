@@ -10,6 +10,7 @@
 #define flatland_EntityRegistry_h
 
 #include "Entity.h"
+#include "Camera.h"
 #include <vector>
 
 using namespace std;
@@ -24,6 +25,10 @@ public:
     void CallUpdates(GLfloat delta);
     void DestroyMarked();
     
+    void AddCamera(Camera* toAdd);
+    void RemoveCamera(Camera* toRemove);
+    const vector<Camera*> GetCameras();
+    
     const vector<Entity*> GetEntities();
     
 private:
@@ -32,6 +37,7 @@ private:
     virtual ~EntityRegistry();
     
     vector<Entity*> m_entities;
+    vector<Camera*> m_cameras;
 };
 
 #endif

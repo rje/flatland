@@ -13,6 +13,7 @@
 #include "Vectors.h"
 
 class Texture;
+class Shader;
 
 class MeshRenderer : public Component {
 public:
@@ -25,13 +26,16 @@ public:
     virtual void Unregister();
     virtual void SetColor(GLfloat r, GLfloat g, GLfloat b, GLfloat a);
     virtual void SetTexture(Texture* tex);
+    virtual void SetShader(Shader* shader);
     virtual Color GetColor();
     virtual Texture* GetTexture();
+    virtual Shader* GetShader();
     virtual void Render();
 
 protected:
     GLfloat m_r, m_g, m_b, m_a;
     Texture* m_texture;
+    Shader* m_shader;
 };
 
 #endif
