@@ -17,8 +17,8 @@ Collider::Collider() :
         m_shape(NULL), 
         m_bodyType(b2_staticBody), 
         m_restitution(0.0f),
-        m_density(1.0f),
-        m_friction(0.5f) {
+        m_friction(0.5f),
+        m_density(1.0f) {
     
 }
 

@@ -57,7 +57,15 @@ Handle<Value> _fl_jsi_loadfile(const Arguments& args) {
     HandleScope handle_scope;
     String::Utf8Value arg(args[0]);
     string path(*arg);
-    string prepend = "(function() { var module = { exports: {}, path: \"" + path + "\" }; var exports = module.exports;";
+    if(args.Length() > 1 && !args[1]->IsUndefined()) {
+        String::Utf8Value parentDir(args[1]);
+        path = (*parentDir) + string("/") + path;
+    }
+    string fullPath = FileIO::GetExpandedPath(path);
+    string directory = FileIO::GetPathComponent(fullPath);
+    string file = FileIO::GetFileComponent(fullPath);
+    printf("--> Trying to load file: %s\n", path.c_str());
+    string prepend = "(function() { var module = { exports: {}, _path: \"" + directory + "\" }; var exports = module.exports;";
     string append = " return module.exports;})();";
     string content = FileIO::GetTextFile(path);
     content = prepend + content + append;
