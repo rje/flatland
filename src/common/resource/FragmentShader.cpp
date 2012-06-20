@@ -9,7 +9,7 @@
 #include "FragmentShader.h"
 #include "FragmentShaderBindings.h"
 
-FragmentShader::FragmentShader() : m_shaderID(NULL) {
+FragmentShader::FragmentShader() : m_shaderID(0) {
     
 }
 

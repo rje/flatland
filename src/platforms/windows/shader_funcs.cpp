@@ -1,6 +1,8 @@
 
 #include "shader_funcs.h"
 
+#ifdef WIN32
+
 PFNGLGENBUFFERSPROC					glGenBuffers = NULL;
 PFNGLBINDBUFFERPROC					glBindBuffer = NULL;
 PFNGLVERTEXATTRIBPOINTERPROC		glVertexAttribPointer = NULL;
@@ -50,3 +52,5 @@ void flatland_setupRequiredGLCalls() {
 	glBindAttribLocation = (PFNGLBINDATTRIBLOCATIONPROC)wglGetProcAddress("glBindAttribLocation");
 	glBufferData = (PFNGLBUFFERDATAPROC)wglGetProcAddress("glBufferData");
 }
+
+#endif

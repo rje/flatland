@@ -230,6 +230,12 @@ void FileIO::CopyFile(string& src, string& dst) {
     out = open(dst.c_str(), O_RDWR|O_CREAT|O_TRUNC, S_IRWXU|S_IRWXG);
     int err = fstat(in, &statbuf);
     err = lseek(out, statbuf.st_size - 1, SEEK_SET);
+	  if(err) {
+        printf("Error copying file %s\n", src.c_str());
+				close(in);
+        close(out);
+        return;
+    }
     write(out, "", 1);
     src_buf = mmap(0, statbuf.st_size, PROT_READ, MAP_SHARED, in, 0);
     dst_buf = mmap(0, statbuf.st_size, PROT_READ|PROT_WRITE, MAP_SHARED, out, 0);

@@ -47,7 +47,7 @@ string defaultFragShader = string("//precision lowp float;\n") +
 Shader* Shader::defaultShader = NULL;
 Shader* Shader::defaultNoTextureShader = NULL;
 
-Shader::Shader() : m_program(NULL) {
+Shader::Shader() : m_program(0) {
     
 }
 

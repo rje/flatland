@@ -9,7 +9,7 @@
 #include "VertexShader.h"
 #include "VertexShaderBindings.h"
 
-VertexShader::VertexShader() : m_shaderID(NULL) {
+VertexShader::VertexShader() : m_shaderID(0) {
     
 }
 

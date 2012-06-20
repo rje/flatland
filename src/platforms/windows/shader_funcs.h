@@ -3,6 +3,7 @@
 #define _flatland_shader_funcs_h_
 
 #ifdef WIN32
+
 #include "flatland_common.h"
 
 extern void flatland_setupRequiredGLCalls();
