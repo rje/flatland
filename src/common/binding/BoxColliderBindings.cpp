@@ -17,8 +17,8 @@ Handle<Value> fl_bc_SetSize(const Arguments& args) {
     HandleScope handle_scope;
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     BoxCollider* boxCollider = static_cast<BoxCollider*>(entVal->Value());
-    GLfloat hw = args[0]->NumberValue();
-    GLfloat hh = args[1]->NumberValue();
+    GLfloat hw = (GLfloat)args[0]->NumberValue();
+    GLfloat hh = (GLfloat)args[1]->NumberValue();
     boxCollider->SetSize(hw, hh);
     return Undefined();
 }
@@ -61,8 +61,8 @@ Handle<Value> fl_bc_ConstructorCall(const Arguments& args) {
     HandleScope handle_scope;
     BoxCollider* boxCollider = new BoxCollider();
     if(args.Length() == 2) {
-        GLfloat w = args[0]->NumberValue();
-        GLfloat h = args[1]->NumberValue();
+        GLfloat w = (GLfloat)args[0]->NumberValue();
+        GLfloat h = (GLfloat)args[1]->NumberValue();
         boxCollider->SetSize(w, h);
     }
     return BoxColliderBindings_WrapBoxCollider(boxCollider);

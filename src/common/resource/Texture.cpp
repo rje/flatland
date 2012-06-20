@@ -87,7 +87,7 @@ void Texture::InitWithFile(string& filepath) {
         return;
     }
     
-    for (int i = 0; i < m_height; ++i) {
+    for (GLuint i = 0; i < m_height; ++i) {
         row_pointers[i] = image_data + i * rowbytes;
     }
     

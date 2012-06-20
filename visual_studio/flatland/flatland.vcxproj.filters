@@ -26,10 +26,20 @@
     <ClCompile Include="..\..\src\common\components\Collider.cpp" />
     <ClCompile Include="..\..\src\common\components\Scriptable.cpp" />
     <ClCompile Include="..\..\src\common\components\PhysicsSystem.cpp" />
-    <ClCompile Include="..\..\src\common\binding\TextureBinding.cpp" />
     <ClCompile Include="..\..\src\common\resource\FileIO.cpp" />
     <ClCompile Include="..\..\src\common\resource\Texture.cpp" />
     <ClCompile Include="..\..\src\common\resource\ProgramArguments.cpp" />
+    <ClCompile Include="..\..\src\common\resource\FragmentShader.cpp" />
+    <ClCompile Include="..\..\src\common\resource\Shader.cpp" />
+    <ClCompile Include="..\..\src\common\resource\VertexShader.cpp" />
+    <ClCompile Include="..\..\src\common\binding\FragmentShaderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\VertexShaderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\ShaderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\TextureBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\CameraBindings.cpp" />
+    <ClCompile Include="..\..\src\common\components\Camera.cpp" />
+    <ClCompile Include="..\..\src\common\binding\PhysicsSystemBindings.cpp" />
+    <ClCompile Include="..\..\src\platforms\windows\shader_funcs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\common\binding\EntityBindings.h" />
@@ -63,5 +73,16 @@
     <ClInclude Include="..\..\src\common\resource\Texture.h" />
     <ClInclude Include="..\..\src\common\resource\ProgramArguments.h" />
     <ClInclude Include="..\..\src\common\flatland_common.h" />
+    <ClInclude Include="..\..\src\common\resource\FragmentShader.h" />
+    <ClInclude Include="..\..\src\common\resource\Shader.h" />
+    <ClInclude Include="..\..\src\common\resource\VertexShader.h" />
+    <ClInclude Include="..\..\src\common\binding\FragmentShaderBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\VertexShaderBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\ShaderBindings.h" />
+    <ClInclude Include="..\..\src\common\renderer\Matrix.h" />
+    <ClInclude Include="..\..\src\common\binding\CameraBindings.h" />
+    <ClInclude Include="..\..\src\common\components\Camera.h" />
+    <ClInclude Include="..\..\src\common\binding\PhysicsSystemBindings.h" />
+    <ClInclude Include="..\..\src\platforms\windows\shader_funcs.h" />
   </ItemGroup>
 </Project>

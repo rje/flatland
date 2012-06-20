@@ -23,8 +23,8 @@ Handle<Value> fl_col_SetType(const Arguments& args) {
 
 Handle<Value> fl_col_SetLinearVelocity(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat vx = args[0]->NumberValue();
-    GLfloat vy = args[1]->NumberValue();
+    GLfloat vx = (GLfloat)args[0]->NumberValue();
+    GLfloat vy = (GLfloat)args[1]->NumberValue();
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     Collider* boxCollider = static_cast<Collider*>(entVal->Value());
     boxCollider->GetBox2DBody()->SetLinearVelocity(b2Vec2(vx, vy));
@@ -44,7 +44,7 @@ Handle<Value> fl_col_GetLinearVelocity(const Arguments& args) {
 
 Handle<Value> fl_col_SetRestitution(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat rest = args[0]->NumberValue();
+    GLfloat rest = (GLfloat)args[0]->NumberValue();
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     Collider* boxCollider = static_cast<Collider*>(entVal->Value());
     boxCollider->SetRestitution(rest);
@@ -53,7 +53,7 @@ Handle<Value> fl_col_SetRestitution(const Arguments& args) {
 
 Handle<Value> fl_col_SetFriction(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat friction = args[0]->NumberValue();
+    GLfloat friction = (GLfloat)args[0]->NumberValue();
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     Collider* boxCollider = static_cast<Collider*>(entVal->Value());
     boxCollider->SetFriction(friction);
@@ -62,7 +62,7 @@ Handle<Value> fl_col_SetFriction(const Arguments& args) {
 
 Handle<Value> fl_col_SetDensity(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat friction = args[0]->NumberValue();
+    GLfloat friction = (GLfloat)args[0]->NumberValue();
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     Collider* boxCollider = static_cast<Collider*>(entVal->Value());
     boxCollider->SetDensity(friction);
@@ -79,15 +79,15 @@ Handle<Value> fl_col_SetPhysicsProperties(const Arguments& args) {
         collider->SetType(type);
     }
     if(dict->Has(String::New("restitution"))) {
-        GLfloat rest = dict->Get(String::New("restitution"))->NumberValue();
+        GLfloat rest = (GLfloat)dict->Get(String::New("restitution"))->NumberValue();
         collider->SetRestitution(rest);
     }
     if(dict->Has(String::New("friction"))) {
-        GLfloat friction = dict->Get(String::New("friction"))->NumberValue();
+        GLfloat friction = (GLfloat)dict->Get(String::New("friction"))->NumberValue();
         collider->SetFriction(friction);
     }
     if(dict->Has(String::New("density"))) {
-        GLfloat density = dict->Get(String::New("density"))->NumberValue();
+        GLfloat density = (GLfloat)dict->Get(String::New("density"))->NumberValue();
         collider->SetDensity(density);
     }
     return Undefined();

@@ -129,7 +129,16 @@ string FileIO::GetExpandedPath(string& relativePath) {
 
 FILE* FileIO::OpenFileDescriptor(string& relativePath) {
     string full_path = FileIO::GetExpandedPath(relativePath);
+#ifdef WIN32
+	FILE* toReturn = NULL;
+	int err = fopen_s(&toReturn, full_path.c_str(), "rb");
+	if(err) {
+		return NULL;
+	}
+	return toReturn;
+#else
     return fopen(full_path.c_str(), "rb");
+#endif
 }
 
 void FileIO::DetermineExecutableDirectory(char* argv0) {

@@ -12,19 +12,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\common\binding\BoxColliderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\CameraBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\CircleColliderBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\ColliderBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\ComponentBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\EntityBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\FragmentShaderBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\JSInterpreter.cpp" />
     <ClCompile Include="..\..\src\common\binding\KeyboardBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\MeshBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\MeshRendererBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\PhysicsSystemBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\ScriptableBindings.cpp" />
-    <ClCompile Include="..\..\src\common\binding\TextureBinding.cpp" />
+    <ClCompile Include="..\..\src\common\binding\ShaderBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\TextureBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\TransformBindings.cpp" />
+    <ClCompile Include="..\..\src\common\binding\VertexShaderBindings.cpp" />
     <ClCompile Include="..\..\src\common\binding\WindowBindings.cpp" />
     <ClCompile Include="..\..\src\common\components\BoxCollider.cpp" />
+    <ClCompile Include="..\..\src\common\components\Camera.cpp" />
     <ClCompile Include="..\..\src\common\components\CircleCollider.cpp" />
     <ClCompile Include="..\..\src\common\components\Collider.cpp" />
     <ClCompile Include="..\..\src\common\components\Entity.cpp" />
@@ -36,26 +42,36 @@
     <ClCompile Include="..\..\src\common\components\Transform.cpp" />
     <ClCompile Include="..\..\src\common\renderer\Renderer.cpp" />
     <ClCompile Include="..\..\src\common\resource\FileIO.cpp" />
+    <ClCompile Include="..\..\src\common\resource\FragmentShader.cpp" />
     <ClCompile Include="..\..\src\common\resource\ProgramArguments.cpp" />
+    <ClCompile Include="..\..\src\common\resource\Shader.cpp" />
     <ClCompile Include="..\..\src\common\resource\Texture.cpp" />
+    <ClCompile Include="..\..\src\common\resource\VertexShader.cpp" />
     <ClCompile Include="..\..\src\common\Window.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\platforms\windows\shader_funcs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\common\binding\BoxColliderBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\CameraBindings.h" />
     <ClInclude Include="..\..\src\common\binding\CircleColliderBindings.h" />
     <ClInclude Include="..\..\src\common\binding\ColliderBindings.h" />
     <ClInclude Include="..\..\src\common\binding\ComponentBindings.h" />
     <ClInclude Include="..\..\src\common\binding\EntityBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\FragmentShaderBindings.h" />
     <ClInclude Include="..\..\src\common\binding\JSInterpreter.h" />
     <ClInclude Include="..\..\src\common\binding\KeyboardBindings.h" />
     <ClInclude Include="..\..\src\common\binding\MeshBindings.h" />
     <ClInclude Include="..\..\src\common\binding\MeshRendererBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\PhysicsSystemBindings.h" />
     <ClInclude Include="..\..\src\common\binding\ScriptableBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\ShaderBindings.h" />
     <ClInclude Include="..\..\src\common\binding\TextureBindings.h" />
     <ClInclude Include="..\..\src\common\binding\TransformBindings.h" />
+    <ClInclude Include="..\..\src\common\binding\VertexShaderBindings.h" />
     <ClInclude Include="..\..\src\common\binding\WindowBindings.h" />
     <ClInclude Include="..\..\src\common\components\BoxCollider.h" />
+    <ClInclude Include="..\..\src\common\components\Camera.h" />
     <ClInclude Include="..\..\src\common\components\CircleCollider.h" />
     <ClInclude Include="..\..\src\common\components\Collider.h" />
     <ClInclude Include="..\..\src\common\components\Component.h" />
@@ -67,12 +83,17 @@
     <ClInclude Include="..\..\src\common\components\Scriptable.h" />
     <ClInclude Include="..\..\src\common\components\Transform.h" />
     <ClInclude Include="..\..\src\common\flatland_common.h" />
+    <ClInclude Include="..\..\src\common\renderer\Matrix.h" />
     <ClInclude Include="..\..\src\common\renderer\Renderer.h" />
     <ClInclude Include="..\..\src\common\renderer\Vectors.h" />
     <ClInclude Include="..\..\src\common\resource\FileIO.h" />
+    <ClInclude Include="..\..\src\common\resource\FragmentShader.h" />
     <ClInclude Include="..\..\src\common\resource\ProgramArguments.h" />
+    <ClInclude Include="..\..\src\common\resource\Shader.h" />
     <ClInclude Include="..\..\src\common\resource\Texture.h" />
+    <ClInclude Include="..\..\src\common\resource\VertexShader.h" />
     <ClInclude Include="..\..\src\common\Window.h" />
+    <ClInclude Include="..\..\src\platforms\windows\shader_funcs.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B17219A9-3315-4943-9229-CA1F80FD7FAF}</ProjectGuid>
@@ -104,13 +125,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(ProjectDir)..\..\deps\box2d\Box2D\Build\vs2010\bin\Debug;$(ProjectDir)..\..\deps\SDL\VisualC\SDLmain\Win32\Debug;$(ProjectDir)..\..\deps\SDL\VisualC\SDL\Win32\Debug;$(OutDir);$(ProjectDir)..\..\deps\v8\build\Debug\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\resource;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\libpng;$(ProjectDir)..\..\deps\box2d\Box2D;$(ProjectDir)..\..\deps\v8\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\resource;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\platforms\windows;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\libpng;$(ProjectDir)..\..\deps\box2d\Box2D;$(ProjectDir)..\..\deps\v8\include;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)..\..\out\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <LibraryPath>$(ProjectDir)..\..\deps\SDL\VisualC\SDLmain\Win32\Release;$(ProjectDir)..\..\deps\SDL\VisualC\SDL\Win32\Release;$(OutDir);$(ProjectDir)..\..\deps\v8\build\Release\lib;$(ProjectDir)..\..\deps\box2d\Box2D\Build\vs2010\bin\Release;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\resource;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\libpng;$(ProjectDir)..\..\deps\box2d\Box2D;$(ProjectDir)..\..\deps\v8\include;$(ProjectDir)..\..\deps\box2d\Box2D;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..\..\src\common\renderer;$(ProjectDir)..\..\src\common\components;$(ProjectDir)..\..\src\common\resource;$(ProjectDir)..\..\src\common\binding;$(ProjectDir)..\..\src\platforms\windows;$(ProjectDir)..\..\src\common;$(ProjectDir)..\..\deps\SDL\include;$(ProjectDir)..\..\deps\libpng;$(ProjectDir)..\..\deps\box2d\Box2D;$(ProjectDir)..\..\deps\v8\include;$(ProjectDir)..\..\deps\box2d\Box2D;$(IncludePath)</IncludePath>
     <OutDir>$(ProjectDir)..\..\out\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

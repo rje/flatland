@@ -47,8 +47,8 @@ void runGameLoop() {
                 running = false;
             }
             else if(evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_RESIZED) {
-                GLfloat w = evt.window.data1;
-                GLfloat h = evt.window.data2;
+                GLfloat w = (GLfloat)evt.window.data1;
+                GLfloat h = (GLfloat)evt.window.data2;
                 Window::GetWindow()->SetSize(w, h);
             }
         }

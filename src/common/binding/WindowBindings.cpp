@@ -14,8 +14,8 @@ using namespace v8;
 Handle<Value> fl_wb_SetSize(const Arguments& args) {
     Locker locker;
     HandleScope handle_scope;
-    GLfloat width = args[0]->NumberValue();
-    GLfloat height = args[1]->NumberValue();
+    GLfloat width = (GLfloat)args[0]->NumberValue();
+    GLfloat height = (GLfloat)args[1]->NumberValue();
     Window::GetWindow()->SetSize(width, height);
     return Undefined();
 }

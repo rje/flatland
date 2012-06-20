@@ -107,8 +107,8 @@ public:
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
             int base = i * 3;
-            verts[base + 0] = center.x + radius * cos(i * 10.0f * M_PI / 180.0f);
-            verts[base + 1] = center.y + radius * sin(i * 10.0f * M_PI / 180.0f);
+            verts[base + 0] = (GLfloat)(center.x + radius * cos(i * 10.0f * M_PI / 180.0f));
+            verts[base + 1] = (GLfloat)(center.y + radius * sin(i * 10.0f * M_PI / 180.0f));
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }
@@ -126,8 +126,8 @@ public:
         GLushort* indices = new GLushort[vertexCount];
         for(int i = 0; i < vertexCount; i++) {
             int base = i * 3;
-            verts[base + 0] = (center.x + radius * cos(i * 10.0f * M_PI / 180.0f));
-            verts[base + 1] = (center.y + radius * sin(i * 10.0f * M_PI / 180.0f));
+            verts[base + 0] = (GLfloat)(center.x + radius * cos(i * 10.0f * M_PI / 180.0f));
+            verts[base + 1] = (GLfloat)(center.y + radius * sin(i * 10.0f * M_PI / 180.0f));
             verts[base + 2] = 0.0f;
             indices[i] = i;
         }

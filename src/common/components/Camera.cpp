@@ -18,8 +18,8 @@ Camera::~Camera() {
     
 }
 
-void Camera::SetOrtho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far) {
-    m_matrix = Matrix4::Ortho(left, right, bottom, top, near, far);
+void Camera::SetOrtho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane) {
+    m_matrix = Matrix4::Ortho(left, right, bottom, top, nearPlane, farPlane);
 }
 
 Matrix4& Camera::GetMatrix() {

@@ -4,3 +4,10 @@ xcode/flatland/flatland.xcodeproj/project.xcworkspace/
 xcode/flatland/flatland.xcodeproj/xcuserdata/
 xcode/flatland/Build
 .idea
+*.obj
+*.user
+*.sdf
+*.suo
+deps/box2d/Box2D/Build/vs2010/bin
+deps/box2d/Box2D/Build/vs2010/obj
+deps/SDL/VisualC/ipch

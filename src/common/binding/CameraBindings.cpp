@@ -14,16 +14,16 @@ using namespace v8;
 
 Handle<Value> fl_cam_SetOrtho(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat left = args[0]->NumberValue();
-    GLfloat right = args[1]->NumberValue();
-    GLfloat bottom = args[2]->NumberValue();
-    GLfloat top = args[3]->NumberValue();
-    GLfloat near = args[4]->NumberValue();
-    GLfloat far = args[5]->NumberValue();
+    GLfloat left = (GLfloat)(args[0]->NumberValue());
+    GLfloat right = (GLfloat)(args[1]->NumberValue());
+    GLfloat bottom = (GLfloat)(args[2]->NumberValue());
+    GLfloat top = (GLfloat)(args[3]->NumberValue());
+    GLfloat nearPlane = (GLfloat)(args[4]->NumberValue());
+    GLfloat farPlane = (GLfloat)(args[5]->NumberValue());
     
     Local<External> entVal  = Local<External>::Cast(args.This()->GetInternalField(0));
     Camera* cam = static_cast<Camera*>(entVal->Value());
-    cam->SetOrtho(left, right, bottom, top, near, far);
+    cam->SetOrtho(left, right, bottom, top, nearPlane, farPlane);
     
     return handle_scope.Close(args.This());
 }

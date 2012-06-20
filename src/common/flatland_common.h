@@ -9,12 +9,14 @@
 #ifndef flatland_flatland_common_h
 #define flatland_flatland_common_h
 
-#	define GL_GLEXT_PROTOTYPES 1
 #include <string>
 #include <vector>
 #include <map>
 #include <SDL_opengl.h>
-#if defined(linux) || defined(__linux)
+#ifdef WIN32
+#include "shader_funcs.h"
+#elif linux
+#define GL_GLEXT_PROTOTYPES 1
 #	include <GL/gl.h>
 #	include <GL/glext.h>
 #endif
