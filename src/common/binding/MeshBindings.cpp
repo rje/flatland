@@ -44,15 +44,15 @@ Handle<Value> fl_mb_ConstructorCall(const Arguments& args) {
 
 Handle<Value> fl_mb_CreateRect(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat width = args[0]->NumberValue();
-    GLfloat height = args[1]->NumberValue();
+    GLfloat width = (GLfloat)args[0]->NumberValue();
+    GLfloat height = (GLfloat)args[1]->NumberValue();
     Mesh* mesh = Mesh::CreateRect(width, height);
     return MeshBindings_WrapMesh(mesh);
 }
 
 Handle<Value> fl_mb_CreateCircle(const Arguments& args) {
     HandleScope handle_scope;
-    GLfloat radius = args[0]->NumberValue();
+    GLfloat radius = (GLfloat)args[0]->NumberValue();
     GLint points = args[1]->Int32Value();
     Mesh* mesh = Mesh::CreateCircle(radius, points);
     return MeshBindings_WrapMesh(mesh);

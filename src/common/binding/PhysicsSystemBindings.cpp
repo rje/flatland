@@ -14,8 +14,8 @@ using namespace v8;
 Handle<Value> fl_ps_SetGravity(const Arguments& args) {
     Locker locker;
     HandleScope handle_scope;
-    GLfloat width = args[0]->NumberValue();
-    GLfloat height = args[1]->NumberValue();
+    GLfloat width = (GLfloat)args[0]->NumberValue();
+    GLfloat height = (GLfloat)args[1]->NumberValue();
     PhysicsSystem::instance()->SetGravity(width, height);
     return handle_scope.Close(args.This());
 }

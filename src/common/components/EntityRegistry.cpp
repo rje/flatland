@@ -7,6 +7,7 @@
 //
 
 #include "EntityRegistry.h"
+#include <algorithm>
 #define LOG printf
 
 EntityRegistry* EntityRegistry::instance() {

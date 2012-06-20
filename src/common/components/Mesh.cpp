@@ -39,8 +39,8 @@ Mesh* Mesh::CreateRect(GLfloat w, GLfloat h) {
         toReturn->m_verts[i].x = (i % 2 == 0) ? -wd2 : wd2;
         toReturn->m_verts[i].y = (i / 2 == 0) ? -hd2 : hd2;
         toReturn->m_verts[i].z = 0;
-        toReturn->m_uvs[i].x = (i % 2 == 0) ? 0 : 1;
-        toReturn->m_uvs[i].y = (i / 2 == 0) ? 1 : 0;
+        toReturn->m_uvs[i].x = (i % 2 == 0) ? 0.0f : 1.0f;
+        toReturn->m_uvs[i].y = (i / 2 == 0) ? 1.0f : 0.0f;
     }
     toReturn->m_indices[0] = 0;
     toReturn->m_indices[1] = 1;
@@ -62,13 +62,13 @@ Mesh* Mesh::CreateCircle(GLfloat radius, GLint numPoints) {
     toReturn->m_indices = new GLushort[numPoints];
     toReturn->m_numVerts = numPoints;
     for(int i = 0; i < numPoints; i++) {
-        GLfloat cx = cos(2 * M_PI * i / (GLfloat)numPoints);
-        GLfloat sy = sin(2 * M_PI * i / (GLfloat)numPoints);
+        GLfloat cx = (GLfloat)cos(2 * M_PI * i / (GLfloat)numPoints);
+        GLfloat sy = (GLfloat)sin(2 * M_PI * i / (GLfloat)numPoints);
         toReturn->m_verts[i].x = radius * cx;
         toReturn->m_verts[i].y = radius * sy;
-        toReturn->m_verts[i].z = 0;
-        toReturn->m_uvs[i].x = 0.5 + cx/2;
-        toReturn->m_uvs[i].y = 0.5 + sy/2;
+        toReturn->m_verts[i].z = 0.0f;
+        toReturn->m_uvs[i].x = 0.5f + cx/2;
+        toReturn->m_uvs[i].y = 0.5f + sy/2;
         toReturn->m_indices[i] = i;
     }
     toReturn->m_indexCount = numPoints;
@@ -111,17 +111,12 @@ void Mesh::CreateBuffers() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * m_indexCount, m_indices, GL_STATIC_DRAW);
 }
 
-void Mesh::BindBuffers(GLboolean enableUVs) {
+void Mesh::BindBuffers() {
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertBuffer);
     glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-    if(enableUVs) {
-        glEnableVertexAttribArray(1);
-        glBindBuffer(GL_ARRAY_BUFFER, m_uvBuffer);
-        glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
-    }
-    else {
-        glDisableVertexAttribArray(1);
-    }
+    glBindBuffer(GL_ARRAY_BUFFER, m_uvBuffer);
+    glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
 }

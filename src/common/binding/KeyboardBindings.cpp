@@ -14,8 +14,8 @@ v8::Handle<v8::Value> fl_kb_IsKeyDown(const v8::Arguments& args) {
     v8::HandleScope handle_scope;
     uint32_t key = args[0]->ToUint32()->Uint32Value();
     Uint8* keys = SDL_GetKeyboardState(NULL);
-    bool results = keys[key];
-    return handle_scope.Close(v8::Boolean::New(results));
+    bool results = (bool)keys[key];
+	return handle_scope.Close(v8::Boolean::New(results));
 }
 
 void fl_kb_SetScancodeConstants(v8::Handle<v8::ObjectTemplate>& codes) {

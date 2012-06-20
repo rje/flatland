@@ -47,11 +47,11 @@ public:
         toReturn.m_data[14] = trans.z;
         return toReturn;
     }
-    static Matrix4 Ortho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat near, GLfloat far) {
+    static Matrix4 Ortho(GLfloat left, GLfloat right, GLfloat bottom, GLfloat top, GLfloat nearPlane, GLfloat farPlane) {
         Matrix4 toReturn;
         GLfloat rl = (right - left);
         GLfloat tb = (top - bottom);
-        GLfloat fn = (far - near);
+        GLfloat fn = (farPlane - nearPlane);
         toReturn.m_data[0] = 2 / rl;
         toReturn.m_data[1] = 0;
         toReturn.m_data[2] = 0;
@@ -66,7 +66,7 @@ public:
         toReturn.m_data[11] = 0;
         toReturn.m_data[12] = -(left + right) / rl;
         toReturn.m_data[13] = -(top + bottom) / tb;
-        toReturn.m_data[14] = -(far + near) / fn;
+        toReturn.m_data[14] = -(farPlane + nearPlane) / fn;
         toReturn.m_data[15] = 1;
         return toReturn;
     }

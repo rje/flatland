@@ -80,7 +80,7 @@ void MeshRenderer::Render() {
         glUniform1f(glGetUniformLocation(m_shader->GetProgram(), "u_tex"), m_texture->GetTextureID());
     }
     else {
-        //glBindTexture(GL_TEXTURE_2D, NULL);
+        //glBindTexture(GL_TEXTURE_2D, 0);
     }
     if(m) {
         glUniform4f(glGetUniformLocation(m_shader->GetProgram(), "u_color"), m_r, m_g, m_b, m_a);

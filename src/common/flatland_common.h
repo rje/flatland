@@ -12,6 +12,17 @@
 #include <string>
 #include <vector>
 #include <map>
+
+#if defined(linux) || defined(_linux)
+#define GL_GLEXT_PROTOTYPES 1
+#	include <GL/gl.h>
+#	include <GL/glext.h>
+#endif
+
+#ifdef WIN32
+#include "shader_funcs.h"
+#endif
+
 #include <SDL_opengl.h>
 
 using std::string;

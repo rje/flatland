@@ -12,6 +12,10 @@
 #include <v8.h>
 #include <SDL.h>
 
+#ifdef WIN32
+#include "shader_funcs.h"
+#endif
+
 Window::Window() : m_window(NULL) {
     printf("Creating window\n");
     SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
@@ -24,6 +28,9 @@ Window::Window() : m_window(NULL) {
                                        SDL_WINDOW_OPENGL);
     m_glContext = SDL_GL_CreateContext(m_window);
     SDL_GL_MakeCurrent(m_window, m_glContext);
+#ifdef WIN32
+	flatland_setupRequiredGLCalls();
+#endif
     glClearColor(0, 0, 0, 0);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
@@ -82,8 +89,8 @@ void Window::CenterOnScreen() {
 
 void Window::HandleUpdates() {
     if(m_isDirty & WINDOW_SIZE) {
-        SDL_SetWindowSize(m_window, m_width, m_height);
-        glViewport(0, 0, m_width, m_height);
+        SDL_SetWindowSize(m_window, (int)m_width, (int)m_height);
+        glViewport(0, 0, (GLsizei)m_width, (GLsizei)m_height);
         m_isDirty &= ~WINDOW_SIZE;
     }
     if(m_isDirty & WINDOW_CLEAR_COLOR) {
