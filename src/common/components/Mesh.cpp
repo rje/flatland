@@ -111,12 +111,17 @@ void Mesh::CreateBuffers() {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * m_indexCount, m_indices, GL_STATIC_DRAW);
 }
 
-void Mesh::BindBuffers() {
+void Mesh::BindBuffers(GLboolean enableUVs) {
     glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
     glBindBuffer(GL_ARRAY_BUFFER, m_vertBuffer);
     glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
-    glBindBuffer(GL_ARRAY_BUFFER, m_uvBuffer);
-    glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+    if(enableUVs) {
+      glEnableVertexAttribArray(1);
+      glBindBuffer(GL_ARRAY_BUFFER, m_uvBuffer);
+      glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
+    }
+    else {
+      glDisableVertexAttribArray(1);
+    }
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
 }

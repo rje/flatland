@@ -21,7 +21,7 @@ string defaultNoTextureFragShader = string("//precision lowp float;\n") +
     "uniform vec4 u_color;" +
     "" +
     "void main() {" +
-    "    gl_FragColor = u_color;" +
+    "    gl_FragColor = vec4(u_color);" +
     "}";
 
 string defaultVertShader = string("attribute vec4 position;") +
@@ -41,7 +41,7 @@ string defaultFragShader = string("//precision lowp float;\n") +
     "varying vec2 v_texCoords;" +
     "" +
     "void main() {" +
-    "    gl_FragColor = vec4(u_color);" +
+    "    gl_FragColor = texture2D(u_tex, v_texCoords) * u_color;" +
     "}";
 
 Shader* Shader::defaultShader = NULL;
